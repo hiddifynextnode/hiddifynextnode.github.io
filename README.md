@@ -1,4 +1,4 @@
-# 8月6日 | HiddifyNextNode节点订阅每天更新20.1M/S免费节点订阅链接  更新时间 2024-08-06 00:04:26
+# 8月6日 | HiddifyNextNode节点订阅每天更新21.9M/S免费节点订阅链接  更新时间 2024-08-06 09:17:05
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://hiddifynextnode.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
