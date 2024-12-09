@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-22904.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RenderDoc图形调试器详细使用教程(基于DirectX11)</title>
+        <meta name="description" content="由于最近Visual Studio的图形调试器老是抽风，不得不寻找一个替代品了。 对于图形程序开发者来说，学会使用RenderDoc图形调试器可以帮助你全面了解渲染管线绑定的资源和运行状态，从而确认问" />
+        <link rel="icon" href="__ADDON__/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                    <span class="sublog">Hiddify Next</span> Node
+                </a>
+                                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">RenderDoc图形调试器详细使用教程(基于DirectX11)</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                      				  				  				</h1> <p>由于最近Visual Studio的图形调试器老是抽风，不得不寻找一个替代品了。</p> <p>对于图形程序开发者来说，学会使用RenderDoc图形调试器可以帮助你全面了解渲染管线绑定的资源和运行状态，从而确认问题所在。</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://renderdoc.org/"  target="_blank" rel="nofollow"><strong>RenderDoc官网</strong></a></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://www.cnblogs.com/X-Jun/p/9028764.html"  target="_blank" rel="nofollow">DirectX11 With Windows SDK完整目录</a></strong></p> </h1> <p>为了调试我们的程序，需要通过RenderDoc来执行程序。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/1ebda54a6cbe741961790b8f986ee975.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>选择File - Launch Application后，在Program - Executable Path中选择要打开的程序。</p> <blockquote> <p><strong>注意：在你自己编写的项目需要将exe放到项目(.vcxproj)所在的位置，或者让VS在生成程序的时候输出到项目位置！</strong></p> </blockquote> <p>如果待调试的程序需要加载Assimp的动态库，我们还需要添加环境变量：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/78a10e7bb3a24b4ea49886a0a18509eb.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>然后就可以点击Launch运行程序了。</p> </h1> <p>在进入程序后，按下Print Screen(PrtSc)键截取一帧有问题的画面，然后就可以看到程序窗口说已经捕获了一帧：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/d686c77ebfbb988b0803d74447b72934.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>捕获完成后退出程序即可，捕获的一帧文件类型为<code>*.rdc</code></p> <p>你可以在一次调试截取多帧画面，但基本上目前我们只需要截取一帧画面就可以退出程序了。</p> </h1> <p>下面是图形调试器的主界面：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/5c939d9d00d1c506ba1f2aa9288fb715.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p><strong>事件浏览器</strong>展示了DirectX中关于<code>ID3D11DeviceContext</code>的重要调用，呈现了这一帧绘制涉及到的<code>Clear</code>、<code>Draw</code>、<code>Dispatch</code>、<code>Present</code>和<code>Resolve</code>等命令。选择具体某个事件，可以在下面的<code>API Inspector</code>看到在这个事件之前大概15个<code>DeviceContext</code>的调用事件。</p> <p>事件浏览器会将绘制到同一系列渲染目标和深度缓冲区的事件折叠成一个Pass，我们可以展开观察里面的具体绘制过程。</p> <p><strong>在选中某次绘制后</strong>，我们可以观察的有：</p> <ul> <li><strong>Texture Viewer</strong>：完成当前绘制后渲染目标的结果、深度缓冲区的结果、像素着色器调试</li> <li><strong>Pipeline State</strong>：观察当前渲染管线有哪些阶段是被激活的，以及不同的阶段状态是怎样的</li> <li><strong>Mesh Viewer</strong>：观察当前正在渲染的模型从顶点输入是什么情况，经过顶点着色输出后又是什么情况，并且能够观察正在渲染的模型</li> <li><strong>Resource Inspector</strong>：观察当前绘制后有哪些资源，状态如何</li> </ul> <p>接下来会按教程的顺序来讲可能需要查看的内容</p> <h2 id="pipeline-state">Pipeline State</h2> <p>在管线状态中我们可以清楚地看到当前有哪些执行的阶段，选择IA（输入装配阶段）可以看到<strong>输入布局</strong>、<strong>顶点缓冲区输入</strong>和<strong>图元类型</strong></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/cb03c204563a2bd8963d3714a0facebd.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>如果找不到窗口可以去菜单栏Window找到Pipeline State。</p> <h2 id="mesh-viewer">Mesh Viewer</h2> <p>点击上图中的Mesh View内的立方体可以跳转到模型线框观察页面，同时可以观察输入的顶点数据：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/b4591bf161e4efb1e43d73cc88c61d00.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>通过Controls可以切换摄像机模式为第一人称，然后使用WSAD移动</p> <p>如果屏幕上没有渲染出想要的东西，首先应当检查的是输出的顶点<code>SV_POSITION</code>是否位于NDC空间内，具体为：</p> <div class="math display">\[-1\leq\frac{x}{w}\leq 1\\<br /> -1\leq\frac{y}{w}\leq 1\\<br /> 0\leq\frac{z}{w}\leq 1<br /> \]</div> <p>要调试某个顶点，只需要在VS Input中选择一个顶点右键 - Debug this vertex即可进入着色器调试。但调试环节我们留到后面再讲。</p> <h2 id="texture-viewer">Texture Viewer</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/642f5ecfe822465eb8463eabdac7036f.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>在Texture Viewer中我们可以观察绑定到管线上的图片(Input)，以及渲染管线输出到的渲染目标、深度缓冲区(Output)。在选择某个Output图后，我们右键选中一个像素，右下角的Pixel Context就会显示具体的位置：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/bdda2b22aaa848e12c33ee5b6d926fde.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>选择History可以查看在此之前有哪些绘制事件影响到当前像素，选择Debug则可以调试当前像素。</p> <h3 id="观察深度模板缓冲区">观察深度/模板缓冲区</h3> <p>选中深度/模板缓冲区，一般情况下越远的物体显得越白，越近显得越黑，且深度图的颜色分布大多在白色上。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/bb73e34b555483df1c6e7288f6352ecf.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>而如果使用了反向Z，越远的物体显得越黑，越近显得越白，且分布大多在黑色上，这时候看深度图就是纯黑一片，根本不知道什么情况：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/b31038d79231aab97424e936a5a4caed.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>由于此时深度值大部分在靠近0的位置上，我们需要缩小显示范围来提高较远物体的亮度：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/071f5515efa19c2d38cdaf0f7a591933.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>为了观察模板测试的结果，我们先选中Stencil，如果模板的输出值为1，可能需要将Range右边的条拖到最左边才看得到（白色区域模板值为1，黑色区域模板值为0）：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/163307c655f02e94006a893109988daa.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>在Overlay中，我们可以观察当前绘制中影响到的像素区域、深度测试（绿Pass红Fail）、模板测试、背面剔除等结果。下图演示了模型的线框在图中的位置：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/0292889088678671cfe5ce9561ad09ea.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <h2 id="resource-inspector">Resource Inspector</h2> <p>在这里可以观察与当前绘制相关的所有资源：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/4172fb7035d62b03d8da8c2d6745dd67.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>选中某个资源后，可以看到和它相关的资源、资源在哪些事件中被用到、资源初始化相关的调用。</p> <h2 id="观察常量缓冲区">观察常量缓冲区</h2> <p>在管道状态的着色器阶段中，我们可以看到绑定的常量缓冲区：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/a520d191bbc8ac1e9a9e839c64d6fb22.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>其中Slot的名称来自着色器声明cbuffer时的名称，Buffer的名称则需要在C++代码中设置，具体参考下一节。</p> <p>选择某一个常量缓冲区，点击Go处的箭头，我们就可以看到里面的具体内容：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/5a4430f335aed62bc20282335d3ffe83.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <blockquote> <p><strong>注意：在当前教程中我们会传入经过DirectXMath转置后的矩阵，但是在这里观察值的时候，依然是以行矩阵的方式显示才是正常的！即平移分量位于第四行。</strong></p> </blockquote> <p>若常量缓冲区的值在从C++端传入到这里出现问题，你还需要去观察常量缓冲区的打包是否出现了问题。</p> <p>关于HLSL的打包规则，可以查看这里：<br /><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/X-Jun/p/9376474.html"  target="_blank" rel="nofollow">深入理解HLSL常量缓冲区打包规则</a></p> <h2 id="为图形调试器的对象添加自定义名称">为图形调试器的对象添加自定义名称</h2> <p>看前面的图片，Buffer在没有指定名称的时候默认是以<code>Buffer 142</code>的形式显示的。等对象一多，我们就难以判别管线所绑定的对象是否正确。因此在某些需要的情况下，我们可以在C++代码来为对象指定名称。</p> <p>在<code>d3dUtil.h</code>中提供了两个系列的函数，一个用于D3D设备创建出来的对象，一个用于DXGI对象。通过<code>SetPrivateData</code>方法，并使用<code>WKPDID_D3DDebugObjectName</code>的<code>GUID</code>使得我们可以为其设置图形调试器下的名称（string_view版本要求C++17，或者可以参照旧<code>d3dUtil.h</code>中的实现）：</p> <pre><code class="language-cpp">// ------------------------------ // D3D11SetDebugObjectName函数 // ------------------------------ // 为D3D设备创建出来的对象在图形调试器中设置对象名 // [In]resource				D3D11设备创建出的对象 // [In]name					对象名 inline void D3D11SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_ std::string_view name) { #if (defined(DEBUG) || defined(_DEBUG)) &amp;&amp; (GRAPHICS_DEBUGGER_OBJECT_NAME) 	resource-&gt;SetPrivateData(WKPDID_D3DDebugObjectName, (UINT)name.length(), name.data()); #else 	UNREFERENCED_PARAMETER(resource); 	UNREFERENCED_PARAMETER(name); #endif }  // ------------------------------ // D3D11SetDebugObjectName函数 // ------------------------------ // 为D3D设备创建出来的对象在图形调试器中清空对象名 // [In]resource				D3D11设备创建出的对象 inline void D3D11SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_ std::nullptr_t) { #if (defined(DEBUG) || defined(_DEBUG)) &amp;&amp; (GRAPHICS_DEBUGGER_OBJECT_NAME) 	resource-&gt;SetPrivateData(WKPDID_D3DDebugObjectName, 0, nullptr); #else 	UNREFERENCED_PARAMETER(resource); #endif }  // ------------------------------ // DXGISetDebugObjectName函数 // ------------------------------ // 为DXGI对象在图形调试器中设置对象名 // [In]object				DXGI对象 // [In]name					对象名 inline void DXGISetDebugObjectName(_In_ IDXGIObject* object, _In_ std::string_view name) { #if (defined(DEBUG) || defined(_DEBUG)) &amp;&amp; (GRAPHICS_DEBUGGER_OBJECT_NAME) 	object-&gt;SetPrivateData(WKPDID_D3DDebugObjectName, (UINT)name.length(), name.c_str()); #else 	UNREFERENCED_PARAMETER(object); 	UNREFERENCED_PARAMETER(name); #endif }  // ------------------------------ // DXGISetDebugObjectName函数 // ------------------------------ // 为DXGI对象在图形调试器中清空对象名 // [In]object				DXGI对象 inline void DXGISetDebugObjectName(_In_ IDXGIObject* object, _In_ std::nullptr_t) { #if (defined(DEBUG) || defined(_DEBUG)) &amp;&amp; (GRAPHICS_DEBUGGER_OBJECT_NAME) 	object-&gt;SetPrivateData(WKPDID_D3DDebugObjectName, 0, nullptr); #else 	UNREFERENCED_PARAMETER(object); #endif }</code></pre> <p>在已经设置过名字的情况下，想要更名需要先调用<code>nullptr_t</code>重载版本，再调用正常版本。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/41ca7cfb9913711d05c3e3e18ed57ef9.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>设置好后，在图形调试的时候一看名字就能知道绑定的情况了。</p> <p>如果你不希望使用调试器对象具名化，可以在<code>d3dUtil.h</code>的开头找到这样的宏：</p> <pre><code class="language-cpp">// 默认开启图形调试器具名化 // 如果不需要该项功能，可通过全局文本替换将其值设置为0 #ifndef GRAPHICS_DEBUGGER_OBJECT_NAME #define GRAPHICS_DEBUGGER_OBJECT_NAME (1) #endif</code></pre> <p>将其修改后只会剩下默认的<code>DDSTextureLoader</code>和<code>WICTextureLoader</code>的对象具名化。</p> <p><strong>注意：在你的Release版本应用程序应该避免出现对调试对象名称的设置。你可以将相关代码移出项目。</strong></p> <h2 id="查看着色器资源视图中的纹理资源">查看着色器资源视图中的纹理资源</h2> <p>以下图像素着色器阶段的为例：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/3c22306717ab74feded9554ee5382b32.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>我们可以很清楚地看到资源的绑定情况，红色表示当前Slot没有资源绑定上去，如果对没有绑定纹理的对象进行采样，会在程序调试运行时的调试输出窗口看到DX Error。当然本示例红的也并不影响，因为会在着色器检查Dimension是否为0从而避开采样。</p> <p>绿色的资源姑且认为是一个有<code>UNKNOWN</code>含义的DXGI格式，在通过SRV具体化。点击Go的箭头我们可以观察传入的着色器资源。</p> <h2 id="查看管线状态采样器">查看管线状态、采样器</h2> <p>基本上光栅化状态、深度/模板状态和混合状态都是所见即所得</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/934dbcc008a92e3599f5cd2420cd2cfa.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/39c9ee040a7740d0b88e3a78c83d6ac5.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>采样器则在像素着色器阶段选中采样器可以查看</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/c6ef33555cc298d89dd26c8765e27e70.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>虽然这些状态你也可以在C++看</p> </h1> <p>接下来就开始进入到重点部分了，使用图形调试器的核心目的还是要观察着色器运行的时候遇到了哪些问题。当然有时候甚至会遇到该有的着色器却被跳过不执行的情况，这时候就先要去前面排查该绑定的资源、状态、着色器、输入是否都OK了，然后才是对上一个正常运行的着色器进行调试。</p> <p>对于顶点着色器，在Mesh Viewer中选择要调试的顶点右键 - Debug this vertex即可</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/454ad004fea52e243cf6d7ec257f96df.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>对于像素着色器，在Texture Viewer中的Output选择RT后，右键选取某一像素，在Pixel Context处点Debug即可</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/bdda2b22aaa848e12c33ee5b6d926fde.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>而调试计算着色器，需要在Pipeline State选择CS，按下图选择Debug，然后填写要调试的线程组编号和组内线程编号（或者全局线程ID）：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/759dfba15b1d2fdfeb46da63e197e3b4.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>然后就进入到了着色器调试界面：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/ef7ef455fc36d6a1595cc9f9c36c62bf.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>因为鼠标操作麻烦，我们需要记住几个快捷键：<strong>F10</strong>单步跳过，<strong>F11</strong>单步进入，<strong>ctrl+F11</strong>单步跳出</p> <p>左侧<code>Constants &amp; Resources</code>可以查看顶点输入、使用的常量、资源等，右侧<code>Watch</code>可以添加变量观察</p> <p>鼠标悬停在代码的变量可以观察变量值</p> <p>右键代码Go to disassembly可以转汇编查看</p> <p>左侧file list可以查看用到的hlsl文件，以及编译shader时候的预定义宏</p> <p>此时首先你需要优先关注局部变量中各个会被用到的常量、输入值是否都是正常的，如果出现常量缓冲区中的值全0或者乱值的情况，说明常量缓冲区可能没有被更新。</p> <h2 id="修改着色器再运行">修改着色器再运行</h2> <p>这是VS的图形调试器所没有的功能，在修改了某次绘制用到的着色器代码并编译后，就可以影响到当前及之后的所有绘制。</p> <p>下面是一个例子，这里尝试修改某个绘制的像素着色器代码：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/63df02edf80be6289f1d7da1f0216b1d.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>然后尝试修改下面<code>g_VisualizePerSampleShaing</code>为<code>true</code>，使得当前绘制的像素颜色强制为红色：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/fead05bf8e8d30e33d87aba1778b1c88.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>完成后选择<code>Apply changes</code>，返回<code>Texture Viewer</code>观察渲染目标的输出变化：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/f77ef51d5af262e9791c8c6d864c305c.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>可以看到，那些执行PS的像素都被染成了红色，观看后续的帧也可以发现的确产生了影响：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/a6e4098bfc982f1fb00a173cec75f71b.jpg" alt="RenderDoc图形调试器详细使用教程(基于DirectX11) "></p> <p>如果要退回变化，则回到像素着色器的Edit处，选择<code>Remove changes</code>即可。</p> </h1> <p>因为目前暂时还没有使用的需要，具体信息查看下面文档：</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://renderdoc.org/docs/in_application_api.html"  target="_blank" rel="nofollow">https://renderdoc.org/docs/in_application_api.html</a></p> <p>如果某些DrawCall、Dispatch不是每帧都会产生的话，编程捕获的方式还是有必要的。</p> </h1> <p><strong>调试技巧需要经常使用才能够熟练掌握</strong>，相比普通调试来说，图形调试会更加复杂。目前RenderDoc的调试体验比VS的图形调试器会好一些，并且最近VS的图形调试器有些问题，调试不了shader。<strong>在初学DX的阶段容易在资源管理上出问题，因此重点是要先确认在绘制之前，绑定到渲染管线的各种资源是否正常，然后才是对着色器代码进行调试。</strong>所以前期准备工作的出错一般占很大的一部分，而着色器代码引发的错误可能只是占较小的一部分。<strong>等到了渲染管线的资源绑定管理体系逐渐稳定以后，使用图形调试的重心才会逐渐转移到以着色器代码的调试为主。</strong>有时候图形调试器解决不了的问题，还需要仔细观察普通调试下的输出窗口是否有渲染管线绘制事件执行时输出的报错信息。</p> <p>当然里面还有很多强大的功能没有挖掘出来，或者现在还不是比较常用而没列出来。有兴趣的读者可以查看renderdoc的文档：</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://renderdoc.org/docs/introduction.html"  target="_blank" rel="nofollow">Introduction — RenderDoc documentation</a></p> <p>这篇博客在后续还会有所变动，因为后续个人的学习会引发新的调试需求而变动。</p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://www.cnblogs.com/X-Jun/p/9028764.html"  target="_blank" rel="nofollow">DirectX11 With Windows SDK完整目录</a></strong></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-22447.htm">宠物免费领养协议（宠物免费领养协议书）</a></p>
+                                        <p>下一个：<a href="/news/article-22905.htm">青岛南京路动物防疫站宠物医院在哪里（青岛市南京路动物防疫站）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-21992.htm" title="今年公务员国考人数（今年国考人数多少）">今年公务员国考人数（今年国考人数多少）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-8-today-hiddify-next-node.htm" title="11月8日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接">11月8日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-20-free-node-subscribe-links.htm" title="10月20日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">10月20日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19699.htm" title="宠物粮生产厂家排名前十有哪些（宠物粮食厂家）">宠物粮生产厂家排名前十有哪些（宠物粮食厂家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-26-hiddify-next-node-share.htm" title="8月26日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接">8月26日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-hiddify-next-node-github.htm" title="11月14日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接">11月14日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-16-free-node-subscribe-links.htm" title="9月16日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接">9月16日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-20-latest-hiddify-next-node.htm" title="9月20日 | HiddifyNextNode节点订阅每天更新20.6M/S免费节点订阅链接">9月20日 | HiddifyNextNode节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-9-latest-hiddify-next-node.htm" title="9月9日 | HiddifyNextNode节点订阅每天更新22.7M/S免费节点订阅链接">9月9日 | HiddifyNextNode节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-1-free-node-subscribe-links.htm" title="11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
