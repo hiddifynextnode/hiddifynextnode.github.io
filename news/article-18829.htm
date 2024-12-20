@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>解决：“/****/kafka_2.13-3.0.0/bin/kafka-run-class.sh: line 342: exec: java: not found ”问题</title>
         <meta name="description" content="启动zookeeper失败，查看状态日志，如下图：   kafka运行依赖java环境，而本机已安装java环境  查看java环境变量  &nbsp;查看kafka环境变量  回到问题本身，我们看一" />
-        <link rel="icon" href="__ADDON__/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
     <!--/google-fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <!--//google-fonts -->
@@ -106,7 +106,8 @@
         <div class="container py-md-5 py-2">
             <div class="row">
                 <div class="col-md-9">
-                                      				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>启动zookeeper失败，查看状态日志，如下图：</p> <p><img fetchpriority="high" decoding="async" alt="" height="296" src="http://img.555519.xyz/uploads3/20220821/7c100c5db0595567d6b14f12e15e01b3.jpg"></p> </h1> <p>kafka运行依赖java环境，而本机已安装java环境</p> <p><img decoding="async" alt="" height="116" src="http://img.555519.xyz/uploads3/20220821/3d796ee06348818815842f829706e708.jpg"></p> <p>查看java环境变量</p> <p><img decoding="async" alt="" height="83" src="http://img.555519.xyz/uploads3/20220821/8702470f7597fab8bca2d62e438fa91b.jpg"></p> <p>&nbsp;查看kafka环境变量</p> <p><img loading="lazy" decoding="async" alt="" height="75" src="http://img.555519.xyz/uploads3/20220821/ce48035ca7551975e73430713f83b9db.jpg"></p> <p>回到问题本身，我们看一下kafka-run-class.sh脚本的342行内容：</p> <p><img loading="lazy" decoding="async" alt="" height="210" src="http://img.555519.xyz/uploads3/20220821/e5c4010acf37e3bcab2cdb75b88f3e18.jpg"></p> <p>这里网上搜了很久，获悉kafka默认引用的java路径：/user/bin/java，这个与我们实际配置的java的环境变量$JAVA_HOME/bin路径不一致。</p> <p>这里，借鉴一下前辈的办法：</p> <ol> <li>修改java环境变量配置(修改java环境变量可能会引入新的环境配置问题，不推荐)</li> <li>设置软连接指向/user/bin/java这个路径(推荐)</li> </ol> <pre><code class="language-bash">[root@node03 ~]# echo $JAVA_HOME /root/jdk/jdk1.8.0_221 [root@node03 ~]#  [root@node03 ~]# ln -s $JAVA_HOME/bin/java user/bin/java [root@node03 ~]#</code></pre> <p>reboot -f 重启即可</p> </div> 			                <div class="clearfix"></div>
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>启动zookeeper失败，查看状态日志，如下图：</p> <p><img fetchpriority="high" decoding="async" alt="" height="296" src="http://img.555519.xyz/uploads3/20220821/7c100c5db0595567d6b14f12e15e01b3.jpg"></p> </h1> <p>kafka运行依赖java环境，而本机已安装java环境</p> <p><img decoding="async" alt="" height="116" src="http://img.555519.xyz/uploads3/20220821/3d796ee06348818815842f829706e708.jpg"></p> <p>查看java环境变量</p> <p><img decoding="async" alt="" height="83" src="http://img.555519.xyz/uploads3/20220821/8702470f7597fab8bca2d62e438fa91b.jpg"></p> <p>&nbsp;查看kafka环境变量</p> <p><img loading="lazy" decoding="async" alt="" height="75" src="http://img.555519.xyz/uploads3/20220821/ce48035ca7551975e73430713f83b9db.jpg"></p> <p>回到问题本身，我们看一下kafka-run-class.sh脚本的342行内容：</p> <p><img loading="lazy" decoding="async" alt="" height="210" src="http://img.555519.xyz/uploads3/20220821/e5c4010acf37e3bcab2cdb75b88f3e18.jpg"></p> <p>这里网上搜了很久，获悉kafka默认引用的java路径：/user/bin/java，这个与我们实际配置的java的环境变量$JAVA_HOME/bin路径不一致。</p> <p>这里，借鉴一下前辈的办法：</p> <ol> <li>修改java环境变量配置(修改java环境变量可能会引入新的环境配置问题，不推荐)</li> <li>设置软连接指向/user/bin/java这个路径(推荐)</li> </ol> <pre><code class="language-bash">[root@node03 ~]# echo $JAVA_HOME /root/jdk/jdk1.8.0_221 [root@node03 ~]#  [root@node03 ~]# ln -s $JAVA_HOME/bin/java user/bin/java [root@node03 ~]#</code></pre> <p>reboot -f 重启即可</p> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>下一个：<a href="/news/article-18830.htm">动物疫苗龙头股一览（动物疫苗上市a股龙头）</a></p>
                                     </div>
@@ -118,16 +119,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-9-27-free-subscribe-node.htm" title="9月27日 | HiddifyNextNode机场节点订阅每天更新21.3M/S免费节点订阅链接">9月27日 | HiddifyNextNode机场节点订阅每天更新21.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-11-hiddify-next-node.htm" title="8月11日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接">8月11日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-1-free-node-subscribe-links.htm" title="11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-6-node-share.htm" title="9月6日 | HiddifyNextNode节点订阅每天更新20M/S免费节点订阅链接">9月6日 | HiddifyNextNode节点订阅每天更新20M/S免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-8-12-hiddify-next-windows.htm" title="8月12日 | HiddifyNextNode节点订阅每天更新18.3M/S免费节点订阅链接">8月12日 | HiddifyNextNode节点订阅每天更新18.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-7-today-hiddify-next-node.htm" title="8月7日 | HiddifyNextNode节点订阅每天更新21.3M/S免费节点订阅链接">8月7日 | HiddifyNextNode节点订阅每天更新21.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-20617.htm" title="哪个牌子的狗粮好一些（哪种品牌的狗粮好）">哪个牌子的狗粮好一些（哪种品牌的狗粮好）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-19-free-node-subscribe-links.htm" title="9月19日 | HiddifyNextNode节点订阅每天更新21.1M/S免费节点订阅链接">9月19日 | HiddifyNextNode节点订阅每天更新21.1M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-6-hiddify-next-node.htm" title="8月6日 | HiddifyNextNode节点订阅每天更新21.2M/S免费节点订阅链接">8月6日 | HiddifyNextNode节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-hiddify-next-node.htm" title="11月30日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接">11月30日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-subscribe-node.htm" title="11月6日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接">11月6日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27545.htm" title="十大水表品牌 家用水表哪个品牌质量好些(十大水表品牌 家用水表哪个品牌质量好耐用)">十大水表品牌 家用水表哪个品牌质量好些(十大水表品牌 家用水表哪个品牌质量好耐用)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-7-free-node-subscribe-links.htm" title="9月7日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接">9月7日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-25223.htm" title="动物疫苗公司销量排名前十 动物疫苗公司销量排名前十名">动物疫苗公司销量排名前十 动物疫苗公司销量排名前十名</a></li>
+                        <li class="py-2"><a href="/news/article-22904.htm" title="RenderDoc图形调试器详细使用教程(基于DirectX11)">RenderDoc图形调试器详细使用教程(基于DirectX11)</a></li>
+                        <li class="py-2"><a href="/news/article-19243.htm" title="动物医院起名（动物医院叫什么医院）">动物医院起名（动物医院叫什么医院）</a></li>
+                        <li class="py-2"><a href="/news/article-22447.htm" title="宠物免费领养协议（宠物免费领养协议书）">宠物免费领养协议（宠物免费领养协议书）</a></li>
+                        <li class="py-2"><a href="/news/article-20156.htm" title="动物防疫疫苗空瓶如何销毁处理方案及流程（动物疫苗未冷藏几小时失效）">动物防疫疫苗空瓶如何销毁处理方案及流程（动物疫苗未冷藏几小时失效）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-15-node-share.htm" title="9月15日 | HiddifyNextNode节点订阅每天更新20M/S免费节点订阅链接">9月15日 | HiddifyNextNode节点订阅每天更新20M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -139,7 +140,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -168,6 +169,15 @@
         <!-- copyright -->
         <section class="w3l-copyright text-center">
             <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                 <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
             </div>
             <!-- move top -->

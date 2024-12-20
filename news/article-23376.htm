@@ -106,7 +106,8 @@
         <div class="container py-md-5 py-2">
             <div class="row">
                 <div class="col-md-9">
-                                      				  				  				<p>　　软件行业流行这样一个说法，由于Docker 技术的成熟和该技术被广大厂商的普遍应用，成就了微服务领域的快速成长，衍生了云原生技术和公有云的进一步推广。我个人认为Dockers 技术、微服务技术、云原生技术乃至领域模型概念其实是彼此相互相吸，互相依赖，组成了当今软件行业的一个新的生态链。作为软件行业从业者，虽然不能精通每一项新兴技术，但是我们要对主流技术应保持一颗积极探索的心。</p> <p>　　本章节开始对Dockers领域的技术探索之路开始总结，之前身处项目，没有太多精力对它进行全面总结，但是，软件开发人员对技术的研究和总结是应该保持的良好习惯。</p> <p><img fetchpriority="high" decoding="async" src="http://img.555519.xyz/uploads3/20220510/d72ed661bf3abdf1f95ed73c630e412a.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>&nbsp;　　闲话少说，开始Docker 探索的的一个步骤，Docker 环境的搭建。首先我们需要在本地开发环境安装Docker 的运行环境，我的开发环境是Windows 10 ，开发工具使用的是VS2022。</p> <p>　　第一步安装&nbsp;Docker Desktop for Windows, 可以从官网（https://www.docker.com/get-started）直接下载，Windows10 需要最新的企业版本或专业版本，安装的过程中需要安装WSL2(它支持适用于 Linux 的 Windows 子系统在 Windows 上运行 ELF64 Linux 二进制文件)。安装过程基本比较简单，都是One By One. 此处就省略了，特别强调一点，第一次启动的时候特别慢，不要担心，是Docker Desktop 进行更新和检查所需组件，并进行相关的自动配置。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/0efdb983973499c987a1a5c775284a5a.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>　　安装完毕后，启动界面如上图，就可以在本地进行开心的玩耍Docker了。本篇文章不再对docker 的专业名词进行解释，可以自行进行度娘。如果你有Linux环境，最后使用Linux环境进行搭建，安装过程也是非常简单，此处不再描述了。Docker Desktop 工具有一个可视化的界面，左侧菜单分别为容器、镜像、卷标三大常规操作提供界面，适合初学者，但，不建议开发人员使用该界面，而是建议大家使用Powershell进行操作。由于安装了WSL2 和Docker 环境，Powershell 里面就可以使用Bush风格的命令了，其实就是Bush操作命令。在Powershell 运行&nbsp;docker run -d -p 80:80 docker/getting-started 命令就可以下载并允许了你的第一个Docker 容器了。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/364113bf68fd7ca24ba3890b0f60c26b.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>　　开发环境正常运行起来了，我们后续就可以将自己的代码打包成Docker镜像，发布到本地的环境，我们也可以将开发好的镜像发布到DockerHub 上面或者Azure 上面的企业自己的容器注册表，可参考文档：https://docs.microsoft.com/zh-cn/azure/container-registry。</p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220510/d7afec5c5f0a39fdb33cfb0e337185e3.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>　　Docker Desktop 工具是对个人和小型企业免费的，我们也可以使用Docker Desktop 进行K8s 环境在本地搭建，后续文章我对K8s 的搭建和配置进行详细描述，本章节只先粗略的对本地dockers开发环境搭建进行了描述，希望能够帮助你开启dockers开心研究之旅。</p> 			                <div class="clearfix"></div>
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>　　软件行业流行这样一个说法，由于Docker 技术的成熟和该技术被广大厂商的普遍应用，成就了微服务领域的快速成长，衍生了云原生技术和公有云的进一步推广。我个人认为Dockers 技术、微服务技术、云原生技术乃至领域模型概念其实是彼此相互相吸，互相依赖，组成了当今软件行业的一个新的生态链。作为软件行业从业者，虽然不能精通每一项新兴技术，但是我们要对主流技术应保持一颗积极探索的心。</p> <p>　　本章节开始对Dockers领域的技术探索之路开始总结，之前身处项目，没有太多精力对它进行全面总结，但是，软件开发人员对技术的研究和总结是应该保持的良好习惯。</p> <p><img fetchpriority="high" decoding="async" src="http://img.555519.xyz/uploads3/20220510/d72ed661bf3abdf1f95ed73c630e412a.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>&nbsp;　　闲话少说，开始Docker 探索的的一个步骤，Docker 环境的搭建。首先我们需要在本地开发环境安装Docker 的运行环境，我的开发环境是Windows 10 ，开发工具使用的是VS2022。</p> <p>　　第一步安装&nbsp;Docker Desktop for Windows, 可以从官网（https://www.docker.com/get-started）直接下载，Windows10 需要最新的企业版本或专业版本，安装的过程中需要安装WSL2(它支持适用于 Linux 的 Windows 子系统在 Windows 上运行 ELF64 Linux 二进制文件)。安装过程基本比较简单，都是One By One. 此处就省略了，特别强调一点，第一次启动的时候特别慢，不要担心，是Docker Desktop 进行更新和检查所需组件，并进行相关的自动配置。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/0efdb983973499c987a1a5c775284a5a.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>　　安装完毕后，启动界面如上图，就可以在本地进行开心的玩耍Docker了。本篇文章不再对docker 的专业名词进行解释，可以自行进行度娘。如果你有Linux环境，最后使用Linux环境进行搭建，安装过程也是非常简单，此处不再描述了。Docker Desktop 工具有一个可视化的界面，左侧菜单分别为容器、镜像、卷标三大常规操作提供界面，适合初学者，但，不建议开发人员使用该界面，而是建议大家使用Powershell进行操作。由于安装了WSL2 和Docker 环境，Powershell 里面就可以使用Bush风格的命令了，其实就是Bush操作命令。在Powershell 运行&nbsp;docker run -d -p 80:80 docker/getting-started 命令就可以下载并允许了你的第一个Docker 容器了。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/364113bf68fd7ca24ba3890b0f60c26b.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>　　开发环境正常运行起来了，我们后续就可以将自己的代码打包成Docker镜像，发布到本地的环境，我们也可以将开发好的镜像发布到DockerHub 上面或者Azure 上面的企业自己的容器注册表，可参考文档：https://docs.microsoft.com/zh-cn/azure/container-registry。</p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220510/d7afec5c5f0a39fdb33cfb0e337185e3.jpg" alt="企业应用架构研究系列十九：Docker开发环境"></p> <p>　　Docker Desktop 工具是对个人和小型企业免费的，我们也可以使用Docker Desktop 进行K8s 环境在本地搭建，后续文章我对K8s 的搭建和配置进行详细描述，本章节只先粗略的对本地dockers开发环境搭建进行了描述，希望能够帮助你开启dockers开心研究之旅。</p> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-22905.htm">青岛南京路动物防疫站宠物医院在哪里（青岛市南京路动物防疫站）</a></p>
                                         <p>下一个：<a href="/news/article-23378.htm">动物医院是干嘛的（动物医院怎么样）</a></p>
@@ -119,16 +120,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-8-17-node-share.htm" title="8月17日 | HiddifyNextNode节点订阅每天更新21M/S免费节点订阅链接">8月17日 | HiddifyNextNode节点订阅每天更新21M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-29-free-subscribe-node.htm" title="10月29日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接">10月29日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-26128.htm" title="动物医院申请条件及流程图片高清（动物医院办理条件）">动物医院申请条件及流程图片高清（动物医院办理条件）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-18-latest-hiddify-next-node.htm" title="8月18日 | HiddifyNextNode节点订阅每天更新19.3M/S免费节点订阅链接">8月18日 | HiddifyNextNode节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-node-share.htm" title="11月10日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接">11月10日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-27-free-hiddify-next-node.htm" title="10月27日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接">10月27日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-8-26-hiddify-next-node-share.htm" title="8月26日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接">8月26日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-2-hiddify-next-node-github.htm" title="9月2日 | HiddifyNextNode节点订阅每天更新19.4M/S免费节点订阅链接">9月2日 | HiddifyNextNode节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-18-free-node-subscribe-links.htm" title="9月18日 | HiddifyNextNode节点订阅每天更新18.2M/S免费节点订阅链接">9月18日 | HiddifyNextNode节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-24291.htm" title="设置feign配置日志级别">设置feign配置日志级别</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-4-hiddify-next-node-github.htm" title="9月4日 | HiddifyNextNode节点订阅每天更新19.3M/S免费节点订阅链接">9月4日 | HiddifyNextNode节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-1-free-node-subscribe-links.htm" title="11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-2-hiddify-next-node-github.htm" title="10月2日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接">10月2日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-13-today-hiddify-next-node.htm" title="8月13日 | HiddifyNextNode节点订阅每天更新21.5M/S免费节点订阅链接">8月13日 | HiddifyNextNode节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-7-free-node-subscribe-links.htm" title="9月7日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接">9月7日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-10-free-node-subscribe.htm" title="10月10日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接">10月10日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-24-latest-hiddify-next-node.htm" title="9月24日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接">9月24日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-5-hiddify-next-node.htm" title="12月5日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">12月5日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-9-hiddify-next-windows.htm" title="8月9日 | HiddifyNextNode节点订阅每天更新23M/S免费节点订阅链接">8月9日 | HiddifyNextNode节点订阅每天更新23M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -140,7 +141,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -169,6 +170,15 @@
         <!-- copyright -->
         <section class="w3l-copyright text-center">
             <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                 <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
             </div>
             <!-- move top -->
