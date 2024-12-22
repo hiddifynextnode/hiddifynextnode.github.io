@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-29397.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>JAVA容器详解</title>
+        <meta name="description" content="文章目录  系列文章目录 前言 一、为什么引入Java容器？ 二、Java容器分类   1.Collection   (1).List (2).Set (3).Queue   2.Map   补漏查缺" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                    <span class="sublog">Hiddify Next</span> Node
+                </a>
+                                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">JAVA容器详解</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> </h1> <hr/> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#_0" rel="nofollow">系列文章目录</a></li> <li><a href="#_7" rel="nofollow">前言</a></li> <li><a href="#Java_15" rel="nofollow">一、为什么引入Java容器？</a></li> <li><a href="#Java_22" rel="nofollow">二、Java容器分类</a></li> <li> <ul> <li><a href="#1Collection_34" rel="nofollow">1.Collection</a></li> <li> <ul> <li><a href="#1List_36" rel="nofollow">(1).List</a></li> <li><a href="#2Set_43" rel="nofollow">(2).Set</a></li> <li><a href="#3Queue_138" rel="nofollow">(3).Queue</a></li> </ul> </li> <li><a href="#2Map_143" rel="nofollow">2.Map</a></li> </ul> </li> <li><a href="#_154" rel="nofollow">补漏查缺小知识</a></li> <li><a href="#_174" rel="nofollow">参考</a></li> </ul> </div> <hr/> </h1> <p>这篇文章主要是介绍java容器的分类和一些用法。</p> <hr/> </h1> <p>为什么要引入Java容器？<br /> 我们知道，如果定义一个int数组，需要一开始就要制定它的大小。在一些情况下，我们根本不知道它的长度是多少，开辟很大的长度会导致空间浪费。<br /> 此外，数组还有很多缺点，例如数组中提供的方法非常有限，对于添加、删除、插入数据等操作，非常不便，同时效率不高。获取数据中实际元素的个数的需求，数组没有现成的属性或方法可用。数组存储数据的特点：有序、可重复。对于无序、不可重复的需求，不能满足。<br /> 为了数组能够更灵活的应用，提出了Java容器的概念。</p> </h1> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230223/a38be1ae5aac78a16b1394547dcd534a.jpg" alt="JAVA容器详解"><br /> Java的容器主要分为2个大类，即Collection和Map。Collection代表着集合，类似数组，只保存一个数字。而Map则是映射，保留键值对两个值。<br /> 根据图，首先提一下<code>List</code> <code>Queue</code> <code>Set</code> <code>Map</code> 这四个的区别。</p> <ul> <li> <code>List(对付顺序的好帮手)</code>: 存储的元素是有序的、可重复的。</li> <li> <code>Set (注重独一无二的性质)</code>：存储的元素是无序的、不可重复的。</li> <li> <code>Queue (实现排队功能的叫号机)</code>:按特定的排队规则来确定先后顺序，存储的元素是有序的、可重复的。</li> <li> <code>Map (用 key 来搜索的专家)</code> :使用键值对（key-value）存储，类似于数学上的函数 y=f(x)，“x” 代表 key，“y” 代表 value，key 是无序的、不可重复的，value 是无序的、可重复的，每个键最多映射到一个值。</li> </ul> <p>接下来我们就来深入探究一下吧。</p> <h2> <a id="1Collection_34" rel="nofollow"></a>1.Collection</h2> <h3> <a id="1List_36" rel="nofollow"></a>(1).List</h3> <table> <thead> <tr> <th>名称</th> <th>底层</th> <th>线程安全性</th> <th>优点</th> <th>扩容机制</th> </tr> </thead> <tbody> <tr> <td>ArrayList</td> <td>数组</td> <td>线程不安全</td> <td>查找快，增删慢</td> <td>首次创建长度为10，扩为1.5倍</td> </tr> <tr> <td>Vector</td> <td>数组</td> <td>线程同步<code>线程安全</code> </td> <td>查找快，增删慢</td> <td>首次创建长度为10，*2</td> </tr> <tr> <td>LinkedList</td> <td>双向链表(JDK1.6 之前为循环链表，JDK1.7 取消了循环)</td> <td>线程不安全</td> <td>增删快，查找慢</td> <td>不主动扩容</td> </tr> </tbody> </table> <h3> <a id="2Set_43" rel="nofollow"></a>(2).Set</h3> <table> <thead> <tr> <th>名称</th> <th>底层</th> <th>线程安全性</th> <th>备注</th> </tr> </thead> <tbody> <tr> <td>HashSet</td> <td>HashMap(数组+链表)</td> <td>线程不安全</td> <td>注意hashcode和equals()</td> </tr> <tr> <td>LinkedHashSet</td> <td>链表和哈希表</td> <td>线程不安全</td> <td>HashSet的子类，元素的插入和取出顺序满足 FIFO</td> </tr> <tr> <td>TreeSet</td> <td>红黑树</td> <td>线程不安全</td> <td>支持对元素自定义排序规则</td> </tr> </tbody> </table> <p>TreeSet中的自然排序和定制排序<br /> （1）自然排序：在所属的类中加上排序</p> <p>实现类</p> <pre><code class="prism language-java"><span class="token keyword">package</span> <span class="token class-name">TreeSet</span><span class="token punctuation">;</span>  <span class="token comment">//1.自然排序</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token keyword">implements</span> <span class="token class-name">Comparable</span><span class="token punctuation">{<!-- --></span>     <span class="token keyword">private</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>     <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>     <span class="token keyword">private</span> <span class="token keyword">int</span> score<span class="token punctuation">;</span>      <span class="token keyword">public</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token keyword">int</span> age<span class="token punctuation">,</span><span class="token class-name">String</span> name<span class="token punctuation">,</span><span class="token keyword">int</span> score<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">=</span>age<span class="token punctuation">;</span>         <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token operator">=</span>name<span class="token punctuation">;</span>         <span class="token keyword">this</span><span class="token punctuation">.</span>score<span class="token operator">=</span>score<span class="token punctuation">;</span>     <span class="token punctuation">}</span>          <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token comment">//强制转换对象</span>         <span class="token comment">//按年龄和分数排序 都是从大到小</span>         <span class="token keyword">if</span><span class="token punctuation">(</span>o <span class="token keyword">instanceof</span> <span class="token class-name">Person</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token class-name">Person</span> <span class="token class-name">O</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">Person</span><span class="token punctuation">)</span> o<span class="token punctuation">;</span><span class="token comment">//强转类型</span>             <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">!=</span><span class="token class-name">O</span><span class="token punctuation">.</span>age<span class="token punctuation">)</span>             <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token operator">-</span><span class="token class-name">O</span><span class="token punctuation">.</span>age<span class="token punctuation">;</span><span class="token comment">//this是当前的主体，此时返回的应该是升序</span>             <span class="token keyword">else</span> <span class="token keyword">return</span> <span class="token class-name">O</span><span class="token punctuation">.</span>score<span class="token operator">-</span><span class="token keyword">this</span><span class="token punctuation">.</span>score<span class="token punctuation">;</span>         <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">(</span><span class="token string">"不属于此类型"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>      <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> <span class="token string">"Person{"</span> <span class="token operator">+</span>                 <span class="token string">"age="</span> <span class="token operator">+</span> age <span class="token operator">+</span>                 <span class="token string">", name='"</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token char">'\''</span> <span class="token operator">+</span>                 <span class="token string">", score="</span> <span class="token operator">+</span> score <span class="token operator">+</span>                 <span class="token char">'}'</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p>测试类</p> <pre><code class="prism language-java"><span class="token keyword">package</span> <span class="token class-name">TreeSet</span><span class="token punctuation">;</span>  <span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Arrays</span><span class="token punctuation">;</span>  <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">Person</span><span class="token punctuation">[</span><span class="token punctuation">]</span> person<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>         person<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">"guolu"</span><span class="token punctuation">,</span><span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">"cherry"</span><span class="token punctuation">,</span><span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">"cherry"</span><span class="token punctuation">,</span><span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//别忘了这句话；</span>         <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span>  </code></pre> <p>(2)定制排序：向其中传入已经重写Comparator中方法的对象。</p> <pre><code class="prism language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">Person</span><span class="token punctuation">[</span><span class="token punctuation">]</span> person<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>         person<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token string">"guolu"</span><span class="token punctuation">,</span><span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">"cherry"</span><span class="token punctuation">,</span><span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">"cherry"</span><span class="token punctuation">,</span><span class="token number">98</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token class-name">Comparator</span> com<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Comparator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token annotation punctuation">@Override</span>             <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">compare</span><span class="token punctuation">(</span><span class="token class-name">Object</span> o1<span class="token punctuation">,</span> <span class="token class-name">Object</span> o2<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 <span class="token class-name">Person</span> p1<span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">Person</span><span class="token punctuation">)</span>o1<span class="token punctuation">;</span>                 <span class="token class-name">Person</span> p2<span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">Person</span><span class="token punctuation">)</span>o2<span class="token punctuation">;</span>                 <span class="token keyword">return</span> p1<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>p2<span class="token punctuation">.</span><span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//得确保有get和set接口，这边好像不太好用compareTo,暂时不知道为啥</span>             <span class="token punctuation">}</span>         <span class="token punctuation">}</span><span class="token punctuation">;</span>         <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>person<span class="token punctuation">,</span>com<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>person<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <h3> <a id="3Queue_138" rel="nofollow"></a>(3).Queue</h3> <p>queue:单向队列<br /> deque:双向队列<br /> PriorityQueue 是非线程安全的，默认小顶堆，但可以接收一个 Comparator 作为构造参数，从而来自定义元素优先级的先后。</p> <h2> <a id="2Map_143" rel="nofollow"></a>2.Map</h2> <table> <thead> <tr> <th>名称</th> <th>底层</th> <th>线程安全性</th> <th>备注</th> <th>扩容机制</th> </tr> </thead> <tbody> <tr> <td>HashMap</td> <td>数组+链表（jdk7） 数组+链表+红黑树 （jdk8）</td> <td>线程不安全</td> <td>能存储null的key和value</td> <td>首次创建长度16，扩容2倍，jdk8中当数组的某一个索引位置上的元素以链表形式存在的数据个数&gt;8且当前的数组长度&gt;64时，此索引位置上的所有数据改为使用红黑树存储</td> </tr> <tr> <td>LinkedHashMap</td> <td>同hashmap</td> <td>线程不安全</td> <td>比hashmap多了指向前驱和后继的两个指针</td> <td></td> </tr> <tr> <td>ConcurrentHashMap</td> <td>同hashmap</td> <td>线程安全</td> <td>使用16个锁来控制segments,分段锁</td> <td></td> </tr> <tr> <td>HashTable</td> <td>数组+链表</td> <td>线程安全，全表锁</td> <td>不能存储null的key和value</td> <td>首次创建时长度为11，后来变为2n+1</td> </tr> <tr> <td>TreeMap</td> <td>红黑树</td> <td>线程不安全</td> <td>定制排序</td> <td></td> </tr> </tbody> </table> <hr/> </h1> <p>1.集合转换为数组</p> <pre><code class="prism language-java"><span class="token class-name">Collection</span> coll<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token class-name">Object</span> arr<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span>coll<span class="token punctuation">.</span><span class="token function">toArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> </code></pre> <p>2.数组转换为集合<br /> asList后面的必须接引用类型</p> <pre><code class="prism language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> list<span class="token operator">=</span><span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{<!-- --></span><span class="token string">"AA"</span><span class="token punctuation">,</span><span class="token string">"BB"</span><span class="token punctuation">,</span><span class="token string">"CC"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre> <p>3.红黑树<br /> 参考：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/u014454538/article/details/120120216"  rel="nofollow">红黑树</a></p> </h1> <p>javaguide、尚硅谷</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-28935.htm">动物防疫疫苗管理要点是什么呢英语（动物防疫疫苗管理要点是什么呢英语翻译）</a></p>
+                                        <p>下一个：<a href="/news/article-29400.htm">修改 Docker 的默认存储路径</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-node-share.htm" title="11月27日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接">11月27日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-7-hiddify-next-github.htm" title="12月7日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">12月7日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-latest-hiddify-next-node.htm" title="10月30日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接">10月30日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-17-free-hiddify-next-node.htm" title="9月17日 | HiddifyNextNode节点订阅每天更新20.5M/S免费节点订阅链接">9月17日 | HiddifyNextNode节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-1-today-hiddify-next-node.htm" title="10月1日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接">10月1日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-7-hiddify-next-node-share.htm" title="10月7日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接">10月7日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-latest-hiddify-next-node.htm" title="10月14日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接">10月14日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-25223.htm" title="动物疫苗公司销量排名前十 动物疫苗公司销量排名前十名">动物疫苗公司销量排名前十 动物疫苗公司销量排名前十名</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-25-hiddify-next-node-share.htm" title="8月25日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接">8月25日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-7-free-node-subscribe-links.htm" title="9月7日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接">9月7日 | HiddifyNextNode节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
