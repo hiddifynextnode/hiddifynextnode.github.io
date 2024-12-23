@@ -110,6 +110,7 @@
                   				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>Docker 默认安装的情况下，会使用 /var/lib/docker/ 目录作为存储目录，用以存放拉取的镜像和创建的容器等。不过由于此目录一般都位于系统盘，遇到系统盘比较小，而镜像和容器多了后就容易尴尬，这里说明一下如何修改 Docker 的存储目录。</p> <p>以我手头的一台 VPS 作为例子，可以看到这台机子本身有两块硬盘，我把数据盘 vdb 挂载到了/www 目录，目标就是将 Docker 存储目录移到/www/docker。</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220604/2a1f7d642c63e1c69f8d7b420d02a772.jpg"></p> <p>输入：</p> <pre><code>docker info</code></pre> <p>可以查看程序信息，红框里就是默认的存储目录：</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220604/4203eabbb88ae9931fe644483001a88c.jpg"></p> <p>最简单粗暴的办法，当然就是直接把数据盘挂载到/var/lib/docker 目录下，不过这样对整体影响太大，其他程序需要使用数据盘时很不方便，所以还是从 Docker 端的修改入手。</p> <p>官方文档的修改办法是编辑 /etc/docker/daemon.json 文件：</p> <pre><code>vi /etc/docker/daemon.json</code></pre> <p>默认情况下这个配置文件是没有的，这里实际也就是新建一个，然后写入以下内容：</p> <pre><code>{   "data-root": "/www/docker" }</code></pre> <p>此文件还涉及默认源的设定，如果设定了国内源，那么实际就是在源地址下方加一行，写成：</p> <pre><code>{   "registry-mirrors": ["http://hub-mirror.c.163.com"],   "data-root": "/www/docker" }</code></pre> <p>保存退出，然后重启 docker 服务：</p> <pre><code>systemctl restart docker</code></pre> <p>再次查看 docker 信息，可以看到目录已经变成了设定的/www/docker:</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220604/454448dfe8bd88e8b59bcf198f83b342.jpg"></p> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-29397.htm">JAVA容器详解</a></p>
+                                        <p>下一个：<a href="/news/article-29878.htm">宠物粮食加工厂设备生产厂家有哪些呢图片（生产宠物粮的工厂有哪些）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -119,16 +120,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-1-hiddify-next-node.htm" title="12月1日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接">12月1日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-2-free-high-speed-nodes.htm" title="12月2日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接">12月2日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-12-hiddify-next-windows.htm" title="8月12日 | HiddifyNextNode节点订阅每天更新18.3M/S免费节点订阅链接">8月12日 | HiddifyNextNode节点订阅每天更新18.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-14-hiddify-next-node-github.htm" title="11月14日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接">11月14日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-17-free-hiddify-next-node.htm" title="9月17日 | HiddifyNextNode节点订阅每天更新20.5M/S免费节点订阅链接">9月17日 | HiddifyNextNode节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-22445.htm" title="动物医院有哪些岗位（动物医院属于什么专业）">动物医院有哪些岗位（动物医院属于什么专业）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-17-node-share.htm" title="8月17日 | HiddifyNextNode节点订阅每天更新21M/S免费节点订阅链接">8月17日 | HiddifyNextNode节点订阅每天更新21M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-18-latest-hiddify-next-node.htm" title="12月18日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">12月18日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-19243.htm" title="动物医院起名（动物医院叫什么医院）">动物医院起名（动物医院叫什么医院）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-8-free-subscribe-node.htm" title="9月8日 | HiddifyNextNode节点订阅每天更新18.5M/S免费节点订阅链接">9月8日 | HiddifyNextNode节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-1-free-node-subscribe-links.htm" title="11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-24-latest-hiddify-next-node.htm" title="9月24日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接">9月24日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27076.htm" title="领养动物花钱吗（领养动物是免费的吗）">领养动物花钱吗（领养动物是免费的吗）</a></li>
+                        <li class="py-2"><a href="/news/article-24292.htm" title="宠物店进货渠道怎么找客户电话号码（宠物店怎么找货源）">宠物店进货渠道怎么找客户电话号码（宠物店怎么找货源）</a></li>
+                        <li class="py-2"><a href="/news/article-23830.htm" title="狗粮猫粮加工设备厂家有哪些（猫狗粮加工的原料是什么）">狗粮猫粮加工设备厂家有哪些（猫狗粮加工的原料是什么）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-13-today-hiddify-next-node.htm" title="8月13日 | HiddifyNextNode节点订阅每天更新21.5M/S免费节点订阅链接">8月13日 | HiddifyNextNode节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-19-free-node-subscribe-links.htm" title="9月19日 | HiddifyNextNode节点订阅每天更新21.1M/S免费节点订阅链接">9月19日 | HiddifyNextNode节点订阅每天更新21.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-14-free-subscribe-node.htm" title="9月14日 | HiddifyNextNode节点订阅每天更新18.2M/S免费节点订阅链接">9月14日 | HiddifyNextNode节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-11-node-share-links.htm" title="10月11日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接">10月11日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-27-hiddify-next-node.htm" title="8月27日 | HiddifyNextNode节点订阅每天更新18.4M/S免费节点订阅链接">8月27日 | HiddifyNextNode节点订阅每天更新18.4M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -140,7 +141,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
