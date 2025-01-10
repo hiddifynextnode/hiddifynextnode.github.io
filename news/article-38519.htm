@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-38519.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>彻底搞定kubernetes远程访问</title>
+        <meta name="description" content="kubectl方式远程访问集群 kubectl是kubernetes自带的命令行客户端，安装kubernete集群之后，可以使用kubectl相关的命令访问kubernetes集群资源。kubectl" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                    <span class="sublog">Hiddify Next</span> Node
+                </a>
+                                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">彻底搞定kubernetes远程访问</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2><a id="kubectl_0" rel="nofollow"></a>kubectl方式远程访问集群</h2> <p>kubectl是kubernetes自带的命令行客户端，安装kubernete集群之后，可以使用kubectl相关的命令访问kubernetes集群资源。kubectl可以独立在本地安装，来访问远程的kubernetes集群资源。<br /><strong>配置方式</strong>：将远程kubernetes集群~.kube/config文件 拷贝到本地并替换，即可通过kubectl访问远程kubernetes集群</p> <h2><a id="kubectl_proxy_4" rel="nofollow"></a>使用kubectl proxy代理方式</h2> <p>执行如下命令</p> <pre><code class="prism language-bash">$ kubectl proxy --port<span class="token operator">=</span>8080<span class="token operator">&amp;</span></code></pre> <ul> <li>注意这里不仅仅只是可以在kubernetes集群的节点上执行才能达到访问目的，如果已经通过上面提到的方式在本地通过kubectl已经连接到远程集群，那么在本地执行此以下命令也是可以的。此时映射的端口是在执行命令的本地机器上</li> <li>该命令执行后通过curl访问kubernetes接口具有较高的权限，包括查看、删除等</li> </ul> <h2><a id="_kubectl__15" rel="nofollow"></a>不使用 kubectl 代理</h2> <pre><code class="prism language-bash">$ APISERVER<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>kubectl config view<span class="token operator">|</span><span class="token function">grep</span> server<span class="token operator">|</span><span class="token function">cut</span> -f 2- -d<span class="token string">":"</span><span class="token operator">|</span><span class="token function">tr</span> -d<span class="token string">" "</span><span class="token variable">)</span></span><span class="token comment">#下面这地方可能会有坑，获取到的token尽量检查一下前面是否有空格，如果有空格，后面即使赋权之后也会报权限错误，注意删除空格</span> $ TOKEN<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>kubectl describe secret<span class="token punctuation">$(</span>kubectl get secrets<span class="token operator">|</span><span class="token function">grep</span> default<span class="token operator">|</span><span class="token function">cut</span> -f1 -d<span class="token string">' '</span><span class="token variable">)</span></span><span class="token operator">|</span><span class="token function">grep</span> -E<span class="token string">'^token'</span><span class="token operator">|</span><span class="token function">cut</span> -f2 -d<span class="token string">':'</span><span class="token operator">|</span><span class="token function">tr</span> -d<span class="token string">'\t'</span><span class="token punctuation">)</span> $<span class="token function">curl</span><span class="token variable">$APISERVER</span>/api/v1/namespaces/default/pods  --header<span class="token string">"Authorization: Bearer<span class="token variable">$TOKEN</span>"</span> --insecure<span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"APIVersions"</span>,<span class="token string">"versions"</span><span class="token keyword">:</span><span class="token punctuation">[</span><span class="token string">"v1"</span><span class="token punctuation">]</span>,<span class="token string">"serverAddressByClientCIDRs"</span><span class="token keyword">:</span><span class="token punctuation">[</span><span class="token punctuation">{<!-- --></span><span class="token string">"clientCIDR"</span><span class="token keyword">:</span><span class="token string">"0.0.0.0/0"</span>,<span class="token string">"serverAddress"</span><span class="token keyword">:</span><span class="token string">"10.0.1.149:443"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">}</span></code></pre> <p>通过这种方式访问kubernetes集群会经过认证、授权、准入控制等环节，所以需要在请求发送时提供证书、token或者账号密码信息。以上示例是提供了TOKEN方式进行了身份认证，其他方式详见<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://k8smeetup.github.io/docs/admin/authentication/"  rel="nofollow">身份认证</a></p> <ul> <li>如果认证失败，会出现以下返，需要确认一下提供的token 或者证书等身份信息是否正确。</li> </ul> <pre><code class="prism language-bash"><span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"Status"</span>,<span class="token string">"apiVersion"</span><span class="token keyword">:</span><span class="token string">"v1"</span>,<span class="token string">"metadata"</span><span class="token keyword">:</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>,<span class="token string">"status"</span><span class="token keyword">:</span><span class="token string">"Failure"</span>,<span class="token string">"message"</span><span class="token keyword">:</span><span class="token string">"Unauthorized"</span>,<span class="token string">"reason"</span><span class="token keyword">:</span><span class="token string">"Unauthorized"</span>,<span class="token string">"code"</span><span class="token keyword">:</span> 401<span class="token punctuation">}</span></code></pre> <ul> <li>更常见的我们会遇到类似如下返回</li> </ul> <pre><code class="prism language-bash"><span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"Status"</span>,<span class="token string">"apiVersion"</span><span class="token keyword">:</span><span class="token string">"v1"</span>,<span class="token string">"metadata"</span><span class="token keyword">:</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>,<span class="token string">"status"</span><span class="token keyword">:</span><span class="token string">"Failure"</span>,<span class="token string">"message"</span><span class="token keyword">:</span><span class="token string">"pods is forbidden: User \"system:anonymous\" cannot list resource \"pods\" in API group \"\" in the namespace \"default\""</span>,<span class="token string">"reason"</span><span class="token keyword">:</span><span class="token string">"Forbidden"</span>,<span class="token string">"details"</span><span class="token keyword">:</span><span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"pods"</span><span class="token punctuation">}</span>,<span class="token string">"code"</span><span class="token keyword">:</span> 403<span class="token punctuation">}</span></code></pre> <p>通过提示信息我们看到没有我们可以通过以下命令来查看，结果发现并没有system:anonymous 这个用户，其实这里的system:anonymous 其实是kubernetes默认配置指定的，kubernetes对于外部请求的身份认证分为认证、授权、准入控制三个层面，所有 未被配置的其他身份验证方法拒绝 的请求被视为匿名请求，并被授予 system:anonymous 用户名和 system:unauthenticated 组（可以通过启动 kubelet 时指定 --anonymous-auth=false 标志来禁止该返回）。所以这里只是说明 我们提供的token 通过了认证，但并没有被授予合适的权限。</p> <pre><code class="prism language-bash">kubectl config view -o jsonpath<span class="token operator">=</span><span class="token string">'{.users[*].name}'</span></code></pre> <p>首先要知道kubernetes中并没有user这个资源对象的概念，对应的有service account这个资源对象，主要用于pod内部访问kubernetes api，通过将关联的 secret挂载到pod实现。但通过curl访问kubernetes api时，我们可以即可以使用use账号来认证授权，也可以通过service account来完成，上面的例子就是通过service account 来访问的，我们只需要解决授权的问题。<br /> 在RBAC这种认证模式下，通过创建ClusterRole/Role进行角色权限定义，指定对某类资源(如pods)的操作权限（get,list,watch,update,create,delete等），然后通过Rolebinding/ClusterRoleBinding去将创建好的角色绑定到 user 或者 service account。</p> <pre><code class="prism language-bash"><span class="token comment">#role定义文件 role.yaml</span><span class="token comment">#使用kubectl create -f role.yaml</span> apiVersion: rbac.authorization.k8s.io/v1 kind: Role metadata:   annotations:     rbac.authorization.kubernetes.io/autoupdate:<span class="token string">"true"</span><span class="token comment"># 此处的 "namespace" 被省略掉是因为 ClusterRoles 是没有命名空间的。</span>   name: role-xingqing rules: - apiGroups:<span class="token punctuation">[</span><span class="token string">""</span><span class="token punctuation">]</span>   resources:<span class="token punctuation">[</span><span class="token string">"pods"</span><span class="token punctuation">]</span>   verbs:<span class="token punctuation">[</span><span class="token string">"get"</span>,<span class="token string">"list"</span>,<span class="token string">"watch"</span>,<span class="token string">"update"</span>,<span class="token string">"create"</span>,<span class="token string">"delete"</span><span class="token punctuation">]</span></code></pre> <pre><code class="prism language-bash">kubectl create rolebinding role-binding-xingqing --role<span class="token operator">=</span>role-xingqing --serviceaccount<span class="token operator">=</span>default:default</code></pre> <p>因为我们的角色是定义的对pods的权限，所以对于pods的接口是可以正常返回的，当你访问其他资源时，就会被禁止</p> <pre><code class="prism language-bash"><span class="token function">curl</span><span class="token variable">$APISERVER</span>/api/v1/namespaces/default/pods  --header<span class="token string">"Authorization: Bearer<span class="token variable">$TOKEN</span>"</span> --insecure                                                       caidongqing@IT-C02Z2CAFLVCF<span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"PodList"</span>,<span class="token string">"apiVersion"</span><span class="token keyword">:</span><span class="token string">"v1"</span>,<span class="token string">"metadata"</span><span class="token keyword">:</span><span class="token punctuation">{<!-- --></span><span class="token string">"selfLink"</span><span class="token keyword">:</span><span class="token string">"/api/v1/namespaces/default/pods"</span>,<span class="token string">"resourceVersion"</span><span class="token keyword">:</span><span class="token string">"265992975"</span><span class="token punctuation">}</span>,<span class="token string">"items"</span><span class="token keyword">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span>%                                                                                                                                                                                       -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  ~ »<span class="token function">curl</span><span class="token variable">$APISERVER</span>/api/v1/namespaces/default/deployment  --header<span class="token string">"Authorization: Bearer<span class="token variable">$TOKEN</span>"</span> --insecure                                                 caidongqing@IT-C02Z2CAFLVCF<span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"Status"</span>,<span class="token string">"apiVersion"</span><span class="token keyword">:</span><span class="token string">"v1"</span>,<span class="token string">"metadata"</span><span class="token keyword">:</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>,<span class="token string">"status"</span><span class="token keyword">:</span><span class="token string">"Failure"</span>,<span class="token string">"message"</span><span class="token keyword">:</span><span class="token string">"deployment is forbidden: User \"system:serviceaccount:default:default\" cannot list resource \"deployment\" in API group \"\" in the namespace \"default\""</span>,<span class="token string">"reason"</span><span class="token keyword">:</span><span class="token string">"Forbidden"</span>,<span class="token string">"details"</span><span class="token keyword">:</span><span class="token punctuation">{<!-- --></span><span class="token string">"kind"</span><span class="token keyword">:</span><span class="token string">"deployment"</span><span class="token punctuation">}</span>,<span class="token string">"code"</span><span class="token keyword">:</span> 403<span class="token punctuation">}</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-38031.htm">猫粮加工机器 猫粮加工机器设备厂家</a></p>
+                                        <p>下一个：<a href="/news/article-38520.htm">附近美甲美睫培训学校哪家好一点（美甲美睫美容学校）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-latest-hiddify-next-node.htm" title="10月14日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接">10月14日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-31-hiddify-next-github.htm" title="10月31日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">10月31日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-hiddify-next-node-share.htm" title="11月16日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接">11月16日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-free-subscribe-node.htm" title="11月13日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">11月13日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-14-free-node-subscribe.htm" title="12月14日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">12月14日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-11-node-share-links.htm" title="10月11日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接">10月11日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-22447.htm" title="宠物免费领养协议（宠物免费领养协议书）">宠物免费领养协议（宠物免费领养协议书）</a></li>
+                        <li class="py-2"><a href="/news/article-32279.htm" title="动物接种疫苗的好处有哪些方面的内容和要求（动物接种疫苗的注意事项）">动物接种疫苗的好处有哪些方面的内容和要求（动物接种疫苗的注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-35563.htm" title="动物生物疫苗工资 动物生物疫苗工资高吗">动物生物疫苗工资 动物生物疫苗工资高吗</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-31-free-node-subscribe.htm" title="12月31日 | HiddifyNextNode机场节点订阅每天更新18.8M/S免费节点订阅链接">12月31日 | HiddifyNextNode机场节点订阅每天更新18.8M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
