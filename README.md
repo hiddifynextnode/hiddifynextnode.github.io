@@ -1,4 +1,4 @@
-# 1月10日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接  更新时间 2025-01-10 10:51:49
+# 1月11日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接  更新时间 2025-01-11 10:12:29
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://hiddifynextnode.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### Clash订阅链接
 
-- https://hiddifynextnode.github.io/uploads/2025/01/0-20250110.yaml
-- https://hiddifynextnode.github.io/uploads/2025/01/1-20250110.yaml
-- https://hiddifynextnode.github.io/uploads/2025/01/2-20250110.yaml
-- https://hiddifynextnode.github.io/uploads/2025/01/3-20250110.yaml
-- https://hiddifynextnode.github.io/uploads/2025/01/4-20250110.yaml
+- https://hiddifynextnode.github.io/uploads/2025/01/0-20250111.yaml
+- https://hiddifynextnode.github.io/uploads/2025/01/1-20250111.yaml
+- https://hiddifynextnode.github.io/uploads/2025/01/2-20250111.yaml
+- https://hiddifynextnode.github.io/uploads/2025/01/3-20250111.yaml
+- https://hiddifynextnode.github.io/uploads/2025/01/4-20250111.yaml
 
 ### V2ray订阅链接
 
-- https://hiddifynextnode.github.io/uploads/2025/01/0-20250110.txt
-- https://hiddifynextnode.github.io/uploads/2025/01/1-20250110.txt
-- https://hiddifynextnode.github.io/uploads/2025/01/2-20250110.txt
-- https://hiddifynextnode.github.io/uploads/2025/01/3-20250110.txt
-- https://hiddifynextnode.github.io/uploads/2025/01/4-20250110.txt
+- https://hiddifynextnode.github.io/uploads/2025/01/0-20250111.txt
+- https://hiddifynextnode.github.io/uploads/2025/01/1-20250111.txt
+- https://hiddifynextnode.github.io/uploads/2025/01/2-20250111.txt
+- https://hiddifynextnode.github.io/uploads/2025/01/3-20250111.txt
+- https://hiddifynextnode.github.io/uploads/2025/01/4-20250111.txt
 
 ### Sing-box订阅链接
 
-- https://hiddifynextnode.github.io/uploads/2025/01/20250110.json
+- https://hiddifynextnode.github.io/uploads/2025/01/20250111.json
 
 ## 更多clash节点订阅 ：
 
