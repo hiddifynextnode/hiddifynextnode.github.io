@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-40019.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CentOS 7.5 配置</title>
+        <meta name="description" content="文章目录  CentOS 7.5 配置   添加用户超权限 安装中文输入法 安装 vscode 安装 gcc/g++ 和 git   安装 SCL 安装 gcc/g++ 10.2.1 安装 git 2" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                    <span class="sublog">Hiddify Next</span> Node
+                </a>
+                                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">CentOS 7.5 配置</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#CentOS_75__2" rel="nofollow">CentOS 7.5 配置</a></li> <li> <ul> <li><a href="#_15" rel="nofollow">添加用户超权限</a></li> <li><a href="#_42" rel="nofollow">安装中文输入法</a></li> <li><a href="#_vscode_61" rel="nofollow">安装 vscode</a></li> <li><a href="#_gccg__git_90" rel="nofollow">安装 gcc/g++ 和 git</a></li> <li> <ul> <li><a href="#_SCL_102" rel="nofollow">安装 SCL</a></li> <li><a href="#_gccg_1021_136" rel="nofollow">安装 gcc/g++ 10.2.1</a></li> <li><a href="#_git_227_154" rel="nofollow">安装 git 2.27</a></li> </ul> </li> <li><a href="#_cmake_320_188" rel="nofollow">安装 cmake 3.20</a></li> <li><a href="#_Eigen_340_207" rel="nofollow">安装 Eigen 3.4.0</a></li> <li><a href="#_openCV_450_264" rel="nofollow">安装 openCV 4.5.0</a></li> <li><a href="#CentOS__358" rel="nofollow">CentOS 遇到的报错</a></li> <li> <ul> <li><a href="#_360" rel="nofollow">用户超权限</a></li> <li><a href="#yum__369" rel="nofollow">yum 锁</a></li> <li><a href="#CentOS_U_385" rel="nofollow">CentOS U盘挂载问题</a></li> </ul> </li> </ul> </li> </ul> </div> </h1> <p>CentOS 下载链接：https://pan.baidu.com/s/1dPYs97Ew-Liz_chnkpV4kw<br /> 提取码：4kxf</p> <p>UltraISO 中文破解版：https://blog.csdn.net/Asher117/article/details/93618082?spm=1001.2014.3001.5506</p> <p>安装过程可参考：</p> <ul> <li>https://blog.csdn.net/qq_18945757/article/details/90033158?spm=1001.2014.3001.5506</li> <li>https://blog.csdn.net/qq_40309341/article/details/109513000?spm=1001.2014.3001.5506</li> </ul> <p>如果是虚拟机的话可以参考????<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/s?__biz=MzA3MTk0NjYxMw==&amp;mid=2650385850&amp;idx=1&amp;sn=66ccf6630709ee902fe00d7344244a3d&amp;chksm=8728d5a0b05f5cb69b1bb5a021cc85cd7b9ca964f711354f4f24e0abc512fe6da41e45f376cd&amp;scene=21#wechat_redirect"  rel="nofollow">此篇</a>。</p> <h2><a id="_15" rel="nofollow"></a>添加用户超权限</h2> <blockquote> <p>参考: https://blog.csdn.net/qq_23327993/article/details/122063031</p> </blockquote> <p>Linux 可以通过<code>sudo</code> 来动态赋予超级用户权限，但是对于先新增的用户不会默认赋予<code>sudo</code> 权力，如下报错：</p> <pre><code class="prism language-bashs">xxx is not in the sudoers file.This incident will be reported.</code></pre> <p>解决方法是修改文件<code>/etc/sudoer</code> 文件：</p> <pre><code class="prism language-bash"><span class="token comment"># 切换为超级用户</span><span class="token function">su</span><span class="token comment"># 赋予文件"写"权限</span><span class="token function">chmod</span> u+w /etc/sudoers<span class="token comment"># 使用 vim 打开文件</span><span class="token function">vi</span> /etc/sudoers</code></pre> <p>在<code>root ALL=(ALL:ALL) ALL</code> 后头添加</p> <pre><code>&lt;userName&gt;  ALL=(ALL:ALL)   ALL</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221117/585074a21f62da5b2497226930a60611.jpg" alt="CentOS 7.5 配置"></p> <h2><a id="_42" rel="nofollow"></a>安装中文输入法</h2> <blockquote> <p>参考: https://blog.csdn.net/m0_37515193/article/details/101212159</p> </blockquote> <p>安装 ibus-libpinyin</p> <pre><code class="prism language-bash">yum<span class="token function">install</span> ibus-libpinyin</code></pre> <p><strong>重启系统</strong>后，打开终端，重启 ibus</p> <pre><code class="prism language-bash">ibus restart</code></pre> <p>打开设置 -&gt; Region &amp; Language，点击<code>+</code>，有这个 Chinese (Intelligent Pinyin) 的选项<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/52bae829b242a142195322d30054b511.jpg" alt="CentOS 7.5 配置"></p> <p>一切正常的话，就有<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/f25f525bed5eece599d279ee6e124984.jpg" alt="CentOS 7.5 配置"></p> <h2><a id="_vscode_61" rel="nofollow"></a>安装 vscode</h2> <blockquote> <p>vscode yyds，官方有相关的教程：</p> <ul> <li>https://code.visualstudio.com/docs/setup/linux</li> </ul> <p>这个也可以参考一下：</p> <ul> <li>https://blog.csdn.net/yy345730585/article/details/89469513</li> </ul> </blockquote> <p>执行以下代码：</p> <pre><code class="prism language-shell"><span class="token function">sudo</span><span class="token function">rpm</span> --import https://packages.microsoft.com/keys/microsoft.asc<span class="token function">sudo</span><span class="token function">sh</span> -c<span class="token string">'echo -e "<code></code>\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" &gt; /etc/yum.repos.d/vscode.repo'</span> yum check-update<span class="token function">sudo</span> yum<span class="token function">install</span> code</code></pre> <p>安装完成在终端输入<code>code</code> 即可启动 vscode。</p> <p>VSCode 可以通过<code>dnf</code> 或<code>yum</code> 包管理器来安装更新，使用<code>dnf</code> 的指令如下：</p> <pre><code class="prism language-bash"><span class="token function">sudo</span> dnf check-update<span class="token function">sudo</span> dnf<span class="token function">install</span> code</code></pre> <p><code>yum</code> 的指令如下：</p> <pre><code class="prism language-bash">yum check-update<span class="token function">sudo</span> yum<span class="token function">install</span> code</code></pre> <h2><a id="_gccg__git_90" rel="nofollow"></a>安装 gcc/g++ 和 git</h2> <p>CentOS 7 自带的 gcc/g++ 和 git 的版本偏低了。gcc 4.8.5 是不支持 c17 特性，vscode 推荐 git 版本要大于 2.0（原自带的 git 是 1.8 的）。</p> <blockquote> <p>参考: https://blog.csdn.net/b_ingram/article/details/121569398</p> </blockquote> <p>这里是使用这个 SCL 软件集，SCL 提供包括 gcc, git, python 等多版本的软件包，且不同版本的切换也比较方便。</p> <blockquote> <p>SCL ( Software Collections ) 是一个CentOS/RHEL Linux平台的软件多版本共存解决方案，为RHEL/CentOS Linux用户提供一种方便、安全地安装和使用应用程序和运行时环境的多个版本的方式，同时避免把系统搞乱。</p> <p>参考：https://blog.csdn.net/A642960662/article/details/123076029</p> </blockquote> <h3><a id="_SCL_102" rel="nofollow"></a>安装 SCL</h3> <pre><code class="prism language-bash"><span class="token comment"># 超级权限用户</span><span class="token function">su</span><span class="token comment"># 安装 SCL</span> yum<span class="token function">install</span> centos-release-scl</code></pre> <p>可以在以下网站查看 SCL 项目：</p> <ul> <li>https://www.softwarecollections.org/en/?spm=a2c4e.10696291.0.0.719919a4kVhmwD</li> <li>https://www.softwarecollections.org/en/scls/?search=&amp;policy=&amp;repo=&amp;order_by=-create_date&amp;per_page=10</li> </ul> <p>查看安装哪些软件集</p> <pre><code class="prism language-bash">yum list all --enablerepo<span class="token operator">=</span><span class="token string">'centos-sclo-rh'</span><span class="token operator">&gt;</span> xxx.txt<span class="token comment"># 重定向输出</span></code></pre> <p>查看已安装的软件</p> <pre><code class="prism language-bash">scl --list</code></pre> <p>激活软件包</p> <pre><code class="prism language-bash">scl<span class="token builtin class-name">enable</span><span class="token operator">&lt;</span>scl-package-name<span class="token operator">&gt;</span><span class="token operator">&lt;</span>command<span class="token operator">&gt;</span></code></pre> <p><code>&lt;command&gt;</code>最常用的就是<code>bash</code>，即在当前的<code>bash</code> 生效，退出了当前的 shell 就失效了。<br /> 想要启动终端就激活软件包可以将<code>source /opt/rh/&lt;packName&gt;/enable</code> 写入到环境变量<code>/etc/profile</code>，即执行</p> <pre><code class="prism language-bash"><span class="token builtin class-name">echo</span><span class="token string">"source /opt/rh/&lt;packName&gt;/enable"</span><span class="token operator">&gt;&gt;</span>/etc/profile</code></pre> <blockquote> <p>参考：https://zhuanlan.zhihu.com/p/112764855</p> </blockquote> <h3><a id="_gccg_1021_136" rel="nofollow"></a>安装 gcc/g++ 10.2.1</h3> <pre><code class="prism language-bash"><span class="token comment"># 进入超权限用户</span><span class="token function">su</span><span class="token comment"># 安装开发工具集, 这里选择版本 10</span> yum<span class="token function">install</span> devtoolset-10<span class="token comment"># 激活对应工具集</span> scl<span class="token builtin class-name">enable</span> devtoolset-10<span class="token function">bash</span></code></pre> <p>可以采用添加环境变量的方式在打开终端时激活<code>devtoolset-10</code>，也可以通过软链接的方式</p> <pre><code class="prism language-bash"><span class="token comment"># 可以先将原先的 4.8.5 版本的 gcc 改名掉</span><span class="token function">ln</span> -s /opt/rh/devtoolset-10/root/bin/gcc /usr/bin/gcc<span class="token function">ln</span> -s /opt/rh/devtoolset-10/root/bin/g++ /usr/bin/g++</code></pre> <h3><a id="_git_227_154" rel="nofollow"></a>安装 git 2.27</h3> <p>卸载原先的 git，执行</p> <pre><code class="prism language-bash"><span class="token function">sudo</span> yum remove<span class="token function">git</span></code></pre> <p>通过 SCL 进行安装</p> <pre><code class="prism language-bash">yum<span class="token function">install</span> rh-git227</code></pre> <p>设置软链接</p> <pre><code class="prism language-bash"><span class="token function">ln</span> -s /opt/rh/rh-git227/root/bin/git /usr/bin/git<span class="token function">ln</span> -s /opt/rh/rh-git227/root/bin/git-shell /usr/bin/git-shell<span class="token function">ln</span> -s /opt/rh/rh-git227/root/bin/git-receive-pack /usr/bin/git-receive-pack<span class="token function">ln</span> -s /opt/rh/rh-git227/root/bin/git-upload-archive /usr/bin/git-upload-archive<span class="token function">ln</span> -s /opt/rh/rh-git227/root/bin/git-upload-pack /usr/bin/git-upload-pack</code></pre> <p>安装完成后，会发现在 /opt/rh/ 目录下多了一个 httpd24 的目录，这个在使用<code>git clone xxx</code> 命令时需要使用到，因此需要进行激活，否则会报错：</p> <pre><code class="prism language-shell">error<span class="token keyword">while</span> loading shared libraries: libcurl-httpd24.so.4: cannot<span class="token function">open</span> shared object file: No such<span class="token function">file</span> or directory</code></pre> <p>激活的命令自然就是：</p> <pre><code class="prism language-bash">scl<span class="token builtin class-name">enable</span> httpd24<span class="token function">bash</span></code></pre> <p>推荐的一劳永逸的方式是写到 /opt/profile 中</p> <pre><code class="prism language-bash"><span class="token builtin class-name">echo</span><span class="token string">"source /opt/rh/httpd24/enable"</span><span class="token operator">&gt;&gt;</span>/etc/profile</code></pre> <h2><a id="_cmake_320_188" rel="nofollow"></a>安装 cmake 3.20</h2> <p>各个版本的 CMake 可以在这查看：https://cmake.org/files/</p> <p>我们直接安装已编译好的版本（解压即可使用），执行</p> <pre><code class="prism language-bash"><span class="token comment"># 下载指定版本的cmake</span><span class="token function">wget</span> https://cmake.org/files/v3.20/cmake-3.20.0-linux-x86_64.tar.gz<span class="token comment"># 解压到指定路径 /opt/, 若想解压到当前路径，省去 -C /opt/</span><span class="token function">tar</span> -zxvf cmake-3.20.0-linux-x86_64 -C /opt/<span class="token comment"># 创建链接，注意必须使用绝对路径</span><span class="token comment"># [path to cmake] = /home/iam/Downloads/cmake-3.20.0-linux-x86_64/bin/cmake</span><span class="token function">sudo</span><span class="token function">ln</span> -s<span class="token punctuation">[</span>path to cmake<span class="token punctuation">]</span> /usr/bin/cmake<span class="token function">sudo</span><span class="token function">ln</span> -s<span class="token punctuation">[</span>path to ccmake<span class="token punctuation">]</span> /usr/bin/ccmake<span class="token function">sudo</span><span class="token function">ln</span> -s<span class="token punctuation">[</span>path to cmake-gui<span class="token punctuation">]</span> /usr/bin/cmake-gui<span class="token function">sudo</span><span class="token function">ln</span> -s<span class="token punctuation">[</span>path to ctest<span class="token punctuation">]</span> /usr/bin/ctest<span class="token function">sudo</span><span class="token function">ln</span> -s<span class="token punctuation">[</span>path to cpack<span class="token punctuation">]</span> /usr/bin/cpack</code></pre> <h2><a id="_Eigen_340_207" rel="nofollow"></a>安装 Eigen 3.4.0</h2> <p>安装 Eigen 之前，需要完成 gcc 和 cmake 的安装。</p> <p>Eigen 官网：https://eigen.tuxfamily.org/index.php?title=Main_Page</p> <p>需要下载源码并进行编译安装</p> <pre><code class="prism language-bash"><span class="token comment"># 下载压缩包</span><span class="token function">wget</span> https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz<span class="token comment"># 解压到当前路径</span><span class="token function">tar</span> -zxvf eigen-3.4.0.tar.gz<span class="token comment"># 进入解压中的文件</span><span class="token builtin class-name">cd</span> eigen-3.40<span class="token function">mkdir</span> build<span class="token builtin class-name">cd</span> build<span class="token comment"># 编译安装</span> cmake<span class="token punctuation">..</span><span class="token function">make</span><span class="token function">install</span></code></pre> <p>默认的安装路径在<code>/usr/local/include/eigen3</code>，在使用的时候可以直接<code>#include&lt;Eigen/Dense&gt;</code> ，但在 VScode 中会显示报错（实际上是没问题的），使用<code>#include&lt;eigen3/Eigen/Dense&gt;</code> 可以解决报错问题。</p> <p><strong>测试代码:</strong></p> <p>test.cpp</p> <pre><code class="prism language-C++">#include &lt;iostream&gt; #include &lt;eigen3/Eigen/Dense&gt; using namespace std; using namespace Eigen; int main(int argc, char **argv) {     Matrix2d A;     A &lt;&lt; 1,2,3,4;     cout &lt;&lt; "A=\n" &lt;&lt; A &lt;&lt; endl;     return 0; }</code></pre> <p>CMakeLists.txt</p> <pre><code class="prism language-Cmake">cmake_minimum_required(VERSION 3.10) project(eigenTest) include_directories("/usr/local/include/eigen3") add_executable(test test.cpp)</code></pre> <p>终端执行：</p> <pre><code class="prism language-bash"><span class="token function">ls</span><span class="token comment"># -&gt; test.cpp CMakeLists.txt</span><span class="token function">mkdir</span> build<span class="token builtin class-name">cd</span> build cmake<span class="token punctuation">..</span><span class="token function">make</span> ./test</code></pre> <h2><a id="_openCV_450_264" rel="nofollow"></a>安装 openCV 4.5.0</h2> <p>安装之前，需要完成 gcc, cmake 和 git 的安装。</p> <blockquote> <p>参考：https://blog.csdn.net/qianbin3200896/article/details/117160054</p> </blockquote> <p>首先，安装依赖项</p> <pre><code class="prism language-bash"><span class="token function">sudo</span> yum -y<span class="token function">install</span> epel-release<span class="token function">sudo</span> yum -y<span class="token function">install</span> gtk2-devel<span class="token function">sudo</span> yum<span class="token function">install</span> -y libpng-devel<span class="token function">sudo</span> yum<span class="token function">install</span> -y jasper-devel<span class="token function">sudo</span> yum<span class="token function">install</span> -y openexr-devel<span class="token function">sudo</span> yum<span class="token function">install</span> -y libwebp-devel<span class="token function">sudo</span> yum -y<span class="token function">install</span> libjpeg-turbo-devel<span class="token function">sudo</span> yum -y<span class="token function">install</span> libtiff-devel<span class="token function">sudo</span> yum -y<span class="token function">install</span> tbb-devel eigen3-devel<span class="token function">sudo</span> yum -y<span class="token function">install</span> boost boost-thread boost-devel<span class="token function">sudo</span> yum -y<span class="token function">install</span> libv4l-devel</code></pre> <p>然后，下载 opencv 和 opencv_contrib 安装包(从码云下即可)</p> <pre><code class="prism language-bash"><span class="token function">git</span> clone https://gitee.com/binghai228/opencv.git<span class="token builtin class-name">cd</span> opencv<span class="token function">git</span> checkout<span class="token number">4.5</span>.0<span class="token comment"># 选择分支</span><span class="token builtin class-name">cd</span><span class="token punctuation">..</span><span class="token function">git</span> clone https://gitee.com/binghai228/opencv_contrib<span class="token builtin class-name">cd</span> opencv_contrib<span class="token function">git</span> checkout<span class="token number">4.5</span>.0<span class="token comment"># 选择分支</span><span class="token builtin class-name">cd</span><span class="token punctuation">..</span></code></pre> <p>分支选择完成后，将 opencv_contrib<strong>复制到</strong> opencv 的目录下。</p> <p>接着，下载 opencv_contrib 的 module 的部分缺失文件，可在此处下载：</p> <blockquote> <p>链接：https://pan.baidu.com/s/1L5KHpbNxAI7BwB592cGX3g<br /> 提取码：qszy</p> </blockquote> <p>把下载的文件放到opencv_contrib/modules/xfeatures2d/src。</p> <p>最后，开始编译，执行：</p> <pre><code class="prism language-bash"><span class="token builtin class-name">cd</span> opencv<span class="token function">mkdir</span> build<span class="token builtin class-name">cd</span> build</code></pre> <p>将 opencv/modules/features2d 复制到这个 build 目录，执行</p> <pre><code class="prism language-bash">cmake -D<span class="token assign-left variable">CMAKE_BUILD_TYPE</span><span class="token operator">=</span>Release -D<span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr/local  -D<span class="token assign-left variable">OPENCV_EXTRA_MODULES_PATH</span><span class="token operator">=</span><span class="token punctuation">..</span>/opencv_contrib/modules/ -D<span class="token assign-left variable">WITH_TBB</span><span class="token operator">=</span>OFF  -D<span class="token assign-left variable">WITH_CUDA</span><span class="token operator">=</span>OFF -D<span class="token assign-left variable">BUILD_opencv_gpu</span><span class="token operator">=</span>OFF -D<span class="token assign-left variable">BUILD_opencv_gpuarithm</span><span class="token operator">=</span>OFF -D<span class="token assign-left variable">OPENCV_GENERATE_PKGCONFIG</span><span class="token operator">=</span>ON<span class="token punctuation">..</span></code></pre> <p>编译</p> <pre><code class="prism language-bash"><span class="token function">make</span></code></pre> <p>这个过程比较久，耐心等待。构建完成进行安装:</p> <pre><code class="prism language-bash"><span class="token function">sudo</span><span class="token function">make</span><span class="token function">install</span></code></pre> <p>安装完成后，开始配置 opencv 库的可执行路径。</p> <p>添加库路径：</p> <pre><code class="prism language-bash"><span class="token function">ln</span> -s /usr/local/lib64/pkgconfig/opencv4.pc /usr/share/pkgconfig/ ldconfig</code></pre> <p>添加环境变量：</p> <pre><code class="prism language-bash"><span class="token function">vi</span> /etc/profile</code></pre> <p>打开此文件，在文件某尾加上</p> <pre><code>export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib64/pkgconfig export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64</code></pre> <p>最后令其生效：</p> <pre><code>source /etc/profile</code></pre> <p>接下来，进行 pkg-config 配置，默认的 pkg 搜索链接路径为 /usr/lib/pkgconfig，需要将 opencv.pc 拷贝到 pkg 的默认路径下:</p> <pre><code>cp /usr/local/lib64/pkgconfig/opencv4.pc /usr/lib/pkgconfig</code></pre> <p>输入命令：</p> <pre><code>ldconfig</code></pre> <p>重启以后，输入下面的命令查看当前 opencv 版本号：</p> <pre><code class="prism language-bash">pkg-config --modversion opencv4<span class="token comment"># 4.5.0</span></code></pre> <h2><a id="CentOS__358" rel="nofollow"></a>CentOS 遇到的报错</h2> <h3><a id="_360" rel="nofollow"></a>用户超权限</h3> <p>错误提示：</p> <pre><code class="prism language-shell">xxx is not<span class="token keyword">in</span> the sudoers file.This incident will be reported.</code></pre> <p>前面已有介绍，此处不在赘述。</p> <h3><a id="yum__369" rel="nofollow"></a>yum 锁</h3> <blockquote> <p>参考：https://blog.csdn.net/Dan1374219106/article/details/112450922</p> </blockquote> <p>错误提示：</p> <pre><code class="prism language-shell">Another app is currently holding the yum lock； waiting<span class="token keyword">for</span> it to exit<span class="token punctuation">..</span>.</code></pre> <p>解决方法：</p> <pre><code class="prism language-bash"><span class="token function">rm</span> -f /var/run/yum.pid</code></pre> <p>然后重新运行之前的<code>yum</code> 命令。</p> <h3><a id="CentOS_U_385" rel="nofollow"></a>CentOS U盘挂载问题</h3> <p>exfat 文件系统的 U 盘 centos 识别不了，比较的麻烦。参考：https://cloud.tencent.com/developer/article/1626805 ，建议格式改成 ntfs 的。</p> <p>如果 ntfs 还是无法挂载，参考：https://blog.csdn.net/weixin_39917791/article/details/110578210。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-39508.htm">国产兽药厂家排名前十强企业（国内兽药厂家）</a></p>
+                                        <p>下一个：<a href="/news/article-40020.htm">开宠物用品店利润大吗多少钱一个月（想开个宠物用品店）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-hiddify-next-node.htm" title="12月22日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接">12月22日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-18-latest-hiddify-next-node.htm" title="12月18日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">12月18日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-13-node-share.htm" title="10月13日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接">10月13日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-latest-hiddify-next-node.htm" title="11月7日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">11月7日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-today-hiddify-next-node.htm" title="1月12日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">1月12日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-23831.htm" title="猫咪三针疫苗多少钱一只猫用（宠物猫三针疫苗多少钱）">猫咪三针疫苗多少钱一只猫用（宠物猫三针疫苗多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-6-today-hiddify-next-node.htm" title="1月6日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">1月6日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27076.htm" title="领养动物花钱吗（领养动物是免费的吗）">领养动物花钱吗（领养动物是免费的吗）</a></li>
+                        <li class="py-2"><a href="/news/article-26128.htm" title="动物医院申请条件及流程图片高清（动物医院办理条件）">动物医院申请条件及流程图片高清（动物医院办理条件）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-node-share.htm" title="11月10日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接">11月10日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
