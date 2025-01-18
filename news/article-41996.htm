@@ -9,6 +9,17 @@
     <title>YARN基本介绍与HA</title>
         <meta name="description" content="文章目录  YARN基本介绍 ResourceManager（资源管理）   主备切换   NodeManager（节点管理） ApplicationMaster（主应用程序） Container（容" />
         <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-41996.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="YARN基本介绍与HA" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/6cd3be6125bc9e0e15563f91cb41239f.webp" />
+        <meta property="og:release_date" content="2025-01-17T09:31:33" />
+    <meta property="og:updated_time" content="2025-01-17T09:31:33" />
+        <meta property="og:description" content="文章目录  YARN基本介绍 ResourceManager（资源管理）   主备切换   NodeManager（节点管理） ApplicationMaster（主应用程序） Container（容" />
+        
     <!--/google-fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <!--//google-fonts -->
@@ -110,6 +121,7 @@
                   				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#YARN_4" rel="nofollow">YARN基本介绍</a></li> <li><a href="#ResourceManager_12" rel="nofollow">ResourceManager（资源管理）</a></li> <li> <ul> <li><a href="#_17" rel="nofollow">主备切换</a></li> </ul> </li> <li><a href="#NodeManager_31" rel="nofollow">NodeManager（节点管理）</a></li> <li><a href="#ApplicationMaster_32" rel="nofollow">ApplicationMaster（主应用程序）</a></li> <li><a href="#Container_33" rel="nofollow">Container（容器）</a></li> </ul> </div> <hr/> </h1> <p>YARN是Hadoop为了提供计算节点Master（JT）的扩展性，同时为了支持多计算模型和提高资源的细粒度调度而引入的全新一代分布式调度框架。</p> <p>其可以支持MapReduce、Tez、Spark、Storm、Imlala、Open MPI等计算引擎。</p> <p>YARN主要由ResourceManager（RM，资源管理）、NodeManager（NM，节点管理）、ApplicationMaster（AM、主应用程序）、Container（容器）四部分组成。</p> </h1> <p>其中最为核心的是ResourceManager，它作为全局的资源管理，负责整个系统的资源管理和分配，同时接受来自各个节点（NodeManager）的资源汇报信息，并把这些信息按照一定的资源策略分配给各个应用程序（Application Manager），其内部维护了各个应用程序的ApplicationMaster信息、NodeManager信息以及资源使用信息等。</p> <p>YARN设计了一套Active/Standby模式的ResourceManager HA框架，在运行期间会有多个ResourceManager并存，并且其中只有一个ResourceManager处于Active状态，其他则处于Standby状态，当前Active节点无法正常工作时，其余处于Standby状态的节点则会通过竞争产生新的Active节点。</p> <h2><a id="_17" rel="nofollow"></a>主备切换</h2> <ol> <li>创建锁节点<br /> 所有的RM在启动的时候，都会去创建同一个临时节点，只有一个节点能够创建成功。<br /> 创建成功的那个RM就切换为Active状态，没有成功的那些RM则切换为Standby状态。</li> <li>注册Watcher监听<br /> 所有Standby状态的RM都会向节点注册监听，利用临时节点的特性，你能够快速感知到Active状态的Resource的运行状况。</li> <li>主备切换<br /> 当Active的RM出现故障或重启情况，在ZooKeeper创建的临时节点会被删除。此时其他Standby状态的RM都会收到Watcher事件通知，重复步骤1操作。</li> <li>脑裂现象<br /> 当RM1为Active出现”假死“状态，导致RM2为Active。当RM1恢复正常时，其依然认为自己还处于Active状态。出现多个Active状态RM，这就是”脑裂“现象。</li> <li>避免脑裂现象<br /> 解决方法是在创建节点的时候携带ACL信息，已防止其他RM对该节点更新。<br /> 当RM1为Active出现”假死“状态，导致RM2为Active。当RM1恢复正常时会试图更新节点相关数据，但是此时发现其没有权限更新节点数据，也就是说，RM1发现节点不是不是自己创建的，于是就自动切换为Standby状态，避免出现”脑裂“。</li> </ol> </h1> </h1> </h1> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-41994.htm">Java字符串compareTo()方法示例。</a></p>
+                                        <p>下一个：<a href="/news/article-42484.htm">动物疫苗注射的作用机制有哪些方面（动物疫苗注射的作用机制有哪些方面呢）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -119,16 +131,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-33216.htm" title="大成路宠爱国际动物医院电话号码是多少（宠爱国际动物医院科怡路店电话）">大成路宠爱国际动物医院电话号码是多少（宠爱国际动物医院科怡路店电话）</a></li>
-                        <li class="py-2"><a href="/news/article-31805.htm" title="宠物粮生产厂家排名榜最新名单（国内宠物粮食十大厂家）">宠物粮生产厂家排名榜最新名单（国内宠物粮食十大厂家）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-19-node-share.htm" title="10月19日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接">10月19日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-26-node-share.htm" title="12月26日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">12月26日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-24-today-hiddify-next-node.htm" title="12月24日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">12月24日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-19-hiddify-next-node.htm" title="11月19日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接">11月19日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-30357.htm" title="【笔记】PyTorch快速入门：基础部分合集_在线工具">【笔记】PyTorch快速入门：基础部分合集_在线工具</a></li>
-                        <li class="py-2"><a href="/news/article-29879.htm" title="动物疫苗能放冰箱吗 动物疫苗能放冰箱吗多久">动物疫苗能放冰箱吗 动物疫苗能放冰箱吗多久</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-node-subscribe.htm" title="1月16日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">1月16日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-24758.htm" title="人和动物打的狂犬疫苗一样吗会传染吗（人和动物提取的狂犬疫苗区别）">人和动物打的狂犬疫苗一样吗会传染吗（人和动物提取的狂犬疫苗区别）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-hiddify-next-windows.htm" title="11月18日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接">11月18日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-19700.htm" title="中国兽药公司排名前十名（中国兽药十强企业排名）">中国兽药公司排名前十名（中国兽药十强企业排名）</a></li>
+                        <li class="py-2"><a href="/news/article-32741.htm" title="springboot的定时任务">springboot的定时任务</a></li>
+                        <li class="py-2"><a href="/news/article-36557.htm" title="福建农林动物医学专业怎么样（福建农林动物医学专业怎么样知乎）">福建农林动物医学专业怎么样（福建农林动物医学专业怎么样知乎）</a></li>
+                        <li class="py-2"><a href="/news/article-31239.htm" title="开个小型宠物食品加工厂前景怎么样啊赚钱吗（开个小型宠物食品加工厂前景怎么样啊赚钱吗知乎）">开个小型宠物食品加工厂前景怎么样啊赚钱吗（开个小型宠物食品加工厂前景怎么样啊赚钱吗知乎）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-hiddify-next-node.htm" title="12月29日 | HiddifyNextNode机场节点订阅每天更新21.3M/S免费节点订阅链接">12月29日 | HiddifyNextNode机场节点订阅每天更新21.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-free-subscribe-node.htm" title="11月13日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">11月13日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-18830.htm" title="动物疫苗龙头股一览（动物疫苗上市a股龙头）">动物疫苗龙头股一览（动物疫苗上市a股龙头）</a></li>
+                        <li class="py-2"><a href="/news/article-22447.htm" title="宠物免费领养协议（宠物免费领养协议书）">宠物免费领养协议（宠物免费领养协议书）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-19-node-share.htm" title="12月19日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接">12月19日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -140,7 +152,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
