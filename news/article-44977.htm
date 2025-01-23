@@ -2,23 +2,23 @@
 <html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
-        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-43999.htm" />
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-44977.htm" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>JDK8默认垃圾回收器详解</title>
-        <meta name="description" content="今天面试问道JDK8默认使用的垃圾收集器是什么，然后回来第一时间CMD命令查看了一下： java -XX:+PrintCommandLineFlags -version  -XX:InitialHea" />
+    <title>win11系统如何创建虚拟磁盘</title>
+        <meta name="description" content="&nbsp; &nbsp;虚拟磁盘就是用内存当中虚拟出一个或者多个磁盘的技术，与虚拟内存一样，内存的速度要比硬盘快的很多，最近有位win11系统用户在使用电脑的过程当中，想要创建虚拟内存，但是不知道怎" />
         <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
 
     <meta name="author" content="HiddifyNextNode免费节点官网">
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-43999.htm" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-44977.htm" />
     <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
-    <meta property="og:title" content="JDK8默认垃圾回收器详解" />
-    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/42ac86770f8e624448a8c69a076c574b.webp" />
-        <meta property="og:release_date" content="2025-01-21T09:50:18" />
-    <meta property="og:updated_time" content="2025-01-21T09:50:18" />
-        <meta property="og:description" content="今天面试问道JDK8默认使用的垃圾收集器是什么，然后回来第一时间CMD命令查看了一下： java -XX:+PrintCommandLineFlags -version  -XX:InitialHea" />
+    <meta property="og:title" content="win11系统如何创建虚拟磁盘" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/94705995eff4f9e7775680bd71c5d05b.webp" />
+        <meta property="og:release_date" content="2025-01-23T10:41:04" />
+    <meta property="og:updated_time" content="2025-01-23T10:41:04" />
+        <meta property="og:description" content="&nbsp; &nbsp;虚拟磁盘就是用内存当中虚拟出一个或者多个磁盘的技术，与虚拟内存一样，内存的速度要比硬盘快的很多，最近有位win11系统用户在使用电脑的过程当中，想要创建虚拟内存，但是不知道怎" />
         
     <meta name="applicable-device" content="pc,mobile" />
     <meta name="renderer" content="webkit" />
@@ -27,7 +27,7 @@
     <meta name="robots" content="max-image-preview:large" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="JDK8默认垃圾回收器详解">
+    <meta name="apple-mobile-web-app-title" content="win11系统如何创建虚拟磁盘">
     <meta name="format-detection" content="telephone=no">
 
     <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
@@ -116,7 +116,7 @@
             <div class="container py-lg-5 py-sm-4">
                 <div class="w3breadcrumb-gids text-center">
                     <div class="w3breadcrumb-info mt-5">
-                        <h1 class="w3ltop-title pt-4">JDK8默认垃圾回收器详解</h1>
+                        <h1 class="w3ltop-title pt-4">win11系统如何创建虚拟磁盘</h1>
                         <ul class="breadcrumbs-custom-path">
                             <li><a href="/">首页</a></li>
                             <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
@@ -135,10 +135,10 @@
             <div class="row">
                 <div class="col-md-9">
                                     <input type="hidden" id="share-website-info" data-name="" data-url="">
-                  				  				  				<div id="content_views" class="markdown_views prism-tomorrow-night-eighties"> <p>今天面试问道JDK8默认使用的垃圾收集器是什么，然后回来第一时间CMD命令查看了一下：</p> <pre><code>java -XX:+PrintCommandLineFlags -version  -XX:InitialHeapSize=266390080 -XX:MaxHeapSize=4262241280 -XX:+PrintCommandLineFlags  -XX:+UseCompressedClassPointers -XX:+UseCompressedOops  -XX:-UseLargePagesIndividualAllocation -XX:+UseParallelGC java version "1.8.0_191" Java(TM) SE Runtime Environment (build 1.8.0_191-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode) </code></pre> <p>UseParallelGC 即 Parallel Scavenge + Parallel Old,再查看详细信息</p> <pre><code>java -XX:+PrintGCDetails -version  java version "1.8.0_191" Java(TM) SE Runtime Environment (build 1.8.0_191-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode) Heap  	PSYoungGen      total 76288K, used 2621K [0x000000076b500000, 0x0000000770a00000, 0x00000007c0000000)   					eden space 65536K, 4% used [0x000000076b500000,0x000000076b78f748,0x000000076f500000)   					from space 10752K, 0% used [0x000000076ff80000,0x000000076ff80000,0x0000000770a00000)   					to   space 10752K, 0% used [0x000000076f500000,0x000000076f500000,0x000000076ff80000) 	ParOldGen       total 175104K, used 0K [0x00000006c1e00000, 0x00000006cc900000, 0x000000076b500000)   					object space 175104K, 0% used [0x00000006c1e00000,0x00000006c1e00000,0x00000006cc900000)  	Metaspace       used 2291K, capacity 4480K, committed 4480K, reserved 1056768K   					class space    used 254K, capacity 384K, committed 384K, reserved 1048576K </code></pre> </p></div> 			                <div class="clearfix"></div>
+                  				  				  				<p><span style="font-size:14px;">&nbsp; &nbsp;虚拟磁盘就是用内存当中虚拟出一个或者多个磁盘的技术，与虚拟内存一样，内存的速度要比硬盘快的很多，最近有位win11系统用户在使用电脑的过程当中，想要创建虚拟内存，但是不知道怎么操作，为此非常苦恼，那么win11系统如何创建虚拟磁盘呢?今天为大家分享in11系统创建虚拟磁盘的操作教程。</span></p> <p><span style="font-size:14px;"><strong>&nbsp; &nbsp;具体操作如下：</strong></span></p> <p><span style="font-size:14px;">&nbsp; &nbsp;1、右键点击【此电脑】，在打开的菜单项中，选择【管理】。如图所示：</span></p> <p style="text-align: center;"><span style="font-size:14px;"><img decoding="async" alt="创建虚拟磁盘" src="http://img.555519.xyz/uploads/20231127/220c245b9d9ebec286defaa485e2bcd9.jpg"></span></p> <p><span style="font-size:14px;"><br /> 	&nbsp; &nbsp; &nbsp; &nbsp;2、计算机管理窗口中，先点击存储下的【磁盘管理】，再点击顶部工具栏【操作】，在打开的下拉菜单项中，选择【创建 VHD】。如图所示：</span></p> <p style="text-align: center;"><span style="font-size:14px;"><img decoding="async" alt="创建虚拟磁盘" src="http://img.555519.xyz/uploads/20231127/8bc41d8efbe1aceee7a64e20933a2388.jpg"></span></p> <p><span style="font-size:14px;"><br /> 	&nbsp; &nbsp; &nbsp; &nbsp;3、创建和附加虚拟硬盘窗口中，对【位置/虚拟硬盘大小/虚拟硬盘类型】参数进行设置。</span></p> <p><span style="font-size:14px;">&nbsp; &nbsp;关于win11系统创建虚拟磁盘的操作教程就为用户们详细分享到这里了，如果用户们使用电脑的时候不知道怎么创建虚拟磁盘，可以参考以上方法步骤进行操作哦，希望本篇教程对大家有所帮助，更多精彩教程请本站。</span></p> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
-                                        <p>上一个：<a href="/news/article-43481.htm">宠物美容师真实现状（宠物美容师真实现状）</a></p>
-                                        <p>下一个：<a href="/news/article-44000.htm">人用狂犬疫苗跟兽用一样吗（兽用狂犬疫苗和人用狂犬疫苗有啥区别）</a></p>
+                                        <p>上一个：<a href="/news/article-44474.htm">广州宠物领养网免费吗多少钱一个月（广州宠物领养平台）</a></p>
+                                        <p>下一个：<a href="/news/article-44978.htm">猫医院游戏（猫咪院子游戏）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -148,16 +148,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-42484.htm" title="动物疫苗注射的作用机制有哪些方面（动物疫苗注射的作用机制有哪些方面呢）">动物疫苗注射的作用机制有哪些方面（动物疫苗注射的作用机制有哪些方面呢）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-20-node-share.htm" title="11月20日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接">11月20日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-3-free-node-subscribe.htm" title="12月3日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接">12月3日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-16-free-high-speed-nodes.htm" title="10月16日 | HiddifyNextNode机场节点订阅每天更新18.3M/S免费节点订阅链接">10月16日 | HiddifyNextNode机场节点订阅每天更新18.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-35036.htm" title="同城免费领养宠物狗的软件有哪些（免费领养宠物狗的平台）">同城免费领养宠物狗的软件有哪些（免费领养宠物狗的平台）</a></li>
-                        <li class="py-2"><a href="/news/article-37529.htm" title="国内兽药厂家前50名有（国内十大兽药厂排名）">国内兽药厂家前50名有（国内十大兽药厂排名）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-2-free-high-speed-nodes.htm" title="12月2日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接">12月2日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-35563.htm" title="动物生物疫苗工资 动物生物疫苗工资高吗">动物生物疫苗工资 动物生物疫苗工资高吗</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-9-hiddify-next-github.htm" title="10月9日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">10月9日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-13-node-share.htm" title="10月13日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接">10月13日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-25-node-share.htm" title="10月25日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">10月25日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-7-hiddify-next-node-share.htm" title="10月7日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接">10月7日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-free-node-subscribe-links.htm" title="11月4日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">11月4日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-hiddify-next-node.htm" title="11月19日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接">11月19日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-3-today-hiddify-next-node.htm" title="11月3日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接">11月3日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-18829.htm" title="解决：“/****/kafka_2.13-3.0.0/bin/kafka-run-class.sh: line 342: exec: java: not found ”问题">解决：“/****/kafka_2.13-3.0.0/bin/kafka-run-class.sh: line 342: exec: java: not found ”问题</a></li>
+                        <li class="py-2"><a href="/news/article-27544.htm" title="去哪领养宠物（一般去哪里领养宠物?）">去哪领养宠物（一般去哪里领养宠物?）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-2-node-share-links.htm" title="11月2日 | HiddifyNextNode机场节点订阅每天更新21.1M/S免费节点订阅链接">11月2日 | HiddifyNextNode机场节点订阅每天更新21.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-3-node-share.htm" title="1月3日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">1月3日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-hiddify-next-node.htm" title="11月5日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接">11月5日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
