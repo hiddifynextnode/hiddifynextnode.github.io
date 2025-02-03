@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-22904.htm" />
@@ -9,6 +9,34 @@
     <title>RenderDoc图形调试器详细使用教程(基于DirectX11)</title>
         <meta name="description" content="由于最近Visual Studio的图形调试器老是抽风，不得不寻找一个替代品了。 对于图形程序开发者来说，学会使用RenderDoc图形调试器可以帮助你全面了解渲染管线绑定的资源和运行状态，从而确认问" />
         <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-22904.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="RenderDoc图形调试器详细使用教程(基于DirectX11)" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/8854a9bcf26d5503e9aebf94be172abc.webp" />
+        <meta property="og:release_date" content="2024-12-08T07:14:46" />
+    <meta property="og:updated_time" content="2024-12-08T07:14:46" />
+        <meta property="og:description" content="由于最近Visual Studio的图形调试器老是抽风，不得不寻找一个替代品了。 对于图形程序开发者来说，学会使用RenderDoc图形调试器可以帮助你全面了解渲染管线绑定的资源和运行状态，从而确认问" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="RenderDoc图形调试器详细使用教程(基于DirectX11)">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
     <!--/google-fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <!--//google-fonts -->
@@ -120,16 +148,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-11-free-node-subscribe.htm" title="12月11日 | HiddifyNextNode机场节点订阅每天更新19M/S免费节点订阅链接">12月11日 | HiddifyNextNode机场节点订阅每天更新19M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-28-today-hiddify-next-node.htm" title="10月28日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接">10月28日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-15-free-node-subscribe-links.htm" title="8月15日 | HiddifyNextNode节点订阅每天更新18.3M/S免费节点订阅链接">8月15日 | HiddifyNextNode节点订阅每天更新18.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-3-today-hiddify-next-node.htm" title="11月3日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接">11月3日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-34172.htm" title="梦到自己拥抱别的女人（梦见自己抱着别的女人意味着什么）">梦到自己拥抱别的女人（梦见自己抱着别的女人意味着什么）</a></li>
-                        <li class="py-2"><a href="/news/article-26611.htm" title="农大动物医院电话24小时营业吗上海 农大动物医院电话24小时营业吗上海">农大动物医院电话24小时营业吗上海 农大动物医院电话24小时营业吗上海</a></li>
-                        <li class="py-2"><a href="/news/article-21529.htm" title="成都宠物领养平台公众号（成都市宠物狗领养平台）">成都宠物领养平台公众号（成都市宠物狗领养平台）</a></li>
-                        <li class="py-2"><a href="/news/article-33694.htm" title="springboot注解@Order的使用">springboot注解@Order的使用</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-27-free-hiddify-next-node.htm" title="10月27日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接">10月27日 | HiddifyNextNode机场节点订阅每天更新19.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-26-hiddify-next-node-share.htm" title="8月26日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接">8月26日 | HiddifyNextNode节点订阅每天更新19M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-36059.htm" title="宠物领养协议电子版模板 宠物领养协议电子版模板下载">宠物领养协议电子版模板 宠物领养协议电子版模板下载</a></li>
+                        <li class="py-2"><a href="/news/article-32278.htm" title="无货源店铺一个月可以赚多少（无货源店铺挣钱吗）">无货源店铺一个月可以赚多少（无货源店铺挣钱吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-today-hiddify-next-node.htm" title="1月12日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">1月12日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-hiddify-next-node-share.htm" title="11月16日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接">11月16日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-49946.htm" title="宠物医院好评回复模板（宠物医院好评模板100字）">宠物医院好评回复模板（宠物医院好评模板100字）</a></li>
+                        <li class="py-2"><a href="/news/article-35563.htm" title="动物生物疫苗工资 动物生物疫苗工资高吗">动物生物疫苗工资 动物生物疫苗工资高吗</a></li>
+                        <li class="py-2"><a href="/news/article-49945.htm" title="郑州宠物打疫苗在哪里（郑州宠物疫苗批发地址）">郑州宠物打疫苗在哪里（郑州宠物疫苗批发地址）</a></li>
+                        <li class="py-2"><a href="/news/article-33216.htm" title="大成路宠爱国际动物医院电话号码是多少（宠爱国际动物医院科怡路店电话）">大成路宠爱国际动物医院电话号码是多少（宠爱国际动物医院科怡路店电话）</a></li>
+                        <li class="py-2"><a href="/news/article-31806.htm" title="动物园宠物医院电话多少 动物园宠物医院电话多少号">动物园宠物医院电话多少 动物园宠物医院电话多少号</a></li>
+                        <li class="py-2"><a href="/news/article-47435.htm" title="猫咪三针疫苗需要多久打一次（猫咪三针疫苗必须打么）">猫咪三针疫苗需要多久打一次（猫咪三针疫苗必须打么）</a></li>
                     </ul>
     </div>
 </div>
@@ -141,22 +169,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

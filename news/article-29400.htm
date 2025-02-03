@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-29400.htm" />
@@ -9,6 +9,34 @@
     <title>修改 Docker 的默认存储路径</title>
         <meta name="description" content="Docker 默认安装的情况下，会使用 /var/lib/docker/ 目录作为存储目录，用以存放拉取的镜像和创建的容器等。不过由于此目录一般都位于系统盘，遇到系统盘比较小，而镜像和容器多了后就容易" />
         <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-29400.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="修改 Docker 的默认存储路径" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/714299a70bb5e3aad3d9b969bd63d575.webp" />
+        <meta property="og:release_date" content="2024-12-22T11:01:23" />
+    <meta property="og:updated_time" content="2024-12-22T11:01:23" />
+        <meta property="og:description" content="Docker 默认安装的情况下，会使用 /var/lib/docker/ 目录作为存储目录，用以存放拉取的镜像和创建的容器等。不过由于此目录一般都位于系统盘，遇到系统盘比较小，而镜像和容器多了后就容易" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="修改 Docker 的默认存储路径">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
     <!--/google-fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <!--//google-fonts -->
@@ -120,16 +148,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-9-24-latest-hiddify-next-node.htm" title="9月24日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接">9月24日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-21992.htm" title="今年公务员国考人数（今年国考人数多少）">今年公务员国考人数（今年国考人数多少）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-8-hiddify-next-windows.htm" title="8月8日 | HiddifyNextNode节点订阅每天更新21.8M/S免费节点订阅链接">8月8日 | HiddifyNextNode节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-23-hiddify-next-node-share.htm" title="11月23日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接">11月23日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-5-hiddify-next-node.htm" title="12月5日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">12月5日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-12-23-node-share-links.htm" title="12月23日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接">12月23日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-27075.htm" title="动物医院开设条件要求是什么呢（动物医院需要几个兽医资格证）">动物医院开设条件要求是什么呢（动物医院需要几个兽医资格证）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-7-latest-hiddify-next-node.htm" title="11月7日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">11月7日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/news/article-21074.htm" title="动物疫苗经营办营业执照是前置还是后置的（动物疫苗经营许可）">动物疫苗经营办营业执照是前置还是后置的（动物疫苗经营许可）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-1-free-node-subscribe-links.htm" title="11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">11月1日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-25-free-hiddify-next-node.htm" title="9月25日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接">9月25日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-48933.htm" title="动物防疫站营业时间是多少（动物防疫站营业时间是多少号）">动物防疫站营业时间是多少（动物防疫站营业时间是多少号）</a></li>
+                        <li class="py-2"><a href="/news/article-24292.htm" title="宠物店进货渠道怎么找客户电话号码（宠物店怎么找货源）">宠物店进货渠道怎么找客户电话号码（宠物店怎么找货源）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-free-hiddify-next-node.htm" title="12月30日 | HiddifyNextNode机场节点订阅每天更新18.8M/S免费节点订阅链接">12月30日 | HiddifyNextNode机场节点订阅每天更新18.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-21075.htm" title="动物疫苗业务员能挣多少钱（动物疫苗技术人员招聘）">动物疫苗业务员能挣多少钱（动物疫苗技术人员招聘）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-28-hiddify-next-node-github.htm" title="11月28日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">11月28日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-24757.htm" title="宠物领养APP的设计与实现（宠物领养app的设计与实现方案）">宠物领养APP的设计与实现（宠物领养app的设计与实现方案）</a></li>
+                        <li class="py-2"><a href="/news/article-29879.htm" title="动物疫苗能放冰箱吗 动物疫苗能放冰箱吗多久">动物疫苗能放冰箱吗 动物疫苗能放冰箱吗多久</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-21-free-high-speed-nodes.htm" title="11月21日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接">11月21日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -141,22 +169,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
