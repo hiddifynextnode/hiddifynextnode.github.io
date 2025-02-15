@@ -1,0 +1,421 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-56948.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>jackson在springboot中的使用-自定义参数转换器</title>
+        <meta name="description" content="目录  要实现的功能 思路 关键代码    springboot中默认使用jackson，且实现了很多参数转换器，其中就有EnumToStringConverter和StringToEnumConve" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-56948.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="jackson在springboot中的使用-自定义参数转换器" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/43ca98b00c15366e71c0506c68596041.webp" />
+        <meta property="og:release_date" content="2025-02-15T05:22:18" />
+    <meta property="og:updated_time" content="2025-02-15T05:22:18" />
+        <meta property="og:description" content="目录  要实现的功能 思路 关键代码    springboot中默认使用jackson，且实现了很多参数转换器，其中就有EnumToStringConverter和StringToEnumConve" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="jackson在springboot中的使用-自定义参数转换器">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">jackson在springboot中的使用-自定义参数转换器</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>目录</h3> <ul> <li><a href="#_2" rel="nofollow">要实现的功能</a></li> <li><a href="#_8" rel="nofollow">思路</a></li> <li><a href="#_12" rel="nofollow">关键代码</a></li> </ul> </div> <p> springboot中默认使用jackson，且实现了很多参数转换器，其中就有EnumToStringConverter和StringToEnumConverterFactory，用于字符串和枚举的互转。但是是根据枚举名称互转。</p> </h1> <ol> <li>空属性我不希望转成json字符串</li> <li>日期对象我希望按照指定格式转换</li> <li>我存在多个枚举，类似<code>public enum ChannelWayEnum { Bluetooth(0, "蓝牙"), NB(1, "NB-IOT"), G4(2, "自建4G"), Ali(3, "ali-4G");</code>},用默认转换器无法转换。需要自定义转换。</li> </ol> </h1> <ol> <li>覆盖默认注入的ObjectMapper，自己实现objectMapper，可设置忽略null字段</li> <li>自定义针对日期对象的Converter</li> <li>枚举需要实现接口IEnum，然后自定义针对IEnum接口的转换器</li> </ol> </h1> <ol> <li>注入ObjectMapper</li> </ol> <pre><code class="prism language-java"><span class="token annotation punctuation">@Configuration</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JacksonConfig</span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Bean</span>     <span class="token keyword">public</span> ObjectMapper <span class="token function">objectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> <span class="token function">createObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>      <span class="token keyword">private</span> ObjectMapper <span class="token function">createObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         ObjectMapper objectMapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         SimpleModule simpleModule <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleModule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">/**          * 序列化：对象=&gt;jsonString          */</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addSerializer</span><span class="token punctuation">(</span>WashEnum<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">WashEnumSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addSerializer</span><span class="token punctuation">(</span>IEnum<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">EnumSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addSerializer</span><span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DateSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addSerializer</span><span class="token punctuation">(</span>Boolean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">BooleanSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">//忽略null字段</span>         objectMapper<span class="token punctuation">.</span><span class="token function">setSerializationInclusion</span><span class="token punctuation">(</span>JsonInclude<span class="token punctuation">.</span>Include<span class="token punctuation">.</span>NON_NULL<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">/**          * 反序列化：jsonString=&gt;对象          */</span>         <span class="token comment">//允许json属性名不使用双引号</span>         objectMapper<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span>JsonParser<span class="token punctuation">.</span>Feature<span class="token punctuation">.</span>ALLOW_UNQUOTED_FIELD_NAMES<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">//忽略不存在字段</span>         objectMapper<span class="token punctuation">.</span><span class="token function">configure</span><span class="token punctuation">(</span>DeserializationFeature<span class="token punctuation">.</span>FAIL_ON_UNKNOWN_PROPERTIES<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addDeserializer</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">StringDeserializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addDeserializer</span><span class="token punctuation">(</span>Date<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DateDeserializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addDeserializer</span><span class="token punctuation">(</span>WashEnum<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">WashEnumDeserializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addDeserializer</span><span class="token punctuation">(</span>Enum<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">EnumDeserializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//反序列化枚举，</span>         simpleModule<span class="token punctuation">.</span><span class="token function">addDeserializer</span><span class="token punctuation">(</span>Boolean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">BooleanDeserializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         objectMapper<span class="token punctuation">.</span><span class="token function">registerModule</span><span class="token punctuation">(</span>simpleModule<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">return</span> objectMapper<span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <ol start="2"> <li>日期对象的转换</li> </ol> <pre><code class="prism language-java"><span class="token annotation punctuation">@JsonComponent</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DateDeserializer</span> <span class="token keyword">extends</span> <span class="token class-name">JsonDeserializer</span><span class="token generics function"><span class="token punctuation">&lt;</span>Date<span class="token punctuation">&gt;</span></span> <span class="token keyword">implements</span> <span class="token class-name">Converter</span><span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> Date<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> Date <span class="token function">deserialize</span><span class="token punctuation">(</span>JsonParser p<span class="token punctuation">,</span> DeserializationContext ctxt<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">try</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> <span class="token function">convert</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>         <span class="token keyword">return</span> null<span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> Date <span class="token function">convert</span><span class="token punctuation">(</span>String source<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">if</span> <span class="token punctuation">(</span>StringUtil<span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> null<span class="token punctuation">;</span>         <span class="token punctuation">}</span>         <span class="token keyword">return</span> TimeUtil<span class="token punctuation">.</span><span class="token function">toDate</span><span class="token punctuation">(</span>TimeUtil<span class="token punctuation">.</span><span class="token function">str2Time</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> TimeFormat<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token annotation punctuation">@JsonComponent</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DateSerializer</span> <span class="token keyword">extends</span> <span class="token class-name">JsonSerializer</span><span class="token generics function"><span class="token punctuation">&lt;</span>Date<span class="token punctuation">&gt;</span></span> <span class="token keyword">implements</span> <span class="token class-name">Converter</span><span class="token generics function"><span class="token punctuation">&lt;</span>Date<span class="token punctuation">,</span>String<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">serialize</span><span class="token punctuation">(</span>Date value<span class="token punctuation">,</span> JsonGenerator gen<span class="token punctuation">,</span> SerializerProvider serializers<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">try</span> <span class="token punctuation">{<!-- --></span>              gen<span class="token punctuation">.</span><span class="token function">writeString</span><span class="token punctuation">(</span><span class="token function">convert</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> String <span class="token function">convert</span><span class="token punctuation">(</span>Date source<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> TimeUtil<span class="token punctuation">.</span><span class="token function">time2Str</span><span class="token punctuation">(</span>TimeUtil<span class="token punctuation">.</span><span class="token function">date2Time</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">,</span>TimeFormat<span class="token punctuation">.</span>DEFAULT<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <ol start="3"> <li>接口</li> </ol> <pre><code class="prism language-java"><span class="token comment">/**  * 枚举都要继承此接口，  * @param &lt;V&gt; 枚举实际值的数据类型  */</span> <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IEnum</span><span class="token generics function"><span class="token punctuation">&lt;</span>V<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{<!-- --></span>     <span class="token comment">//枚举实际值</span>     V <span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">static</span><span class="token operator">&lt;</span>T <span class="token keyword">extends</span> <span class="token class-name">IEnum</span><span class="token operator">&gt;</span> T <span class="token function">getBean</span><span class="token punctuation">(</span>String value<span class="token punctuation">,</span>Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> tClass<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">if</span> <span class="token punctuation">(</span>StringUtil<span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> null<span class="token punctuation">;</span>         <span class="token punctuation">}</span>         <span class="token keyword">for</span> <span class="token punctuation">(</span>T enumObj <span class="token operator">:</span> tClass<span class="token punctuation">.</span><span class="token function">getEnumConstants</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">if</span> <span class="token punctuation">(</span>value<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>enumObj<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 <span class="token keyword">return</span> enumObj<span class="token punctuation">;</span>             <span class="token punctuation">}</span>         <span class="token punctuation">}</span>         <span class="token keyword">return</span> null<span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token keyword">default</span> String <span class="token function">getStr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> String<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <ol start="4"> <li>枚举的转换器</li> </ol> <pre><code class="prism language-java"><span class="token comment">/**  * json=&gt;对象  */</span> <span class="token annotation punctuation">@JsonComponent</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EnumDeserializer</span><span class="token operator">&lt;</span>T <span class="token keyword">extends</span> <span class="token class-name">IEnum</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">JsonDeserializer</span><span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token keyword">implements</span> <span class="token class-name">ContextualDeserializer</span><span class="token punctuation">{<!-- --></span>     <span class="token keyword">private</span> Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> targetClass <span class="token operator">=</span> null<span class="token punctuation">;</span>     <span class="token keyword">public</span> <span class="token function">EnumDeserializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token punctuation">}</span>     <span class="token keyword">public</span> <span class="token function">EnumDeserializer</span><span class="token punctuation">(</span>Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> targetClass<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">this</span><span class="token punctuation">.</span>targetClass <span class="token operator">=</span> targetClass<span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> T <span class="token function">deserialize</span><span class="token punctuation">(</span>JsonParser p<span class="token punctuation">,</span> DeserializationContext ctxt<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> <span class="token comment">//        if(targetClass!=null&amp;&amp;IEnum.class.isAssignableFrom(targetClass)){<!-- --></span>             <span class="token keyword">try</span> <span class="token punctuation">{<!-- --></span>                 <span class="token keyword">return</span> IEnum<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>targetClass<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span> <span class="token comment">//        }</span>         <span class="token keyword">return</span> null<span class="token punctuation">;</span>     <span class="token punctuation">}</span>      <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> JsonDeserializer<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">&gt;</span> <span class="token function">createContextual</span><span class="token punctuation">(</span>DeserializationContext ctxt<span class="token punctuation">,</span> BeanProperty property<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> targetClass <span class="token operator">=</span> <span class="token punctuation">(</span>Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span><span class="token punctuation">)</span> ctxt<span class="token punctuation">.</span><span class="token function">getContextualType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getRawClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">EnumDeserializer</span><span class="token punctuation">(</span>targetClass<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token comment">/**  * 序列化，将enum枚举转为json  * @author chenzy  * @since 2019.12.19  */</span> <span class="token annotation punctuation">@JsonComponent</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EnumSerializer</span><span class="token operator">&lt;</span>T <span class="token keyword">extends</span> <span class="token class-name">IEnum</span><span class="token operator">&gt;</span> <span class="token keyword">extends</span> <span class="token class-name">JsonSerializer</span><span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">serialize</span><span class="token punctuation">(</span>T value<span class="token punctuation">,</span> JsonGenerator gen<span class="token punctuation">,</span> SerializerProvider serializers<span class="token punctuation">)</span> <span class="token keyword">throws</span> IOException <span class="token punctuation">{<!-- --></span>         Optional<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> data <span class="token operator">=</span> Optional<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">if</span> <span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token function">isPresent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span><span class="token comment">//非空</span>             gen<span class="token punctuation">.</span><span class="token function">writeObject</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{<!-- --></span> <span class="token comment">//            gen.writeString("");</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p>下面才是真正的转换器</p> <pre><code class="prism language-java"><span class="token comment">/**  * IEnum=&gt;str  */</span> <span class="token annotation punctuation">@Component</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Enum2StrConverter</span><span class="token operator">&lt;</span>T <span class="token keyword">extends</span> <span class="token class-name">IEnum</span><span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">&gt;&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">ConditionalConverter</span><span class="token punctuation">,</span>Converter<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">,</span> String<span class="token punctuation">&gt;</span></span><span class="token punctuation">{<!-- --></span>     <span class="token keyword">private</span> <span class="token keyword">final</span> ConversionService conversionService<span class="token punctuation">;</span>     <span class="token keyword">protected</span> <span class="token function">Enum2StrConverter</span><span class="token punctuation">(</span>ConversionService conversionService<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">this</span><span class="token punctuation">.</span>conversionService <span class="token operator">=</span> conversionService<span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> String <span class="token function">convert</span><span class="token punctuation">(</span>T source<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> source<span class="token punctuation">.</span><span class="token function">getStr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">matches</span><span class="token punctuation">(</span>TypeDescriptor sourceType<span class="token punctuation">,</span> TypeDescriptor targetType<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">for</span> <span class="token punctuation">(</span>Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">&gt;</span> interfaceType <span class="token operator">:</span> ClassUtils<span class="token punctuation">.</span><span class="token function">getAllInterfacesForClassAsSet</span><span class="token punctuation">(</span>sourceType<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>conversionService<span class="token punctuation">.</span><span class="token function">canConvert</span><span class="token punctuation">(</span>TypeDescriptor<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>interfaceType<span class="token punctuation">)</span><span class="token punctuation">,</span> targetType<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span>         <span class="token punctuation">}</span>         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token comment">/**  * str=&gt;IEnum  */</span> <span class="token annotation punctuation">@Component</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Str2EnumConverte</span> <span class="token keyword">implements</span> <span class="token class-name">ConverterFactory</span><span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> IEnum<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token operator">&lt;</span>T <span class="token keyword">extends</span> <span class="token class-name">IEnum</span><span class="token operator">&gt;</span> Converter<span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> T<span class="token punctuation">&gt;</span></span> <span class="token function">getConverter</span><span class="token punctuation">(</span>Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> targetType<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Str2Enum</span><span class="token punctuation">(</span>targetType<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Str2Enum</span><span class="token operator">&lt;</span>T <span class="token keyword">extends</span> <span class="token class-name">IEnum</span><span class="token operator">&gt;</span> <span class="token keyword">implements</span> <span class="token class-name">Converter</span><span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> T<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">private</span> <span class="token keyword">final</span> Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> enumType<span class="token punctuation">;</span>         <span class="token keyword">public</span> <span class="token function">Str2Enum</span><span class="token punctuation">(</span>Class<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> enumType<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>enumType <span class="token operator">=</span> enumType<span class="token punctuation">;</span>         <span class="token punctuation">}</span>         <span class="token annotation punctuation">@Override</span>         <span class="token keyword">public</span> T <span class="token function">convert</span><span class="token punctuation">(</span>String source<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">if</span> <span class="token punctuation">(</span>StringUtil<span class="token punctuation">.</span><span class="token function">isBlank</span><span class="token punctuation">(</span>source<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 <span class="token keyword">return</span> null<span class="token punctuation">;</span>             <span class="token punctuation">}</span>             <span class="token keyword">return</span> IEnum<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span>enumType<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token comment">/**  * @author chenzy  * @since 2020-12-02  */</span> <span class="token annotation punctuation">@Configuration</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JacksonConfig</span>  <span class="token keyword">implements</span> <span class="token class-name">WebMvcConfigurer</span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Autowired</span> <span class="token keyword">private</span> Str2EnumConverte str2EnumConverte<span class="token punctuation">;</span>      <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addFormatters</span><span class="token punctuation">(</span>FormatterRegistry registry<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         registry<span class="token punctuation">.</span><span class="token function">addConverterFactory</span><span class="token punctuation">(</span>str2EnumConverte<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token annotation punctuation">@Bean</span>     <span class="token keyword">public</span> ObjectMapper <span class="token function">objectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">return</span> JsonUtil<span class="token punctuation">.</span><span class="token function">getObjectMapper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p>以上代码比较简单，就没有写注释，有问题请留言。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-56375.htm">最便宜的宠物猫多少钱?（最便宜的一只猫多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-56949.htm">UML——顺序图</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-1-node-share.htm" title="2月1日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接">2月1日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-20-hiddify-next-node-share.htm" title="12月20日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接">12月20日 | HiddifyNextNode机场节点订阅每天更新20.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-30357.htm" title="【笔记】PyTorch快速入门：基础部分合集_在线工具">【笔记】PyTorch快速入门：基础部分合集_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-50457.htm" title="2020年开宠物店怎么样（2020年开宠物店怎么样了）">2020年开宠物店怎么样（2020年开宠物店怎么样了）</a></li>
+                        <li class="py-2"><a href="/news/article-49945.htm" title="郑州宠物打疫苗在哪里（郑州宠物疫苗批发地址）">郑州宠物打疫苗在哪里（郑州宠物疫苗批发地址）</a></li>
+                        <li class="py-2"><a href="/news/article-24291.htm" title="设置feign配置日志级别">设置feign配置日志级别</a></li>
+                        <li class="py-2"><a href="/news/article-31805.htm" title="宠物粮生产厂家排名榜最新名单（国内宠物粮食十大厂家）">宠物粮生产厂家排名榜最新名单（国内宠物粮食十大厂家）</a></li>
+                        <li class="py-2"><a href="/news/article-36059.htm" title="宠物领养协议电子版模板 宠物领养协议电子版模板下载">宠物领养协议电子版模板 宠物领养协议电子版模板下载</a></li>
+                        <li class="py-2"><a href="/news/article-55827.htm" title="动物疫苗注射注意事项及禁忌症有哪些 动物疫苗注射注意事项及禁忌症有哪些呢">动物疫苗注射注意事项及禁忌症有哪些 动物疫苗注射注意事项及禁忌症有哪些呢</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-28-today-hiddify-next-node.htm" title="12月28日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接">12月28日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
