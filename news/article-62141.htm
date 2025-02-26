@@ -1,0 +1,421 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-62141.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>c++引用折叠</title>
+        <meta name="description" content="目录  一、引用折叠 二、示例解析 三、参考：   &nbsp; &nbsp; &nbsp;由于存在T&amp;&amp;这种万能引用类型，当它作为参数时，有可能被一个左值引用或右值引用的参数初始化，" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-62141.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="c++引用折叠" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/8964939959d553d6002b8722e59bd1f0.webp" />
+        <meta property="og:release_date" content="2025-02-24T09:16:00" />
+    <meta property="og:updated_time" content="2025-02-24T09:16:00" />
+        <meta property="og:description" content="目录  一、引用折叠 二、示例解析 三、参考：   &nbsp; &nbsp; &nbsp;由于存在T&amp;&amp;这种万能引用类型，当它作为参数时，有可能被一个左值引用或右值引用的参数初始化，" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="c++引用折叠">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">c++引用折叠</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p id="main-toc"><strong>目录</strong></p> <p id="-toc" style="margin-left:0px;"> <p id="%E4%B8%80%E3%80%81%E5%BC%95%E7%94%A8%E6%8A%98%E5%8F%A0-toc" style="margin-left:0px;"><a href="#%E4%B8%80%E3%80%81%E5%BC%95%E7%94%A8%E6%8A%98%E5%8F%A0" title="一、引用折叠" rel="nofollow">一、引用折叠</a></p> <p id="%E4%BA%8C%E3%80%81%E7%A4%BA%E4%BE%8B%E8%A7%A3%E6%9E%90-toc" style="margin-left:0px;"><a href="#%E4%BA%8C%E3%80%81%E7%A4%BA%E4%BE%8B%E8%A7%A3%E6%9E%90" title="二、示例解析" rel="nofollow">二、示例解析</a></p> <p id="%E4%B8%89%E3%80%81%E5%8F%82%E8%80%83%EF%BC%9A-toc" style="margin-left:0px;"><a href="#%E4%B8%89%E3%80%81%E5%8F%82%E8%80%83%EF%BC%9A" title="三、参考：" rel="nofollow">三、参考：</a></p> <hr id="hr-toc"/> </h1> <p>&nbsp; &nbsp; &nbsp;由于存在T&amp;&amp;这种万能引用类型，当它作为参数时，有可能被一个左值引用或右值引用的参数初始化，这是经过类型推导的T&amp;&amp;类型，相比右值引用(&amp;&amp;)会发生类型的变化，这种变化就称为引用折叠。</p> <p>1.所有右值引用折叠到右值引用上仍然是一个右值引用。（A&amp;&amp; &amp;&amp; 变成 A&amp;&amp;）<br /> 2.所有的其他引用类型之间的折叠都将变成左值引用。 （A&amp; &amp; 变成 A&amp;; A&amp; &amp;&amp; 变成 A&amp;; A&amp;&amp; &amp; 变成 A&amp;）</p> </h1> <p>&nbsp; &nbsp; &nbsp; &nbsp;要说引用折叠，首先得说右值引用(在看这个之前需要了解C++11中左值，右值的概念)。它是C++11出现的新概念，声明类型的方法是：T&amp;&amp;，具体信息可以看下面的代码：</p> <pre><code>Class A {     A()     {// do something} };  A GetA() {     return A(); }  int main() {     A a1 = GetA();   // a1是左值     A&amp;&amp; a2 = GetA(); // a2是右值引用     return 0; } </code></pre> <p>&nbsp; &nbsp; &nbsp; a1是左值，在构造时使用了GetA() 产生的临时对象，之后GetA()产生的临时对象会销毁。</p> <p>&nbsp; &nbsp; &nbsp; a2是右值引用，其指向的就是GetA()所产生的对象，这个对象的声明周期是和a2的声明周期是一致的。即少了临时对象，从而省去了临时对象的构造和析构。</p> <p>&nbsp; &nbsp; &nbsp;由此可见右值引用的好处，在新代码中，右值引用是值得大力使用的。但是，在使用的时候，有例外情况了:T&amp;&amp;并不是一定表示右值，比如，如果它绑定的类型是未知的话，既可能是左值，又可能是右值。比如：</p> <pre><code>template&lt;typename T&gt; void f(T&amp;&amp; param) {   std::cout&lt;&lt;param; }  f(10); // 10是右值   int &amp;&amp; int x = 10; f(x);  // x是左值   int &amp; </code></pre> <p>&nbsp; &nbsp; &nbsp; 以上这种万能引用类型(param的类型)能万能引用不同类型的参数,这种类型必须被初始化,而它是左值还是右值则取决于它的初始化，如果被左值初始化，那么它就是左值，反之亦然。那么什么时候是左值，什么时候是右值，就需要进行类型推导才知道。</p> <p>&nbsp; &nbsp; &nbsp; &nbsp;有的人会问，我传入的是一个左值a,并不是一个左值引用，为什么编译器会推导出T 为int &amp;呢。首先，模板函数参数为 T&amp;&amp; param,也就是说，不管T是什么类型，T&amp;&amp;的最终结果必然是一个引用类型。如果T是int, 那么T&amp;&amp; 就是 int &amp;&amp;；如果T为 int &amp;，那么 T &amp;&amp;(int&amp; &amp;&amp;) 就是&amp;，如果T为&amp;&amp;,那么T &amp;&amp;(&amp;&amp; &amp;&amp;) 就是&amp;&amp;。很明显，接受左值的话，T只能推导为int &amp;。</p> <p>&nbsp; &nbsp; &nbsp;总结一下，万能引用就是利用模板推导和引用折叠的相关规则，生成不同的实例化模板来接收传进来的参数。</p> </h1> <p>https://www.zhihu.com/question/40346748/answer/88672920</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://zhuanlan.zhihu.com/p/50816420"  title="引用折叠和完美转发 - 知乎" rel="nofollow">引用折叠和完美转发 - 知乎</a></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-61551.htm">宠物美容师一个月工资大概多少钱（宠物美容师工作时间一般是多少）</a></p>
+                                        <p>下一个：<a href="/news/article-62142.htm">成人高考兽医专业可以考兽医资格证吗（成人高考的动物医学专业能参加兽医证）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-17-free-subscribe-node.htm" title="12月17日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">12月17日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-5-hiddify-next-node.htm" title="12月5日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">12月5日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-41491.htm" title="被猫抓了一下用打针吗（被猫抓了一下需要打预防针吗）">被猫抓了一下用打针吗（被猫抓了一下需要打预防针吗）</a></li>
+                        <li class="py-2"><a href="/news/article-50986.htm" title="宠物领养中心是什么单位 宠物领养中心是什么单位性质">宠物领养中心是什么单位 宠物领养中心是什么单位性质</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-hiddify-next-node.htm" title="12月29日 | HiddifyNextNode机场节点订阅每天更新21.3M/S免费节点订阅链接">12月29日 | HiddifyNextNode机场节点订阅每天更新21.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-hiddify-next-node-share.htm" title="11月9日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">11月9日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-36557.htm" title="福建农林动物医学专业怎么样（福建农林动物医学专业怎么样知乎）">福建农林动物医学专业怎么样（福建农林动物医学专业怎么样知乎）</a></li>
+                        <li class="py-2"><a href="/news/article-22904.htm" title="RenderDoc图形调试器详细使用教程(基于DirectX11)">RenderDoc图形调试器详细使用教程(基于DirectX11)</a></li>
+                        <li class="py-2"><a href="/news/article-29400.htm" title="修改 Docker 的默认存储路径">修改 Docker 的默认存储路径</a></li>
+                        <li class="py-2"><a href="/news/article-53095.htm" title="厦门宠物领养中心地址电话（厦门有没有宠物领养中心）">厦门宠物领养中心地址电话（厦门有没有宠物领养中心）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">78</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

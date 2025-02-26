@@ -1,0 +1,421 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-60967.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SpringBoot 基本原理</title>
+        <meta name="description" content="文章目录  一、什么是SpringBoot 二、SpringBoot 运行原理   1. pom.xml 2. 主启动类的配置 3. 主启动类的运行   三、自动配置原理       SpringBo" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-60967.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="SpringBoot 基本原理" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/c1b4c7739ce8e8fa5777a9266204bae5.webp" />
+        <meta property="og:release_date" content="2025-02-22T07:11:19" />
+    <meta property="og:updated_time" content="2025-02-22T07:11:19" />
+        <meta property="og:description" content="文章目录  一、什么是SpringBoot 二、SpringBoot 运行原理   1. pom.xml 2. 主启动类的配置 3. 主启动类的运行   三、自动配置原理       SpringBo" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot 基本原理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">SpringBoot 基本原理</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#SpringBoot_6" rel="nofollow">一、什么是SpringBoot</a></li> <li><a href="#SpringBoot__16" rel="nofollow">二、SpringBoot 运行原理</a></li> <li> <ul> <li><a href="#1_pomxml_17" rel="nofollow">1. pom.xml</a></li> <li><a href="#2__23" rel="nofollow">2. 主启动类的配置</a></li> <li><a href="#3__113" rel="nofollow">3. 主启动类的运行</a></li> </ul> </li> <li><a href="#_146" rel="nofollow">三、自动配置原理</a></li> </ul> </div> <hr/> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230112/6e6ba0080b472f2186c1017dac103e11.jpg" alt="SpringBoot 基本原理"></p> </h1> <ul> <li>SpringBoot 是一个javaweb的开发框架，和SpringMVC类似，对比其他javaweb框架的好处，官方说是简化开发，约定大于配置。</li> <li>Spring Boot 基于 Spring 开发，Spirng Boot 本身并不提供 Spring 框架的核心特性以及扩展功能，只是用于快速、敏捷地开发新一代基于 Spring 框架的应用程序。也就是说，它并不是用来替代 Spring 的解决方案，而是和 Spring 框架紧密结合用于提升 Spring 开发者体验的工具。Spring Boot 以约定大于配置的核心思想，默认帮我们进行了很多设置，多数 Spring Boot 应用只需要很少的 Spring 配置。同时它集成了大量常用的第三方库配置（例如 Redis、MongoDB、Jpa、RabbitMQ、Quartz 等等），Spring Boot 应用中这些第三方库几乎可以零配置的开箱即用。</li> <li>简单来说就是SpringBoot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像maven整合了所有的jar包，spring boot整合了所有的框架 。</li> <li>Spring Boot 的主要优点：<br /> 为所有Spring开发者更快的入门<br /> 开箱即用，提供各种默认配置来简化项目配置<br /> 内嵌式容器简化Web项目<br /> 没有冗余代码生成和XML配置的要求</li> </ul> </h1> <h2> <a id="1_pomxml_17" rel="nofollow"></a>1. pom.xml</h2> <p><strong>spring-boot-dependencies</strong>: 核心依赖在父工程中；<br /><strong>springboot-boot-starter-xxx</strong>：就是spring-boot的场景启动器<br /><strong>spring-boot-starter-web</strong>：帮我们导入了web模块正常运行所依赖的组件；<br /> SpringBoot将所有的功能场景都抽取出来，做成一个个的starter （启动器），只需要在项目中引入这些starter即可，所有相关的依赖都会导入进来 ， 我们要用什么功能就导入什么样的场景启动器即可 ；我们未来也可以自己自定义 starter；</p> <h2> <a id="2__23" rel="nofollow"></a>2. 主启动类的配置</h2> <pre><code class="prism language-java"><span class="token comment">//@SpringBootApplication 来标注一个主程序类</span> <span class="token comment">//说明这是一个Spring Boot应用</span> <span class="token annotation punctuation">@SpringBootApplication</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpringbootApplication</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>      <span class="token comment">//以为是启动了一个方法，没想到启动了一个服务</span>       <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">SpringbootApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p><strong>@SpringBootApplication</strong><br /> 作用：标注在某个类上说明这个类是SpringBoot的主配置类 ， SpringBoot就应该运行这个类的main方法来启动SpringBoot应用；<br /> 进入这个注解：可以看到上面还有很多其他注解！</p> <pre><code class="prism language-java"> <span class="token annotation punctuation">@SpringBootConfiguration</span> <span class="token annotation punctuation">@EnableAutoConfiguration</span> <span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>     excludeFilters <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>     type <span class="token operator">=</span> <span class="token class-name">FilterType</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span>     classes <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span><span class="token class-name">TypeExcludeFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>     type <span class="token operator">=</span> <span class="token class-name">FilterType</span><span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span>     classes <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span><span class="token class-name">AutoConfigurationExcludeFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">SpringBootApplication</span> <span class="token punctuation">{<!-- --></span>     <span class="token comment">// ......</span> <span class="token punctuation">}</span> </code></pre> <p><strong>@ComponentScan</strong><br /> 这个注解在Spring中很重要 ,它对应XML配置中的元素。<br /> 作用：自动扫描并加载符合条件的组件或者bean ， 将这个bean定义加载到IOC容器中</p> <p><strong>@SpringBootConfiguration</strong><br /> 作用：SpringBoot的配置类 ，标注在某个类上 ， 表示这是一个SpringBoot的配置类；<br /> 我们继续进去这个注解查看</p> <pre><code class="prism language-java"><span class="token comment">// 点进去得到下面的 @Component</span> <span class="token annotation punctuation">@Configuration</span> <span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">SpringBootConfiguration</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>  <span class="token annotation punctuation">@Component</span> <span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">Configuration</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span> </code></pre> <p><strong>@Configuration</strong>，说明这是一个配置类 ，配置类就是对应Spring的xml 配置文件；<br /><strong>@Component</strong> 这就说明，启动类本身也是Spring中的一个组件而已，负责启动应用！</p> <p>我们回到 SpringBootApplication 注解中继续看。<br /><strong>@EnableAutoConfiguration</strong> ：开启自动配置功能，告诉SpringBoot开启自动配置功能，这样自动配置才能生效；<br /> 以前我们需要自己配置的东西，而现在SpringBoot可以自动帮我们配置 ；</p> <p>点进注解接续查看：<br /><strong>@AutoConfigurationPackage</strong> ：自动配置包</p> <pre><code class="prism language-java"><span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span><span class="token class-name">Registrar</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">AutoConfigurationPackage</span> <span class="token punctuation">{<!-- --></span> <span class="token punctuation">}</span> </code></pre> <p><strong>@import</strong> ：Spring底层注解@import ， 给容器中导入一个组件<br /> Registrar.class 作用：将主启动类的所在包及包下面所有子包里面的所有组件扫描到Spring容器 ；</p> <p>这个分析完了，退到上一步，继续看<br /><strong>@Import({AutoConfigurationImportSelector.class})</strong> ：给容器导入组件 ；<br /><strong>AutoConfigurationImportSelector</strong> ：自动配置导入选择器；</p> <p><strong>spring.factories</strong></p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230112/888de5336acc22e1222abcdb74fde591.jpg" alt="SpringBoot 基本原理"></p> <p><strong>结论</strong></p> <ul> <li>SpringBoot在启动的时候从类路径下的META-INF/spring.factories中获取EnableAutoConfiguration指定的值</li> <li>将这些值作为自动配置类导入容器，自动配置类就生效，帮我们进行自动配置工作；</li> <li>整个J2EE的整体解决方案和自动配置都在springboot-autoconfigure的jar包中；</li> <li>它会给容器中导入非常多的自动配置类 （xxxAutoConfiguration）, 就是给容器中导入这个场景需要的所有组件，并配置好这些组件 ；</li> <li>有了自动配置类，免去了我们手动编写配置注入功能组件等的工作；</li> </ul> <h2> <a id="3__113" rel="nofollow"></a>3. 主启动类的运行</h2> <p><strong>SpringApplication 类</strong><br /> 最初以为就是运行了一个main方法，没想到却开启了一个服务；</p> <pre><code class="prism language-java"><span class="token annotation punctuation">@SpringBootApplication</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpringbootApplication</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">SpringbootApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p>分析该方法主要分两部分，一部分是SpringApplication的实例化，二是run方法的执行；</p> <p>SpringApplication 这个类主要做了以下四件事情：<br /> 1、推断应用的类型是普通的项目还是Web项目<br /> 2、查找并加载所有可用初始化器 ， 设置到initializers属性中<br /> 3、找出所有的应用程序监听器，设置到listeners属性中<br /> 4、推断并设置main方法的定义类，找到运行的主类</p> <p>查看构造器：</p> <pre><code class="prism language-java"><span class="token keyword">public</span> <span class="token class-name">SpringApplication</span><span class="token punctuation">(</span><span class="token class-name">ResourceLoader</span> resourceLoader<span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> primarySources<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token comment">// ......</span>     <span class="token keyword">this</span><span class="token punctuation">.</span>webApplicationType <span class="token operator">=</span> <span class="token class-name">WebApplicationType</span><span class="token punctuation">.</span><span class="token function">deduceFromClasspath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setInitializers</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getSpringFactoriesInstances</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setListeners</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getSpringFactoriesInstances</span><span class="token punctuation">(</span><span class="token class-name">ApplicationListener</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">this</span><span class="token punctuation">.</span>mainApplicationClass <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">deduceMainApplicationClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> </code></pre> <p><strong>SpringApplication.run</strong><br /> run 方法运行原理：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230112/1514fc8be1f3cf4faaf16e5a5a6ef60b.jpg" alt="SpringBoot 基本原理"></p> </h1> <p><strong>根据当前不同的条件判断，决定这个配置类是否生效！</strong></p> <ul> <li>一但这个配置类生效；这个配置类就会给容器中添加各种组件；</li> <li>这些组件的属性是从对应的properties类中获取的，这些类里面的每一个属性又是和配置文件绑定的；</li> <li>所有在配置文件中能配置的属性都是在xxxxProperties类中封装着；</li> <li>配置文件能配置什么就可以参照某个功能对应的这个属性类</li> </ul> <p><strong>精髓</strong></p> <ul> <li>SpringBoot启动会加载大量的自动配置类</li> <li>我们看我们需要的功能有没有在SpringBoot默认写好的自动配置类当中；</li> <li>我们再来看这个自动配置类中到底配置了哪些组件；（只要我们要用的组件存在在其中，我们就不需要再手动配置了）</li> <li>给容器中自动配置类添加组件的时候，会从properties类中获取某些属性。我们只需要在配置文件中指定这些属性的值即可；</li> <li> <strong>xxxxAutoConfigurartion</strong>：自动配置类；给容器中添加组件</li> <li> <strong>xxxxProperties</strong>:封装配置文件中相关属性；</li> </ul> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-60367.htm">宠物疫苗猫咪打几针啊（宠物疫苗猫咪打几针啊多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-60968.htm">字符串和输入输出缓冲区</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-7-hiddify-next-github.htm" title="1月7日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">1月7日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-54726.htm" title="宠物粮品牌排行榜前十名图片（宠物粮go）">宠物粮品牌排行榜前十名图片（宠物粮go）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-4-free-node-subscribe.htm" title="2月4日 | HiddifyNextNode机场节点订阅每天更新20M/S免费节点订阅链接">2月4日 | HiddifyNextNode机场节点订阅每天更新20M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-48339.htm" title="动物疫苗行业现状分析 动物疫苗行业现状分析报告">动物疫苗行业现状分析 动物疫苗行业现状分析报告</a></li>
+                        <li class="py-2"><a href="/news/article-56374.htm" title="动物接种疫苗后多久产生抗体?（动物疫苗间隔时间）">动物接种疫苗后多久产生抗体?（动物疫苗间隔时间）</a></li>
+                        <li class="py-2"><a href="/news/article-58713.htm" title="厦门宠物接送（厦门宠物接送一站式服务）">厦门宠物接送（厦门宠物接送一站式服务）</a></li>
+                        <li class="py-2"><a href="/news/article-28472.htm" title="猫咪驱虫费用（猫咪驱虫多少钱一次?）">猫咪驱虫费用（猫咪驱虫多少钱一次?）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-1-node-share.htm" title="2月1日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接">2月1日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-today-hiddify-next-node.htm" title="1月12日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">1月12日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-27544.htm" title="去哪领养宠物（一般去哪里领养宠物?）">去哪领养宠物（一般去哪里领养宠物?）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">72</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

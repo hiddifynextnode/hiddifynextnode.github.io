@@ -1,0 +1,421 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-62744.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>vue2.x版本中computed和watch的使用入门详解-watch篇_在线工具</title>
+        <meta name="description" content="前言  watch顾名思义，属于vue2.x版本中，监听和观察组件状态变化的钩子函数，常见的应用场景有监听路由变化，以及父组件传递给子组件的props数据的变化等  基本使用 在使用watch的时候，" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-62744.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="vue2.x版本中computed和watch的使用入门详解-watch篇_在线工具" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/48cb3600d24c0aad9e52de080c1013a4.webp" />
+        <meta property="og:release_date" content="2025-02-25T04:59:47" />
+    <meta property="og:updated_time" content="2025-02-25T04:59:47" />
+        <meta property="og:description" content="前言  watch顾名思义，属于vue2.x版本中，监听和观察组件状态变化的钩子函数，常见的应用场景有监听路由变化，以及父组件传递给子组件的props数据的变化等  基本使用 在使用watch的时候，" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue2.x版本中computed和watch的使用入门详解-watch篇_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">vue2.x版本中computed和watch的使用入门详解-watch篇_在线工具</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h3 id="前言"><strong>前言</strong></h3> <blockquote> <p>watch顾名思义，属于vue2.x版本中，监听和观察组件状态变化的钩子函数，常见的应用场景有监听路由变化，以及父组件传递给子组件的props数据的变化等</p> </blockquote> <h3 id="基本使用"><strong>基本使用</strong></h3> <p>在使用watch的时候，需要在data中生命一个状态，并添加到watch当中进行观察，当发生变化时，watch可以通过默认参数获取最新的值的变化</p> <pre><code>&lt;li&gt;name值：{{ name }}&lt;/li&gt; &lt;li&gt;{{ nameTip }}&lt;/li&gt; &lt;li&gt;通过异步操作获取的age：{{ age }}&lt;/li&gt; &lt;li&gt;&lt;button @click="getUser"&gt;修改名字&lt;/button&gt;&lt;/li&gt;  let p1 = new Promise((resolve, reject) =&gt; { 	resolve({ age: "14" }); });  data() { 	return { 		name: "zhangsan", 		nameTip: "name未改变", 	}; },  watch: { 	name(newVal, oldVal) { 		// watch可以监听一些状态发生更改的时候，做一些处理，修改状态，或者异步操作 		this.nameTip = "name状态改变了"; 		this.getData(); 	}, },  methods: { 	getData() { 		setTimeout(() =&gt; { 			this.getAge(); 		}, 1000); 	}, 	getUser() { 		this.name = "lisi"; 	}, 	getAge() { 		p1.then((res) =&gt; { 			console.log(res); 			this.age = res.age; 		}); 	}, }, </code></pre> <p>当点击修改的时候，name的值会被修改为lisi，watch监听到name的修改之后，可以修改nameTip的文字，进行出发修改别的状态，<br /> 我们也可以通过newVal获取name的最新的值，或者oldVal的值进行一些对比和操作</p> <p>使用promise和定时器模拟当状态变化的时候，请求后台数据并渲染，这是我们在开发过程中，对watch使用的一个比较典型的例子</p> <hr> <h3 id="immediate和deep"><strong>immediate和deep</strong></h3> <p>immediate：当watch第一次加载或者首次绑定的时候，需要监听和获取data中的状态，那么就可以使用immediate，设置为true，该属性值为布尔值</p> <p>deep：watch监听的值为对象的时候，可以使用该属性进行监听对象深层次的属性变化，</p> <h5 id="注意事项"><strong>注意事项：</strong></h5> <blockquote> <p>deep默认是false，使用的时候，需要自行添加deep:true ,deep和immediate的值一样，是布尔值</p> </blockquote> <h5 id="实例"><strong>实例</strong></h5> <pre><code>&lt;li&gt;{{ immediateNameTip }}&lt;/li&gt;   data() { 	return { 		immediateName: "immediateName原始值", 		immediateNameTip: "immediateName改变时的提示文字", 	}; },   immediateName: {     handler(newVal, oldVal) {     	console.log("immediate表示最初监听值得时候，也执行这段代码");     	setTimeout(() =&gt; {     		this.immediateNameTip =     			"immediateName添加immediate，初次绑定也会执行";     	}, 2000);     },     immediate: true,     deep: true, // 只针对对象的深层次属性变化 },   </code></pre> <p>当设置了immediate为true的时候，首次进来immediateNameTip在定时器执行之后，就会发生更改。<br /> deep这里不再举例子，大家可以自己在实战中去使用和学习。</p> <hr> <p><strong>使用建议</strong></p> <blockquote> <p>watch可以作为监听路由变化，以及通过异步的方式去获取数据，同时在一些开销比较大的状态监听都有较多的应用场景，还有购物车功能的实现等场景。</p> </blockquote> <p>关于vue和watch的区别，在个人的博客中持续更新中。以上例子的源码中已开源，后续关于vue的笔记也会继续更新</p> <ul> <li> <h5 id="码云-httpsgiteecomlewyonvue-note"> <strong>码云</strong> <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://gitee.com/lewyon/vue-note"  target="_blank"  rel="nofollow">https://gitee.com/lewyon/vue-note</a><br /> </h5> </li> <li> <h5 id="githup-httpsgithubcomakari16vue-note"> <strong>githup</strong> <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/akari16/vue-note"  target="_blank"  rel="nofollow">https://github.com/akari16/vue-note</a><br /> </h5> </li> </ul> <p>文章个人博客地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://lewyon.xyz/watchDetail.html"  target="_blank"  rel="nofollow">vue2.x版本中computed和watch的使用入门详解-watch篇</a></p> <p>欢迎关注公众号：程序猿布欧，不定期更新一些前端入门文章</p> <p>创作不易，转载请注明出处和作者。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-62142.htm">成人高考兽医专业可以考兽医资格证吗（成人高考的动物医学专业能参加兽医证）</a></p>
+                                        <p>下一个：<a href="/news/article-62745.htm">动物疫苗属于疫苗吗为什么 动物疫苗属于疫苗吗为什么不能打</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-21992.htm" title="今年公务员国考人数（今年国考人数多少）">今年公务员国考人数（今年国考人数多少）</a></li>
+                        <li class="py-2"><a href="/news/article-58077.htm" title="重庆在哪里领养狗狗（重庆领养狗狗的地方）">重庆在哪里领养狗狗（重庆领养狗狗的地方）</a></li>
+                        <li class="py-2"><a href="/news/article-38030.htm" title="宠物粮食品牌都有什么名字呢女生（宠物粮食品牌起名大全）">宠物粮食品牌都有什么名字呢女生（宠物粮食品牌起名大全）</a></li>
+                        <li class="py-2"><a href="/news/article-23830.htm" title="狗粮猫粮加工设备厂家有哪些（猫狗粮加工的原料是什么）">狗粮猫粮加工设备厂家有哪些（猫狗粮加工的原料是什么）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-11-free-node-subscribe.htm" title="2月11日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">2月11日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-62744.htm" title="vue2.x版本中computed和watch的使用入门详解-watch篇_在线工具">vue2.x版本中computed和watch的使用入门详解-watch篇_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-18829.htm" title="解决：“/****/kafka_2.13-3.0.0/bin/kafka-run-class.sh: line 342: exec: java: not found ”问题">解决：“/****/kafka_2.13-3.0.0/bin/kafka-run-class.sh: line 342: exec: java: not found ”问题</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-hiddify-next-github.htm" title="12月12日 | HiddifyNextNode机场节点订阅每天更新18M/S免费节点订阅链接">12月12日 | HiddifyNextNode机场节点订阅每天更新18M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-25223.htm" title="动物疫苗公司销量排名前十 动物疫苗公司销量排名前十名">动物疫苗公司销量排名前十 动物疫苗公司销量排名前十名</a></li>
+                        <li class="py-2"><a href="/news/article-47435.htm" title="猫咪三针疫苗需要多久打一次（猫咪三针疫苗必须打么）">猫咪三针疫苗需要多久打一次（猫咪三针疫苗必须打么）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">78</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
