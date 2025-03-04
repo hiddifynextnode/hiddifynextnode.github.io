@@ -1,0 +1,421 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-66413.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>java自带的四种线程池</title>
+        <meta name="description" content="java预定义的哪四种线程池？  newSingleThreadExexcutor：单线程数的线程池（核心线程数=最大线程数=1） newFixedThreadPool：固定线程数的线程池（核心线程数" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-66413.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="java自带的四种线程池" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/8854a9bcf26d5503e9aebf94be172abc.webp" />
+        <meta property="og:release_date" content="2025-03-03T08:14:15" />
+    <meta property="og:updated_time" content="2025-03-03T08:14:15" />
+        <meta property="og:description" content="java预定义的哪四种线程池？  newSingleThreadExexcutor：单线程数的线程池（核心线程数=最大线程数=1） newFixedThreadPool：固定线程数的线程池（核心线程数" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="java自带的四种线程池">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">java自带的四种线程池</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h4 id="java预定义的哪四种线程池">java预定义的哪四种线程池？</h4> <ul> <li>newSingleThreadExexcutor：单线程数的线程池（核心线程数=最大线程数=1）</li> <li>newFixedThreadPool：固定线程数的线程池（核心线程数=最大线程数=自定义）</li> <li>newCacheThreadPool：可缓存的线程池（核心线程数=0，最大线程数=Integer.MAX_VALUE）</li> <li>newScheduledThreadPool：支持定时或周期任务的线程池（核心线程数=自定义，最大线程数=Integer.MAX_VALUE）</li> </ul> <h4 id="四种线程池有什么区别">四种线程池有什么区别？</h4> <p>上面四种线程池类都继承ThreadPoolExecutor，在创建时都是直接返回new ThreadPoolExecutor(参数)，它们的区别是定义的ThreadPoolExecutor(参数)中参数不同，而ThreadPoolExecutor又继承ExecutorService接口类</p> <ul> <li>newFixedThreadPool</li> </ul> <pre><code>定义： ExecutorService executorService=Executors.newFixedThreadPool(2);</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/253a9853e2c2fefc83a5d533fd1ae592.jpg" alt="java自带的四种线程池"></p> <p>缺点：使用了LinkBlockQueue的链表型阻塞队列，当任务的堆积速度大于处理速度时，容易堆积任务而导致OOM内存溢出</p> <ul> <li>newSingleThreadExecutor</li> </ul> <pre><code>定义：ExecutorService executorService =Executors.newSingleThreadExecutor();</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3c223fcf8a728ff4463c0136dd956110.jpg" alt="java自带的四种线程池"></p> <p>上面代码神似new FixedThreadPoop(1)，但又有区别，因为外面多了一层FinalizableDelegatedExecutorService，其作用：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c50d7860b125ccbab167cd47b463c3aa.jpg" alt="java自带的四种线程池"></p> <p>可知，fixedExecutorService的本质是ThreadPoolExecutor,所以fixedExecutorService可以强转成ThreadPoolExecutor，但singleExecutorService与ThreadPoolExecutor无任何关系，所以强转失败，故newSingleThreadExecutor()被创建后，无法再修改其线程池参数，真正地做到single单个线程。</p> <p>缺点：使用了LinkBlockQueue的链表型阻塞队列，当任务的堆积速度大于处理速度时，容易堆积任务而导致OOM内存溢出</p> <ul> <li>newCacheThreadPool</li> </ul> <pre><code>定义：ExecutorService executorService=Executors.newCacheThreadPool();</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/1c0a5c0a2ac3e7a10a24ed9dda619c1d.jpg" alt="java自带的四种线程池"></p> <p>缺点：SynchronousQueue是BlockingQueue的一种实现，它也是一个队列，因为最大线程数为Integer.MAX_VALUE，所有当线程过多时容易OOM内存溢出</p> <ul> <li>ScheduledThreadPool</li> </ul> <pre><code>定义：ExecutorService executorService=Executors.newScheduledThreadPool(2);</code></pre> <pre><code>源码： public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {         //ScheduledThreadPoolExecutor继承ThreadPoolExecutor         return new ScheduledThreadPoolExecutor(corePoolSize);     }      public ScheduledThreadPoolExecutor(int corePoolSize) {     //ScheduledThreadPoolExecutor继承ThreadPoolExecutor，故super()会调用ThreadPoolExecutor的构造函数初始化并返回一个ThreadPoolExecutor，而ThreadPoolExecutor使实现ExecutorService接口的     //最终ScheduledThreadPoolExecutor也和上面几种线程池一样返回的是ExecutorService接口的实现类ThreadPoolExecutor     super(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,           new DelayedWorkQueue()); }</code></pre> <h4 id="线程池有哪几个重要参数">线程池有哪几个重要参数？</h4> <p>ThreadPoolExecutor构造方法如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/32b7246bea606861a284670d7cfa7342.jpg" alt="java自带的四种线程池"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/a578d7e40926e855ec9e9592c4003441.jpg" alt="java自带的四种线程池"></p> <ul> <li>keepAliveTime是指当前线程数位于 [核心线程数,最大线程数] 之间的这些非核心线程等待多久空闲时间而没有活干时，就退出线程池；</li> <li>等待丢列的大小与最大线程数是没有任何关系的，线程创建优先级=核心线程 &gt; 阻塞队列 &gt; 扩容的线程(当前核心线程数小于最大线程数时才能扩容线程)</li> <li>假如核心线程数5，等待队列长度为3，最大线程数10：当线程数不断在增加时，先创建5个核心线程，核心线程数满了再把线程丢进等待丢列，等待队列满了(3个线程)，此时会比较最大线程数（只有等待丢列满了最大线程数才能出场），还可以继续创建2个线程（5+3+2），若线程数超过了最大线程数，则执行拒绝策略；</li> <li>假如核心线程数5，等待队列长度为3，最大线程数7：当线程数不断在增加时，先创建5个核心线程，核心线程数满了再把线程丢进等待丢列，当等待队列中有2个线程时达到了最大线程数(5+2=7)，但是等待丢列还没满所以不用管最大线程数，直到等待丢列满了（3个阻塞线程），此时会比较最大线程数（只有等待丢列满了最大线程数才能出场），此时核心+等待丢列=5+3=8&gt;7=最大线程数，即已经达到最大线程数了，则执行拒绝策略；</li> <li>如果把等待丢列设置为LinkedBlockingQueue无界丢列，这个丢列是无限大的，就永远不会走到判断最大线程数那一步了</li> </ul> <h4 id="如何自定义线程池">如何自定义线程池</h4> <p>可以使用有界队列，自定义线程创建工厂ThreadFactory和拒绝策略handler来自定义线程池</p> <pre><code>public class ThreadTest {     public static void main(String[] args) throws InterruptedException, IOException {         int corePoolSize = 2;         int maximumPoolSize = 4;         long keepAliveTime = 10;         TimeUnit unit = TimeUnit.SECONDS;         BlockingQueue&lt;Runnable&gt; workQueue = new ArrayBlockingQueue&lt;&gt;(2);         ThreadFactory threadFactory = new NameTreadFactory();         RejectedExecutionHandler handler = new MyIgnorePolicy();        ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit,                 workQueue, threadFactory, handler);         executor.prestartAllCoreThreads(); // 预启动所有核心线程                 for (int i = 1; i &lt;= 10; i++) {             MyTask task = new MyTask(String.valueOf(i));             executor.execute(task);         }         System.in.read(); //阻塞主线程     }     static class NameTreadFactory implements ThreadFactory {         private final AtomicInteger mThreadNum = new AtomicInteger(1);         @Override         public Thread newThread(Runnable r) {             Thread t = new Thread(r, "my-thread-" + mThreadNum.getAndIncrement());             System.out.println(t.getName() + " has been created");             return t;         }     }      public static class MyIgnorePolicy implements RejectedExecutionHandler {         @Override         public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {             doLog(r, e);         }         private void doLog(Runnable r, ThreadPoolExecutor e) {             // 可做日志记录等             System.err.println( r.toString() + " rejected"); //          System.out.println("completedTaskCount: " + e.getCompletedTaskCount());         }     }      static class MyTask implements Runnable {         private String name;         public MyTask(String name) {             this.name = name;         }         @Override         public void run() {             try {                 System.out.println(this.toString() + " is running!");                 Thread.sleep(3000); //让任务执行慢点             } catch (InterruptedException e) {                 e.printStackTrace();             }         }         public String getName() {             return name;         }         @Override         public String toString() {             return "MyTask [name=" + name + "]";         }     } }</code></pre> <p>运行结果：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/4270897989325bb9b56ceb6940858c59.jpg" alt="java自带的四种线程池"></p> <p>其中7-10号线程被拒绝策略拒绝了，1、2号线程执行完后，3、6号线程进入核心线程池执行，此时4、5号线程在任务队列等待执行，3、6线程执行完再通知4、5线程执行</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-65811.htm">宠爱宠物店电话（宠爱宠物诊所怎么样）</a></p>
+                                        <p>下一个：<a href="/news/article-66414.htm">宠物猫疫苗多少钱一个针（宠物猫疫苗多少钱一次）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-34649.htm" title="宠物领养网页设计图片（宠物领养网下载）">宠物领养网页设计图片（宠物领养网下载）</a></li>
+                        <li class="py-2"><a href="/news/article-44000.htm" title="人用狂犬疫苗跟兽用一样吗（兽用狂犬疫苗和人用狂犬疫苗有啥区别）">人用狂犬疫苗跟兽用一样吗（兽用狂犬疫苗和人用狂犬疫苗有啥区别）</a></li>
+                        <li class="py-2"><a href="/news/article-40504.htm" title="宠物批发商业运营计划书（宠物店市场规划）">宠物批发商业运营计划书（宠物店市场规划）</a></li>
+                        <li class="py-2"><a href="/news/article-26125.htm" title="疫苗瓶回收处理（疫苗空瓶回收登记表）">疫苗瓶回收处理（疫苗空瓶回收登记表）</a></li>
+                        <li class="py-2"><a href="/news/article-32742.htm" title="延吉动物医院在哪里啊多少钱（延吉市宠物医院）">延吉动物医院在哪里啊多少钱（延吉市宠物医院）</a></li>
+                        <li class="py-2"><a href="/news/article-35563.htm" title="动物生物疫苗工资 动物生物疫苗工资高吗">动物生物疫苗工资 动物生物疫苗工资高吗</a></li>
+                        <li class="py-2"><a href="/news/article-48933.htm" title="动物防疫站营业时间是多少（动物防疫站营业时间是多少号）">动物防疫站营业时间是多少（动物防疫站营业时间是多少号）</a></li>
+                        <li class="py-2"><a href="/news/article-32278.htm" title="无货源店铺一个月可以赚多少（无货源店铺挣钱吗）">无货源店铺一个月可以赚多少（无货源店铺挣钱吗）</a></li>
+                        <li class="py-2"><a href="/news/article-31238.htm" title="动物防疫站***需要什么手续（动物防疫站***需要什么手续呢）">动物防疫站***需要什么手续（动物防疫站***需要什么手续呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-3-free-subscribe-node.htm" title="2月3日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接">2月3日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">87</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
