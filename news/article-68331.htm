@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-68331.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>pandas高阶应用</title>
+        <meta name="description" content="1、时间序列相关操作 pd的date_range中的基本时间序列频率     Alias   Description（偏移量类型）   说明     B   business day frequenc" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-68331.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="pandas高阶应用" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/94bcd62f7456c726822fbf66e02d1d8c.webp" />
+        <meta property="og:release_date" content="2025-03-06T11:02:03" />
+    <meta property="og:updated_time" content="2025-03-06T11:02:03" />
+        <meta property="og:description" content="1、时间序列相关操作 pd的date_range中的基本时间序列频率     Alias   Description（偏移量类型）   说明     B   business day frequenc" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="pandas高阶应用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">pandas高阶应用</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h2 id="fh8wY">1、时间序列相关操作</h2> <p id="u31faf344">pd的date_range中的基本时间序列频率</p> <table id="eueuF"> <tbody> <tr> <td> <p id="u65f3c13a">Alias</p> </td> <td> <p id="u4c3cc1b7">Description（偏移量类型）</p> </td> <td> <p id="u38e7afa0">说明</p> </td> </tr> <tr> <td> <p id="u8a94b270">B</p> </td> <td> <p id="u1d27d939">business day frequency</p> </td> <td> <p id="u7b2a0cb3">每工作日</p> </td> </tr> <tr> <td> <p id="u374840fa">C</p> </td> <td> <p id="u7e7b6a55">custom business day frequency</p> </td> <td> <p id="ub0463702">自定义工作日频率</p> </td> </tr> <tr> <td> <p id="u57d32fd3">D</p> </td> <td> <p id="uaa902dd7">calendar day frequency</p> </td> <td> <p id="ub876b874">每日历日</p> </td> </tr> <tr> <td> <p id="u9056a314">W</p> </td> <td> <p id="u60cde212">weekly frequency</p> </td> <td> <p id="ub0e2c9b4">每周</p> </td> </tr> <tr> <td> <p id="uae59cab5">M</p> </td> <td> <p id="u8261ed96">month end frequency</p> </td> <td> <p id="u0d6577c2">每个月最后一个日历日</p> </td> </tr> <tr> <td> <p id="u236a9ea2">SM</p> </td> <td> <p id="uf4924e4b">semi-month end frequency (15th and end of month)</p> </td> <td> <p id="ucddd90cd">每月第一个日历日</p> </td> </tr> <tr> <td> <p id="ueeeaa772">BM</p> </td> <td> <p id="ud2242460">business month end frequency</p> </td> <td> <p id="u8f7dcf93">每月最后一个工作日</p> </td> </tr> <tr> <td> <p id="uaeab2e6b">CBM</p> </td> <td> <p id="u1dde282e">custom business month end frequency</p> </td> <td> <p id="u4c3b3372">自定义每月最后一个工作日</p> </td> </tr> <tr> <td> <p id="uaa4b9b5a">MS</p> </td> <td> <p id="u25b53e95">month start frequency</p> </td> <td> <p id="ua477616a">每月第一个日历日</p> </td> </tr> <tr> <td> <p id="uf55ffb10">SMS</p> </td> <td> <p id="u2f9e47e4">semi-month start frequency (1st and 15th)</p> </td> <td></td> </tr> <tr> <td> <p id="ufbab4089">BMS</p> </td> <td> <p id="uae2c8650">business month start frequency</p> </td> <td> <p id="u0c54788b">每个月第一个工作日</p> </td> </tr> <tr> <td> <p id="u17bfcfe6">CBMS</p> </td> <td> <p id="u45b923c1">custom business month start frequency</p> </td> <td> <p id="u196a918e">自定义每个月第一个工作日</p> </td> </tr> <tr> <td> <p id="u769cf069">Q</p> </td> <td> <p id="u2f9e8d3e">quarter end frequency</p> </td> <td> <p id="u7e43c075">对于以指定月份结束的年度，每季度最后一月的最后一个日历日</p> </td> </tr> <tr> <td> <p id="u2bc11e2d">BQ</p> </td> <td> <p id="u8c732728">business quarter end frequency</p> </td> <td> <p id="u23e50fb6">对于以指定月份结束的年度，每季度最后一个月的最后一个工作日</p> </td> </tr> <tr> <td> <p id="u87f5ce66">QS</p> </td> <td> <p id="u680c1b6e">quarter start frequency</p> </td> <td> <p id="u0bba8759">对于以指定月份结束的年度，每季度最后一个月的第一个工作日</p> </td> </tr> <tr> <td> <p id="u719d4e72">BQS</p> </td> <td> <p id="u02853c1f">business quarter start frequency</p> </td> <td> <p id="u2e5bc19b">自定义对于以指定月份结束的年度，每季度最后一个月的第一个工作日</p> </td> </tr> <tr> <td> <p id="ubf8ad11e">A, Y</p> </td> <td> <p id="u4a4a24f1">year end frequency</p> </td> <td></td> </tr> <tr> <td> <p id="uce08d89d">BA, BY</p> </td> <td> <p id="uc50888b7">business year end frequency</p> </td> <td></td> </tr> <tr> <td> <p id="ue20f5ef0">AS, YS</p> </td> <td> <p id="uffb1c564">year start frequency</p> </td> <td></td> </tr> <tr> <td> <p id="ue97ca49f">BAS, BYS</p> </td> <td> <p id="ufff5a00f">business year start frequency</p> </td> <td></td> </tr> <tr> <td> <p id="u2fc96210">BH</p> </td> <td> <p id="u0f4d2330">business hour frequency</p> </td> <td> <p id="u34e8f603">工作每小时</p> </td> </tr> <tr> <td> <p id="u650d3541">H</p> </td> <td> <p id="ub6fdf003">hourly frequency</p> </td> <td> <p id="u74e8bc90">每小时</p> </td> </tr> <tr> <td> <p id="u9ff35c47">T, min</p> </td> <td> <p id="u6a82dd93">minutely frequency</p> </td> <td> <p id="uf36ca325">每分</p> </td> </tr> <tr> <td> <p id="u03e2f7f7">S</p> </td> <td> <p id="u17db09a3">secondly frequency</p> </td> <td> <p id="u7920df51">每秒</p> </td> </tr> <tr> <td> <p id="u38fdb026">L, ms</p> </td> <td> <p id="u659618aa">milliseconds</p> </td> <td> <p id="u30960bfc">每毫秒</p> </td> </tr> <tr> <td> <p id="u1dd0d31e">U, us</p> </td> <td> <p id="uc591d95c">microseconds</p> </td> <td> <p id="ue2f7a30c">每微秒</p> </td> </tr> <tr> <td> <p id="u56a453e8">N</p> </td> <td> <p id="ud7dbd2d0">nanoseconds</p> </td> <td></td> </tr> </tbody> </table> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221229/6abe0250128aab816bb67b9dfd550201.jpg"></p> <h2 id="NaYs2">2、三种透视图操作方法</h2> <pre id="unfsP">import pandas as pd import numpy as np  v = [1, 2, 3, 3, 3] a = pd.DataFrame({'v': v}) d = [2 , 4, 4, 5, 4] a['d'] = d c = ['c' , 'h', 'd', 'e',  'c'] a['c'] = c a.head() ####a的数据状况为： 	v	d	c 0	1	2	c 1	2	4	h 2	3	4	d 3	3	5	e 4	3	4	c  # df用两个列进行分组groupby a.groupby(['v','d'])['c'].count() ### 分组结果为： v  d 1  2    1 2  4    1 3  4    2    5    1 Name: c, dtype: int64</pre> <p id="u0b61a82a">将上步得到的数据行列转换：v列的值做index, d列的值做columns，将数据对应填入</p> <p id="u809e996d">以下为三种操作方法</p> <h3 id="mrQpS">2.1 crosstab</h3> <pre id="N1Scf">cpd = pd.crosstab(a['v'], a['d'], a['c'], aggfunc='count') cpd ## 结果为: d	2	4	5 v			 1	1.0	NaN	NaN 2	NaN	1.0	NaN 3	NaN	2.0	1.0 # 将上步所得结果空值填充为0 cpb.fillna(0,inplace=True)</pre> <h3 id="PoWUa">2.2 pivot_tabel</h3> <pre id="QFWkT">a.groupby(['v', 'd'], as_index=False)['c'].count().pivot_table(     index=['v'],     columns=['d'],     values='c',     aggfunc='count').fillna(0) ## 结果为： d	2	4	5 v			 1	1.0	0.0	0.0 2	0.0	1.0	0.0 3	0.0	1.0	1.0</pre> <h3 id="h8nXc">2.3 pivot</h3> <pre id="FPLVe">a.groupby(['v', 'd'], as_index=False)['c'].count() ## 结果为： 	v	d	c 0	1	2	1 1	2	4	1 2	3	4	2 3	3	5	1  a.groupby(['v', 'd'], as_index=False)['c'].count().pivot("v","d","c").fillna(0) ### 结果为：  d	2	4	5 v			 1	1.0	0.0	0.0 2	0.0	1.0	0.0 3	0.0	2.0	1.0</pre> <h2 id="SRHHb">3、groupby后接各种便利操作</h2> <h3 id="Q9a96">3.1 groupby本体</h3> <pre id="wnk4R">for ind,data in a.groupby(['v','d']):     print(ind,data)</pre> <h3 id="YbLmc">3.2 groupby--agg</h3> <pre id="K1kIU">a.groupby(['v','d']).agg({"c":["count"]})  # 哪些列所需的函数操作只需要列为key, 函数作为value，或value list # 结果为： 		c count v	d	 1	2	1 2	4	1 3	4	2 5	1  # 常用的函数有：count,min,max,median,mean,sum,cumsum</pre> <h3 id="GinDo">3.3 groupby--transform</h3> <p id="u7d150677">transform可使groupby的结果去索引化一一填充，作用类似a.groupby(['v', 'd'], as_index=False)['c'].count()</p> <pre id="JaLqN">a.groupby(['v','d'])['c'].transform('count') ## 结果为: 0    1 1    1 2    2 3    1 4    2 Name: c, dtype: int64</pre> <h2 id="Qs7zr">4、apply</h2> <pre id="jhRc4">def func(x):     if x=="c":         x = 3     elif x=="d":         x = 4     elif x=="e":         x = 5     else:         x = 6     return x  a['c'].apply(func)  ## 结果为： 0    3 1    6 2    4 3    5 4    3  a['c'].apply(lambda x: 1 if x=="c" else 0)</pre> <h2 id="KtR1d">5、多个sheet写入excel</h2> <pre id="tAK74">pd.ExcelWriter(path) as fp:     df1.to_excel(fp,sheet_name="")     df2.to_excel(fp,sheet_name="")     df3.to_excel(fp,sheet_name="")</pre> <h2 id="bvd5Y">6、大数据加速处理Tips</h2> <h3 id="r5idl">6.1 分块读取</h3> <pre id="obRBM">def get_df(file):     mylist = list()     for chunk in pd.read_csv(file,sep=',',chunksize=1000000):         mylist.append(chunk)     temp_df = pd.concat(mylist,axis=0)     del mylist     return temp_df</pre> <h3 id="L15F3">6.2 swifter--针对apply的加速包</h3> <pre id="uqQ1Q"># Swifter可以检查你的函数是否可以向量化，如果可以，就使用向量化计算 # 直接在apply在前面加上swifter就行 df.swifter.apply()</pre> <h3 id="fnQyq">6.3 category</h3> <p id="u404fe3ac">Pandas中有一种特殊的数据类型叫做category。它表示的是一个类别，一般用在统计分类中，比如性别，血型，分类，级别等等。</p> <ol> <li id="uc62283df">Categories是从数据中推断出来的。</li> <li id="u2e17ddd7">Categories是没有大小顺序的。</li> </ol> <p id="uee7e00f0">会比原始数据类型占用的内存少。</p> <p id="u2653ff8e">但是category数据类型后续操作不方便，比如填充空值就会报错，可将其转化成对应的code</p> <p id="u03b8c3cf">.astype('category').cat.codes----&gt;直接将series分类后映射成数值。</p> <h3 id="lJdd7">6.4 glob--读取批量数据</h3> <p id="u1183c031">glob包，这个包将一次处理多个csv文件。可以使用data/*. CSV模式来获取data文件夹中的所有csv文件。</p> <p id="u6a93ac2c">pandas没有本地的glob支持，因此我们需要循环读取文件。</p> <pre id="LltXS">import glob all_files = glob.glob('data/*.csv') dfs = [] for fname in all_files:     dfs.append(pd.read_csv(fname, parse_dates=['Date'])) df = pd.concat(dfs, axis=0) dfsum = df.groupby(df['Date'].dt.year).sum() </pre> <h3 id="qGajU">6.5 Vaex</h3> <ol> <li id="u802cdd27">Vaex 是一个开源的DataFrame库(类似于Pandas)，对和你硬盘空间一样大小的表格数据集，它可以有效进行可视化、探索、分析甚至进行实践机器学习。</li> <li id="u640e8bcd">Vaex 采用内存映射、高效的核外算法和延迟计算等概念。</li> </ol> <ol> <li id="u101fc85b">Vaex 要求将CSV转换为HDF5格式，才能看到Vaex的优点。</li> </ol> <pre id="DTT1z">HDF5是一种全新的分层数据格式产品，由数据格式规范和支持库实现组成。 HDF5旨在解决较旧的HDF产品的一些限制，满足现代系统和应用需求。 HDF5文件以分层结构组织，其中包含两个主要结构：组和数据集。 HDF5 group：分组结构包含零个或多个组或数据集的实例，以及支持元数据(metadata)。 HDF5 dataset：数据元素的多维数组，以及支持元数据。 但HDF5文件会比较大</pre> <pre id="KRSm2">import glob import vaex  # csv_files = glob.glob('csv_files/*.csv') csv_files = glob.glob('train.csv') for i, csv_file in enumerate(csv_files, 1):     for j, dv in enumerate(vaex.from_csv(csv_file, convert=True, chunk_size=5_000_000), 1):         print('Exporting %d %s to hdf5 part %d' % (i, csv_file, j))         dv.export_hdf5(f'hdf5_files/analysis_{i:02}_{j:02}.hdf5') dv = vaex.open('hdf5_files/*.hdf5') ### Vaex实际上并没有读取文件，因为延迟加载。### quantile = dv.percentile_approx('col1', 10) dv['col1_plus_col2'] = dv.col1 + dv.col2 dv['col1_binary'] = dv.col1&gt; dv.percentile_approx（'col1'，10） </pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67696.htm">动物疫苗去哪里买便宜点 动物疫苗去哪里买便宜点呢</a></p>
+                                        <p>下一个：<a href="/news/article-68332.htm">家养两个月小猫咬出血（家养的两个月小猫咬伤）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-52034.htm" title="JavaScript从数组中删除相同的条目，并保持其长度相同方法详解">JavaScript从数组中删除相同的条目，并保持其长度相同方法详解</a></li>
+                        <li class="py-2"><a href="/news/article-59797.htm" title="卖宠物粮食的app 卖宠物粮食的店名">卖宠物粮食的app 卖宠物粮食的店名</a></li>
+                        <li class="py-2"><a href="/news/article-52035.htm" title="哪里可以免费领养宠物猫（哪里能免费领养猫咪）">哪里可以免费领养宠物猫（哪里能免费领养猫咪）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-7-hiddify-next-windows.htm" title="2月7日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接">2月7日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-6-today-hiddify-next-node.htm" title="1月6日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">1月6日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-10-free-hiddify-next-node.htm" title="2月10日 | HiddifyNextNode机场节点订阅每天更新18M/S免费节点订阅链接">2月10日 | HiddifyNextNode机场节点订阅每天更新18M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-hiddify-next-node-share.htm" title="3月5日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接">3月5日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-59224.htm" title="本人长期上门回收宠物猫昆明（昆明上门回收宠物狗）">本人长期上门回收宠物猫昆明（昆明上门回收宠物狗）</a></li>
+                        <li class="py-2"><a href="/news/article-38031.htm" title="猫粮加工机器 猫粮加工机器设备厂家">猫粮加工机器 猫粮加工机器设备厂家</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-26-free-high-speed-nodes.htm" title="1月26日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接">1月26日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

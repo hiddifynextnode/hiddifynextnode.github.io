@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-68980.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SQL Server中函数、存储过程与触发器的用法_MsSql</title>
+        <meta name="description" content="一、函数 函数分为（1）系统函数，（2）自定义函数。 其中自定义函数又可以分为（1）标量值函数（返回单个值），（2）表值函数（返回查询结果） 本文主要介绍自定义函数的使用。 （1）编写一个函数求该银行" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-68980.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="SQL Server中函数、存储过程与触发器的用法_MsSql" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/17d5902003ae2dafd3950a92310c65aa.webp" />
+        <meta property="og:release_date" content="2025-03-07T06:35:35" />
+    <meta property="og:updated_time" content="2025-03-07T06:35:35" />
+        <meta property="og:description" content="一、函数 函数分为（1）系统函数，（2）自定义函数。 其中自定义函数又可以分为（1）标量值函数（返回单个值），（2）表值函数（返回查询结果） 本文主要介绍自定义函数的使用。 （1）编写一个函数求该银行" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SQL Server中函数、存储过程与触发器的用法_MsSql">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">SQL Server中函数、存储过程与触发器的用法_MsSql</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>一、函数</h2> <p>函数分为（1）系统函数，（2）自定义函数。</p> <p>其中自定义函数又可以分为（1）标量值函数（返回单个值），（2）表值函数（返回查询结果）</p> <p>本文主要介绍自定义函数的使用。</p> <p>（1）编写一个函数求该银行的金额总和</p> <div class="ay1code"> <pre class="brush:sql;">create function GetSumCardMoney()  returns money   as  begin  	declare @AllMOney money  	select @AllMOney = (select SUM(CardMoney) from BankCard)  	return @AllMOney  end</pre> </div> <p>函数调用</p> <div class="ay1code"> <pre class="brush:sql;">select dbo.GetSumCardMoney()</pre> </div> <p>上述函数没有参数，下面介绍有参数的函数的定义及使用</p> <p>（2）传入账户编号，返回账户真实姓名</p> <div class="ay1code"> <pre class="brush:sql;">create function GetNameById(@AccountId int)  returns  varchar(20)  as  begin  	declare @RealName varchar(20)  	select @RealName = (select RealName from AccountInfo where AccountId = @AccountId)  	return @RealName  end</pre> </div> <p>函数调用</p> <div class="ay1code"> <pre class="brush:sql;">print dbo.GetNameById(2)</pre> </div> <p>（3）传递开始时间和结束时间，返回交易记录（存钱取钱），交易记录中包含 真实姓名，卡号，存钱金额，取钱金额，交易时间。</p> <p>方案一（逻辑复杂，函数内容除了返回结果的sql语句还有其他内容，例如定义变量等）：</p> <div class="ay1code"> <pre class="brush:sql;">create function GetExchangeByTime(@StartTime varchar(30),@EndTime varchar(30))  returns @ExchangeTable table  (  	RealName varchar(30),  --真实姓名  	CardNo varchar(30),    --卡号  	MoneyInBank money,     --存钱金额  	MoneyOutBank money,    --取钱金额  	ExchangeTime smalldatetime  --交易时间  )  as  begin  	insert into @ExchangeTable  	select AccountInfo.RealName,CardExchange.CardNo,CardExchange.MoneyInBank,  	CardExchange.MoneyOutBank,CardExchange.ExchangeTime from CardExchange  	left join BankCard on CardExchange.CardNo = BankCard.CardNo  	left join AccountInfo on BankCard.AccountId = AccountInfo.AccountId  	where CardExchange.ExchangeTime between @StartTime+' 00:00:00' and @EndTime+' 23:59:59'  	return  end</pre> </div> <p>函数调用</p> <div class="ay1code"> <pre class="brush:sql;">select * from GetExchangeByTime('2018-6-1','2018-7-1')</pre> </div> <p>方案二（逻辑简单，函数内容直接是一条sql查询语句）：</p> <div class="ay1code"> <pre class="brush:sql;">create function GetExchangeByTime(@StartTime varchar(30),@EndTime varchar(30))  returns table  as  	return  	select AccountInfo.RealName,CardExchange.CardNo,CardExchange.MoneyInBank,  	CardExchange.MoneyOutBank,CardExchange.ExchangeTime from CardExchange  	left join BankCard on CardExchange.CardNo = BankCard.CardNo  	left join AccountInfo on BankCard.AccountId = AccountInfo.AccountId  	where CardExchange.ExchangeTime between @StartTime+' 00:00:00' and @EndTime+' 23:59:59'  go</pre> </div> <p>函数调用：</p> <div class="ay1code"> <pre class="brush:sql;">select * from GetExchangeByTime('2018-6-19','2018-6-19')</pre> </div> <p>（4）查询银行卡信息，将银行卡状态1,2,3,4分别转换为汉字“正常,挂失,冻结,注销”，根据银行卡余额显示银行卡等级 30万以下为“普通用户”,30万及以上为"VIP用户"，分别显示卡号，身份证，姓名，余额，用户等级，银行卡状态。</p> <p>方案一：直接在sql语句中使用case when</p> <div class="ay1code"> <pre class="brush:sql;">select * from AccountInfo  select * from BankCard  select CardNo 卡号,AccountCode 身份证,RealName 姓名,CardMoney 余额,  case  	when CardMoney &lt; 300000 then '普通用户'  	else 'VIP用户'   end 用户等级,  case  	when CardState = 1 then '正常'  	when CardState = 2 then '挂失'  	when CardState = 3 then '冻结'  	when CardState = 4 then '注销'  	else '异常'  end 卡状态  from BankCard inner join AccountInfo on BankCard.AccountId = AccountInfo.AccountId</pre> </div> <p>方案二：将等级和状态用函数实现</p> <div class="ay1code"> <pre class="brush:sql;">create function GetGradeByMoney(@myMoney int)  returns varchar(10)  as  begin  	declare @result varchar(10)  	if @myMoney &lt; 3000   		set @result = '普通用户'  	else  		set @result = 'VIP用户'  	return @result  end  go    create function GetStatusByNumber(@myNum int)  returns varchar(10)  as  begin  	declare @result varchar(10)  	if @myNum = 1  		set @result = '正常'  	else if @myNum = 2  		set @result = '挂失'  	else if @myNum = 3  		set @result = '冻结'  	else if @myNum = 4  		set @result = '注销'  	else  		set @result = '异常'	  	return @result  end  go</pre> </div> <p>函数调用实现查询功能</p> <div class="ay1code"> <pre class="brush:sql;">select CardNo 卡号,AccountCode 身份证,RealName 姓名,CardMoney 余额,  dbo.GetGradeByMoney(CardMoney) 账户等级,dbo.GetStatusByNumber(CardState) 卡状态  from BankCard inner join AccountInfo on BankCard.AccountId = AccountInfo.AccountId</pre> </div> <p>（5）编写函数，根据出生日期求年龄，年龄求实岁，例如：</p> <p>​ 生日为2000-5-5，当前为2018-5-4，年龄为17岁<br />​ 生日为2000-5-5，当前为2018-5-6，年龄为18岁</p> <p>测试数据如下：</p> <div class="ay1code"> <pre class="brush:sql;">create table Emp  (  	EmpId int primary key identity(1,2), --自动编号  	empName varchar(20), --姓名  	empSex varchar(4),   --性别  	empBirth smalldatetime --生日  )  insert into Emp(empName,empSex,empBirth) values('刘备','男','2008-5-8')  insert into Emp(empName,empSex,empBirth) values('关羽','男','1998-10-10')  insert into Emp(empName,empSex,empBirth) values('张飞','男','1999-7-5')  insert into Emp(empName,empSex,empBirth) values('赵云','男','2003-12-12')  insert into Emp(empName,empSex,empBirth) values('马超','男','2003-1-5')  insert into Emp(empName,empSex,empBirth) values('黄忠','男','1988-8-4')  insert into Emp(empName,empSex,empBirth) values('魏延','男','1998-5-2')  insert into Emp(empName,empSex,empBirth) values('简雍','男','1992-2-20')  insert into Emp(empName,empSex,empBirth) values('诸葛亮','男','1993-3-1')  insert into Emp(empName,empSex,empBirth) values('徐庶','男','1994-8-5')</pre> </div> <p>函数定义：</p> <div class="ay1code"> <pre class="brush:sql;">create function GetAgeByBirth(@birth smalldatetime)  returns int  as  begin  	declare @age int  	set @age = year(getdate()) - year(@birth)  	if month(getdate()) &lt; month(@birth)  		set @age = @age - 1  	if month(getdate()) = month(@birth) and day(getdate()) &lt; day(@birth)  		set @age = @age -1  	return @age  end</pre> </div> <p>函数调用实现查询</p> <div class="ay1code"> <pre class="brush:sql;">select *,dbo.GetAgeByBirth(empBirth) 年龄 from Emp</pre> </div> <h2>二、触发器</h2> <p>触发器分类：（1） “Instead of”触发器（2）“After”触发器<br />“Instead of”触发器：在执行操作之前被执行<br />“After”触发器：在执行操作之后被执行</p> <p>触发器中后面的案例中需要用到的表及测试数据如下：</p> <div class="ay1code"> <pre class="brush:sql;">--部门  create table Department  (  	DepartmentId varchar(10) primary key , --主键，自动增长  	DepartmentName nvarchar(50), --部门名称  )  --人员信息  create table People  (  	PeopleId int primary key identity(1,1), --主键,自动增长  	DepartmentId varchar(10), --部门编号,外键,与部门表关联  	PeopleName nvarchar(20), --人员姓名  	PeopleSex nvarchar(2), --人员性别  	PeoplePhone nvarchar(20), --电话，联系方式  )  insert into Department(DepartmentId,DepartmentName)  values('001','总经办')  insert into Department(DepartmentId,DepartmentName)  values('002','市场部')  insert into Department(DepartmentId,DepartmentName)  values('003','人事部')  insert into Department(DepartmentId,DepartmentName)  values('004','财务部')  insert into Department(DepartmentId,DepartmentName)  values('005','软件部')  insert into People(DepartmentId,PeopleName,PeopleSex,PeoplePhone)  values('001','刘备','男','13558785478')  insert into People(DepartmentId,PeopleName,PeopleSex,PeoplePhone)  values('001','关羽','男','13558788785')  insert into People(DepartmentId,PeopleName,PeopleSex,PeoplePhone)  values('002','张飞','男','13698547125')</pre> </div> <p>（1）假设有部门表和员工表，在添加员工的时候，该员工的部门编号如果在部门表中找不到，则自动添加部门信息，部门名称为"新部门"。</p> <p>编写触发器：</p> <div class="ay1code"> <pre class="brush:sql;">create trigger tri_InsertPeople on People  after insert  as  if not exists(select * from Department where DepartmentId = (select DepartmentId from inserted))  	insert into Department(DepartmentId,DepartmentName)  	values((select DepartmentId from inserted),'新部门')  go</pre> </div> <p>测试触发器：</p> <div class="ay1code"> <pre class="brush:sql;">insert People(DepartmentId,PeopleName,PeopleSex,PeoplePhone)  values('009','赵云','男','13854587456')</pre> </div> <p>我们会发现，当插入赵云这个员工的时候会自动向部门表中添加数据。</p> <p>（2）触发器实现，删除一个部门的时候将部门下所有员工全部删除。</p> <p>编写触发器：</p> <div class="ay1code"> <pre class="brush:sql;">create trigger tri_DeleteDept on Department  after delete  as  delete from People where People.DepartmentId =   (select DepartmentId from deleted)  go</pre> </div> <p>测试触发器：</p> <div class="ay1code"> <pre class="brush:sql;">delete Department where DepartmentId = '001'</pre> </div> <p>我们会发现当我们删除此部门的时候，同时会删除该部门下的所有员工</p> <p>（3）创建一个触发器，删除一个部门的时候判断该部门下是否有员工，有则不删除，没有则删除。</p> <p>编写触发器：</p> <div class="ay1code"> <pre class="brush:sql;">drop trigger tri_DeleteDept	--删除掉之前的触发器，因为当前触发器也叫这个名字  create trigger tri_DeleteDept on Department  Instead of delete  as    if not exists(select * from People where DepartmentId = (select DepartmentId from deleted))    begin  	delete from Department where DepartmentId = (select DepartmentId from deleted)    end  go</pre> </div> <p>测试触发器：</p> <div class="ay1code"> <pre class="brush:sql;">delete Department where DepartmentId = '001'  delete Department where DepartmentId = '002'  delete Department where DepartmentId = '003'</pre> </div> <p>我们会发现，当部门下没有员工的部门信息可以成功删除，而部门下有员工的部门并没有被删除。</p> <p>（4）修改一个部门编号之后，将该部门下所有员工的部门编号同步进行修改</p> <p>编写触发器：</p> <div class="ay1code"> <pre class="brush:sql;">create trigger tri_UpdateDept on Department  after update  as  	update People set DepartmentId = (select DepartmentId from inserted)  	where DepartmentId = (select DepartmentId from deleted)  go</pre> </div> <p>测试触发器：</p> <div class="ay1code"> <pre class="brush:sql;">update Department set DepartmentId = 'zjb001' where DepartmentId='001'</pre> </div> <p>我们会发现不但部门信息表中的部门编号进行了修改，员工信息表中部门编号为001的信息也被一起修改了。</p> <h2>三、存储过程</h2> <p>存储过程（Procedure）是SQL语句和流程控制语句的预编译集合。</p> <p>（1）没有输入参数，没有输出参数的存储过程。</p> <p>定义存储过程实现查询出账户余额最低的银行卡账户信息,显示银行卡号，姓名，账户余额</p> <div class="ay1code"> <pre class="brush:sql;">--方案一  create proc proc_MinMoneyCard  as      select top 1 CardNo 银行卡号,RealName 姓名,CardMoney 余额      from BankCard inner join AccountInfo on BankCard.AccountId = AccountInfo.AccountId      order by CardMoney asc  go    --方案二：（余额最低，有多个人则显示结果是多个）  create proc proc_MinMoneyCard  as      select CardNo 银行卡号,RealName 姓名,CardMoney 余额      from BankCard inner join AccountInfo on BankCard.AccountId = AccountInfo.AccountId      where CardMoney=(select MIN(CardMoney) from BankCard)  go</pre> </div> <p>执行存储过程：</p> <div class="ay1code"> <pre class="brush:sql;">exec proc_MinMoneyCard</pre> </div> <p>（2）有输入参数，没有输出参数的存储过程</p> <p>模拟银行卡存钱操作，传入银行卡号，存钱金额，实现存钱操作</p> <div class="ay1code"> <pre class="brush:sql;">create proc proc_CunQian  @CardNo varchar(30),  @MoneyInBank money  as      update BankCard set CardMoney = CardMoney + @MoneyInBank where CardNo = @CardNo      insert into CardExchange(CardNo,MoneyInBank,MoneyOutBank,ExchangeTime)      values(@CardNo,@MoneyInBank,0,GETDATE())  --go</pre> </div> <p>执行存储过程：</p> <div class="ay1code"> <pre class="brush:sql;">exec proc_CunQian '6225125478544587',3000</pre> </div> <p>（3）有输入参数，没有输出参数，但是有返回值的存储过程（返回值必须整数）。</p> <p>模拟银行卡取钱操作，传入银行卡号，取钱金额，实现取钱操作，取钱成功，返回1，取钱失败返回-1</p> <div class="ay1code"> <pre class="brush:sql;">create proc proc_QuQian  @CardNo varchar(30),  @MoneyOutBank money  as      update BankCard set CardMoney = CardMoney - @MoneyOutBank where CardNo = @CardNo      if @@ERROR &lt;&gt; 0          return -1      insert into CardExchange(CardNo,MoneyInBank,MoneyOutBank,ExchangeTime)      values(@CardNo,0,@MoneyOutBank,GETDATE())      return 1  go</pre> </div> <p>执行存储过程：</p> <div class="ay1code"> <pre class="brush:sql;">declare @returnValue int  exec @returnValue = proc_QuQian '662018092100000002',1000000  print @returnValue</pre> </div> <p>（4）有输入参数，有输出参数的存储过程</p> <p>查询出某时间段的银行存取款信息以及存款总金额，取款总金额，传入开始时间，结束时间，显示存取款交易信息的同时，返回存款总金额，取款总金额。</p> <div class="ay1code"> <pre class="brush:sql;">create proc proc_SelectExchange      @startTime varchar(20),  --开始时间      @endTime varchar(20),    --结束时间      @SumIn money output,     --存款总金额      @SumOut money output    --取款总金额  as  select @SumIn = (select SUM(MoneyInBank) from CardExchange   				where ExchangeTime between @startTime+' 00:00:00' and @endTime+' 23:59:59')  select @SumOut = (select SUM(MoneyOutBank) from CardExchange   				where ExchangeTime between @startTime+' 00:00:00' and @endTime+' 23:59:59')  select * from CardExchange   where ExchangeTime between @startTime+' 00:00:00' and @endTime+' 23:59:59'  go</pre> </div> <p>执行存储过程：</p> <div class="ay1code"> <pre class="brush:sql;">declare @SumIn money     --存款总金额  declare @SumOut money   --取款总金额  exec proc_SelectExchange '2018-1-1','2018-12-31',@SumIn output,@SumOut output  select @SumIn  select @SumOut</pre> </div> <p>（5）具有同时输入输出参数的存储过程</p> <p>密码升级，传入用户名和密码，如果用户名密码正确，并且密码长度&lt;8，自动升级成8位密码</p> <div class="ay1code"> <pre class="brush:sql;">--有输入输出参数（密码作为输入参数也作为输出参数）  --密码升级，传入用户名和密码，如果用户名密码正确，并且密码长度&lt;8，自动升级成8位密码  select FLOOR(RAND()*10) --0-9之间随机数  create proc procPwdUpgrade  @cardno nvarchar(20),  @pwd nvarchar(20) output  as  	if not exists(select * from BankCard where CardNo=@cardno and CardPwd=@pwd)  		set @pwd = ''  	else  	begin  		if len(@pwd) &lt; 8  		begin  			declare @len int = 8- len(@pwd)  			declare @i int = 1  			while @i &lt;= @len  			begin  				  				set @pwd = @pwd + cast(FLOOR(RAND()*10) as varchar(1))  				set @i = @i+1  			end  			update BankCard set CardPwd = @pwd where CardNo=@cardno  		end  	end  go  declare @pwd nvarchar(20) = '123456'  exec procPwdUpgrade '6225547854125656',@pwd output  select @pwd</pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-68332.htm">家养两个月小猫咬出血（家养的两个月小猫咬伤）</a></p>
+                                        <p>下一个：<a href="/news/article-68981.htm">手指被猫抓出血了,要打疫苗吗?（手指被猫抓出血了要打疫苗吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-41994.htm" title="Java字符串compareTo()方法示例。">Java字符串compareTo()方法示例。</a></li>
+                        <li class="py-2"><a href="/news/article-67053.htm" title="「BUAA OO Unit 2 HW8」第二单元总结_在线工具">「BUAA OO Unit 2 HW8」第二单元总结_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-hiddify-next-node-github.htm" title="2月18日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">2月18日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-49945.htm" title="郑州宠物打疫苗在哪里（郑州宠物疫苗批发地址）">郑州宠物打疫苗在哪里（郑州宠物疫苗批发地址）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-19-free-high-speed-nodes.htm" title="1月19日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接">1月19日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-free-hiddify-next-node.htm" title="3月3日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接">3月3日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-52566.htm" title="React系列五——event事件">React系列五——event事件</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-hiddify-next-node-share.htm" title="3月5日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接">3月5日 | HiddifyNextNode机场节点订阅每天更新18.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-55262.htm" title="重庆宠物狗狗免费领养中心（2021重庆免费领养狗狗贴吧）">重庆宠物狗狗免费领养中心（2021重庆免费领养狗狗贴吧）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-17-latest-hiddify-next-node.htm" title="2月17日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接">2月17日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
