@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-75594.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>如何修改项目加载包默认的node_modules路径</title>
+        <meta name="description" content="修改项目默认node_modules路径 npm install --global xxx 属于全局安装npm install xxx 属于本地安装1、全局路径Windows下的Nodejs npm路" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-75594.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="如何修改项目加载包默认的node_modules路径" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/6cd3be6125bc9e0e15563f91cb41239f.webp" />
+        <meta property="og:release_date" content="2025-03-17T09:40:18" />
+    <meta property="og:updated_time" content="2025-03-17T09:40:18" />
+        <meta property="og:description" content="修改项目默认node_modules路径 npm install --global xxx 属于全局安装npm install xxx 属于本地安装1、全局路径Windows下的Nodejs npm路" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="如何修改项目加载包默认的node_modules路径">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">如何修改项目加载包默认的node_modules路径</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div style="text-align:center"><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; line-height:25.2px"><span style="font-size:24px">修改项目默认node_modules路径</span></span></div> <p><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"></span><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">npm install --global xxx 属于全局安装</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">npm install xxx 属于本地安装</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">1、全局路径</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">Windows下的Nodejs npm路径是appdata</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">cmd下执行以下命令</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">npm config set cache "D:\nodejs\node_cache"</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">npm config set prefix "D:\nodejs\node_global"</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">如果无效</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">在nodejs的安装目录中找到node_modules\npm\.npmrc文件</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">修改如下即可：</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">prefix = D:\nodejs\node_global</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">cache = D:\nodejs\node_global</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="word-wrap:break-word; margin:0px; padding:0px; font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px; color:rgb(255,0,0)">［重要］环境变量配置：在环境变量path追加：D:\nodejs\node_global;</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">2、本地路径（项目级）</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">NODE_PATH 是干什么的呢？</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">操作系统中都会有一个PATH环境变量，想必大家都知道，当系统调用一个命令的时候，就会在PATH变量中注册的路径中寻找，如果注册的路径中有就调用，否则就提示命令没找到。</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">那 NODE_PATH 就是NODE中用来寻找模块所提供的路径注册环境变量</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">［加载机制］</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">NODE_PATH中的路径被遍历是发生在从项目的根位置递归搜寻 node_modules 目录，直到文件系统根目录的 node_modules，如果还没有查找到指定模块的话，就会去 NODE_PATH中注册的路径中查找。</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="word-wrap:break-word; margin:0px; padding:0px; font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px; color:rgb(255,0,0)">这样，我们的项目就可以共享node_modules的依赖包。</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="word-wrap:break-word; margin:0px; padding:0px; font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px; color:rgb(255,0,0)">差异性的解决方法</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">如果 项目A 使用了，express的3.x版本，项目B 使用了 express的4.x版本，那这种情况该怎么办呢？</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">可以将 NODE_PATH 指定的位置中存放 express的4.x版本，再将 项目B的 node_modules 目录中放置 3.x 版本。</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">这样就解决了模块版本差异性问题。</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="word-wrap:break-word; margin:0px; padding:0px; font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px; color:rgb(255,0,0)">问题</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">在使用 --global 参数的时候 --save 或 --save-dev参数是无效的。</span><br style="word-wrap:break-word; color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"/><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px">这样就带来一个问题。此时 package.json 中的 dependencies, devDependencies 将无法享受到npm自动更新带来的便利</span><span style="color:rgb(51,51,51); font-family:arial,verdana,'Microsoft YaHei',Tahoma,Simsun,sans-serif; font-size:14px; line-height:25.2px"></span></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-74924.htm">宠物寄养条款规定是什么（家庭式宠物寄养是什么）</a></p>
+                                        <p>下一个：<a href="/news/article-75595.htm">浆液循环泵厂家(中国循环水泵十大名牌)</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-65172.htm" title="宠物打疫苗几天后可以洗澡（宠物打疫苗后多久可以产生抗体）">宠物打疫苗几天后可以洗澡（宠物打疫苗后多久可以产生抗体）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-9-hiddify-next-node-github.htm" title="1月9日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接">1月9日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-free-hiddify-next-node.htm" title="1月18日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接">1月18日 | HiddifyNextNode机场节点订阅每天更新19.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-19-hiddify-next-node-github.htm" title="2月19日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接">2月19日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-36559.htm" title="宠物零食加工厂都需要什么执照（宠物零食加工需要什么资质）">宠物零食加工厂都需要什么执照（宠物零食加工需要什么资质）</a></li>
+                        <li class="py-2"><a href="/news/article-58078.htm" title="宠物寄养协议合同电子版怎么写的啊（宠物寄养协议书怎么写）">宠物寄养协议合同电子版怎么写的啊（宠物寄养协议书怎么写）</a></li>
+                        <li class="py-2"><a href="/news/article-58077.htm" title="重庆在哪里领养狗狗（重庆领养狗狗的地方）">重庆在哪里领养狗狗（重庆领养狗狗的地方）</a></li>
+                        <li class="py-2"><a href="/news/article-68980.htm" title="SQL Server中函数、存储过程与触发器的用法_MsSql">SQL Server中函数、存储过程与触发器的用法_MsSql</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-12-hiddify-next-windows.htm" title="2月12日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">2月12日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-47920.htm" title="pymysql增删改查之insert操作">pymysql增删改查之insert操作</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-76968.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>关于Springcloud Sleuth分布式请求链路跟踪的使用 小结</title>
+        <meta name="description" content="目录 1.&nbsp;Sleuth概述 2. Zipkin配置 3.&nbsp;Sleuth案例 3.1 服务提供者 3.2&nbsp;服务消费者 3.3 依赖关系    Sleuth configu" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-76968.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="关于Springcloud Sleuth分布式请求链路跟踪的使用 小结" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/4bb24595ca22009cebfa3710752d945d.webp" />
+        <meta property="og:release_date" content="2025-03-19T09:09:58" />
+    <meta property="og:updated_time" content="2025-03-19T09:09:58" />
+        <meta property="og:description" content="目录 1.&nbsp;Sleuth概述 2. Zipkin配置 3.&nbsp;Sleuth案例 3.1 服务提供者 3.2&nbsp;服务消费者 3.3 依赖关系    Sleuth configu" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="关于Springcloud Sleuth分布式请求链路跟踪的使用 小结">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">关于Springcloud Sleuth分布式请求链路跟踪的使用 小结</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p id="main-toc"><strong>目录</strong></p> <p id="1.%C2%A0Sleuth%E6%A6%82%E8%BF%B0-toc" style="margin-left:0px;"><a href="#1.%C2%A0Sleuth%E6%A6%82%E8%BF%B0" rel="nofollow">1.&nbsp;Sleuth概述</a></p> <p id="2.%20Zipkin%E9%85%8D%E7%BD%AE-toc" style="margin-left:0px;"><a href="#2.%20Zipkin%E9%85%8D%E7%BD%AE" rel="nofollow">2. Zipkin配置</a></p> <p id="3.%C2%A0Sleuth%E6%A1%88%E4%BE%8B-toc" style="margin-left:0px;"><a href="#3.%C2%A0Sleuth%E6%A1%88%E4%BE%8B" rel="nofollow">3.&nbsp;Sleuth案例</a></p> <p id="3.1%20%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85-toc" style="margin-left:40px;"><a href="#3.1%20%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85" rel="nofollow">3.1 服务提供者</a></p> <p id="3.2%C2%A0%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85-toc" style="margin-left:40px;"><a href="#3.2%C2%A0%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85" rel="nofollow">3.2&nbsp;服务消费者</a></p> <p id="3.3%20%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB-toc" style="margin-left:40px;"><a href="#3.3%20%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB" rel="nofollow">3.3 依赖关系</a></p> <hr id="hr-toc"/> </h1> <blockquote> <p>Sleuth configures everything you need to get started. This includes where trace data (spans) are reported to, how many traces to keep (sampling), if remote fields (baggage) are sent, and which libraries are traced.</p> </blockquote> <p>微服务框架中，一个由客户端发起的请求在后端系统中经过多个不同的服务节点调用来协同产生最后的请求结果，每个请求都会形成一条复杂的分布式服务调用链路，而<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://spring.io/projects/spring-cloud-sleuth"  title="Springcloud Sleuth" rel="nofollow">Springcloud Sleuth</a>提供了一套完整的服务跟踪的解决方案。</p> <p><img fetchpriority="high" decoding="async" alt="" height="333" src="http://img.555519.xyz/uploads/20221130/6b62f2731a755294e8ac9899768f1954.jpg"></p> </h1> <p>1) 下载<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server/"  title="Zipkin" rel="nofollow">Zipkin</a>的zipkin-server-2.12.9-exec.jar。</p> <p>2) 启动zipkin：java -jar .\zipkin-server-2.12.9-exec.jar。</p> <p><img decoding="async" alt="" height="235" src="http://img.555519.xyz/uploads/20221130/1d1c5695fb86a20658fa30e8c533555b.jpg"></p> <p>3) 访问zipkin（localhost:9411/zipkin/）。</p> <p><img decoding="async" alt="" height="156" src="http://img.555519.xyz/uploads/20221130/e33a250908573870d849f165f41d02b2.jpg"></p> </h1> <p>以下案例代码的<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/BAStriver/springcloud-test"  title="Github地址" rel="nofollow">Github地址</a>。</p> <p>四个modules分别是：cloud-eureka-server7001，cloud-provider-hystrix-payment8001，cloud-consumer-feign-hystrix-order80。</p> <h2 id="3.1%20%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85">3.1 服务提供者</h2> <p>1)&nbsp;cloud-provider-payment8001添加zipkin依赖。</p> <pre><code>&lt;dependency&gt;     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;     &lt;artifactId&gt;spring-cloud-starter-zipkin&lt;/artifactId&gt; &lt;/dependency&gt;</code></pre> <p>2) 添加zipkin配置。</p> <pre><code>zipkin:   base-url: http://localhost:9411   sleuth:     sampler:       #采样取值介于 0到1之间，1则表示全部收集       probability: 1</code></pre> <p>3)&nbsp;PaymentController添加接口：</p> <pre><code class="language-java">@GetMapping(value="/payment/zipkin") public String paymentZipkin() { 	return "hello,i am paymentZipkin server fallback,O(∩_∩)O哈哈~"; }</code></pre> <h2 id="3.2%C2%A0%E6%9C%8D%E5%8A%A1%E6%B6%88%E8%B4%B9%E8%80%85">3.2&nbsp;服务消费者</h2> <p>1)&nbsp;cloud-consumer-feign-hystrix-order80添加zipkin依赖。</p> <pre><code>&lt;dependency&gt;     &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;     &lt;artifactId&gt;spring-cloud-starter-zipkin&lt;/artifactId&gt; &lt;/dependency&gt;</code></pre> <p>2)&nbsp;添加zipkin配置。</p> <pre><code>zipkin:   base-url: http://localhost:9411   sleuth:     sampler:       #采样取值介于 0到1之间，1则表示全部收集       probability: 1</code></pre> <p>3)&nbsp;ordercontroller添加接口：</p> <pre><code class="language-java">@GetMapping(value="/consumer/payment/zipkin") public String paymentZipkin() { 	return restTemplate.getForObject("http://127.0.0.1:8001/payment/zipkin/",String.class); }</code></pre> <h2 id="3.3%20%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB">3.3 依赖关系</h2> <p><img loading="lazy" decoding="async" alt="" height="280" src="http://img.555519.xyz/uploads/20221130/0d1d461e6a4dd36de98106ef809860c3.jpg"></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-76293.htm">宠物粮食行业发展前景分析论文怎么写好（宠物粮市场前景）</a></p>
+                                        <p>下一个：<a href="/news/article-76969.htm">急售二手颗粒饲料机一台多少钱（二手颗粒饲料机饲料颗粒机）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-54727.htm" title="做动物疫苗前景怎么样啊（动物疫苗专业）">做动物疫苗前景怎么样啊（动物疫苗专业）</a></li>
+                        <li class="py-2"><a href="/news/article-44474.htm" title="广州宠物领养网免费吗多少钱一个月（广州宠物领养平台）">广州宠物领养网免费吗多少钱一个月（广州宠物领养平台）</a></li>
+                        <li class="py-2"><a href="/news/article-42486.htm" title="中国动物疫苗生产企业排名前十（全国动物疫苗生产厂家）">中国动物疫苗生产企业排名前十（全国动物疫苗生产厂家）</a></li>
+                        <li class="py-2"><a href="/news/article-55263.htm" title="成都兽医站打疫苗多少钱 成都兽医站打疫苗多少钱一针">成都兽医站打疫苗多少钱 成都兽医站打疫苗多少钱一针</a></li>
+                        <li class="py-2"><a href="/news/article-70270.htm" title="狗粮国产排名前十品牌（狗粮国产排名前十品牌有哪些）">狗粮国产排名前十品牌（狗粮国产排名前十品牌有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-42994.htm" title="宠物粮食的上市公司排名 宠物粮食的上市公司排名榜">宠物粮食的上市公司排名 宠物粮食的上市公司排名榜</a></li>
+                        <li class="py-2"><a href="/news/article-48933.htm" title="动物防疫站营业时间是多少（动物防疫站营业时间是多少号）">动物防疫站营业时间是多少（动物防疫站营业时间是多少号）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-7-hiddify-next-windows.htm" title="2月7日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接">2月7日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-41007.htm" title="MYSQL存储时间数据的数据类型选择">MYSQL存储时间数据的数据类型选择</a></li>
+                        <li class="py-2"><a href="/news/article-49427.htm" title="人和动物打的狂犬疫苗一样吗 人和动物打的狂犬疫苗一样吗多少钱">人和动物打的狂犬疫苗一样吗 人和动物打的狂犬疫苗一样吗多少钱</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
