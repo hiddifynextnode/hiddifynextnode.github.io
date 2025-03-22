@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-78327.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>servlet 中 servlet context 与 session 与 request 三个对象的常用方法和存放数据的作用域。</title>
+        <meta name="description" content="  在一个web应用中，servlet主要通过servlet&nbsp;context、session、request这三个对象来传递信息，但三种容器的作用域不同，需根据需求来选择容器。 servle" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-78327.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="servlet 中 servlet context 与 session 与 request 三个对象的常用方法和存放数据的作用域。" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/6cd3be6125bc9e0e15563f91cb41239f.webp" />
+        <meta property="og:release_date" content="2025-03-21T10:30:21" />
+    <meta property="og:updated_time" content="2025-03-21T10:30:21" />
+        <meta property="og:description" content="  在一个web应用中，servlet主要通过servlet&nbsp;context、session、request这三个对象来传递信息，但三种容器的作用域不同，需根据需求来选择容器。 servle" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="servlet 中 servlet context 与 session 与 request 三个对象的常用方法和存放数据的作用域。">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">servlet 中 servlet context 与 session 与 request 三个对象的常用方法和存放数据的作用域。</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>  在一个web应用中，servlet主要通过servlet&nbsp;context、session、request这三个对象来传递信息，但三种容器的作用域不同，需根据需求来选择容器。</p> <h2>servlet context：servlet容器，<span style="color:#000000;">用于实现</span><span style="color:#000000;">Web</span><span style="color:#000000;">应用中的资源共享</span></h2> <p>在一个项目中只会有一个servlet容器。</p> <h3><span style="color:#000000;">常用方法：</span></h3> <ul> <li><span style="color:#000000;">ServletContext&nbsp; getServletContext( )&nbsp; &nbsp;获取</span>servle容器对象</li> </ul> <div> <ul> <li><span style="color:#000000;">void setAttribute (String name, Object object )&nbsp; 利用</span>servlet容器保存数据</li> <li><span style="color:#000000;">Object getAttribute (String name )&nbsp;&nbsp;用</span>servlet容器取出数据</li> <li><span style="color:#000000;">String getRealPath (String path )&nbsp;&nbsp;返回参数所代表目录的真实路径（项目路径）</span></li> </ul> <h3>作用域：</h3> <p>在一个项目中只会有一个servlet容器，不论在哪一个页面获取到的都是同一个容器，即servlet容器可作用于所有的项目页面，也就是说，servlet容器<span style="color:#000000;">在整个个应用服务器范围内有效。</span></p> <h2><span style="color:#000000;">session：会话，用于记录会话状态的相关信息</span></h2> <div>   浏览器可创建一个session，用于存放数据，一个浏览器只有一个session。</div> <h3>&nbsp; 常用方法：</h3> <ul> <li> <div><span style="color:#0d0016;">HttpSession getSession( )&nbsp; 获取session对象</span></div> </li> <li> <div><span style="color:#000000;">String getId()</span><span style="color:#000000;">获取</span><span style="color:#000000;">sessionid</span></div> </li> <li> <div><span style="color:#000000;">void setMaxInactiveInterval(int interval)</span><span style="color:#000000;">设定</span><span style="color:#000000;">session</span><span style="color:#000000;">的非活动时间</span></div> </li> <li> <div> <div><span style="color:#000000;">void invalidate()</span><span style="color:#000000;">设置</span><span style="color:#000000;">session</span><span style="color:#000000;">对象失效</span></div> </div> </li> <li> <div><span style="color:#000000;">void setAttribute(String key, Object value)&nbsp;&nbsp;利用</span>session保存数据</div> </li> <li> <div><span style="color:#000000;">Object getAttribute(String key)</span>取出数据</div> </li> <li> <div> <p><span style="color:#000000;">void removeAttribute(String key)&nbsp; 删除数据</span></p> <h3>生命周期</h3> <ul> <li>不同的浏览器获取的sessio对象不同</li> <li>浏览器关闭后，获取不到之前的session</li> <li>服务器异常、关闭、重启，session对象会被销毁</li> <li>用户“安全退出”，session失效</li> <li>session生命时间超时，session失效</li> </ul> <h3>作用域：</h3> <p>在session生命周期内，session对象<span style="color:#000000;">在一次会话范围内容有效。</span></p> <h2>request ：<span style="color:#000000;">主要用于处理客户端请求的数据信息</span></h2> <p><span style="color:#000000;">利用request来传递信息时，需要和转发配合使用，可保证是同一个请求。</span></p> <h3>常用方法：</h3> <ul> <li><span style="color:#0d0016;">Object getAttribute ( String name )&nbsp;&nbsp;获取名称为name的属性值</span></li> <li><span style="color:#0d0016;">void setAttribute (String name, Object object )&nbsp;&nbsp;在请求中保存名称为name的属性</span></li> <li><span style="color:#0d0016;">void removeAttribute (String name)&nbsp;&nbsp;清除请求中名字为name的属性</span></li> <li><span style="color:#0d0016;">String getCharacterEncoding ( )&nbsp;&nbsp;返回请求体所使用的字符编码</span></li> <li><span style="color:#0d0016;">void setCharacterEncoding (String charset )&nbsp;&nbsp;设置请求体的字符编码</span></li> <li><span style="color:#0d0016;">String getParameter ( String name )&nbsp; 获取参数</span></li> <li><span style="color:#0d0016;">String[ ] getParameterValues (String name )&nbsp;&nbsp;返回指定请求参数的全部值</span></li> <li><span style="color:#0d0016;">RequestDispatcher getRequestDispatcher( String path )&nbsp;&nbsp;返回指定路径的请求分发对象</span></li> </ul> <h3>作用域：</h3> <div><span style="color:#000000;">在一个服务器请求范围内有效。</span></div> </div> </li> </ul> </div> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-77645.htm">动物疫苗注射注意事项及禁忌症是什么 动物疫苗注射注意事项及禁忌症是什么意思</a></p>
+                                        <p>下一个：<a href="/news/article-78328.htm">宠物医院看仓鼠（仓鼠宠物医生在线咨询免费）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-67696.htm" title="动物疫苗去哪里买便宜点 动物疫苗去哪里买便宜点呢">动物疫苗去哪里买便宜点 动物疫苗去哪里买便宜点呢</a></li>
+                        <li class="py-2"><a href="/news/article-79003.htm" title="猫咪三针疫苗是哪三针（猫咪三针疫苗是哪三针啊）">猫咪三针疫苗是哪三针（猫咪三针疫苗是哪三针啊）</a></li>
+                        <li class="py-2"><a href="/news/article-57512.htm" title="深圳哪里有免费领养宠物狗的地方（深圳免费领养狗狗正规网）">深圳哪里有免费领养宠物狗的地方（深圳免费领养狗狗正规网）</a></li>
+                        <li class="py-2"><a href="/news/article-48933.htm" title="动物防疫站营业时间是多少（动物防疫站营业时间是多少号）">动物防疫站营业时间是多少（动物防疫站营业时间是多少号）</a></li>
+                        <li class="py-2"><a href="/news/article-54169.htm" title="被野猫抓出一点点血（被野猫抓破了一点点血很快就好了）">被野猫抓出一点点血（被野猫抓破了一点点血很快就好了）</a></li>
+                        <li class="py-2"><a href="/news/article-38030.htm" title="宠物粮食品牌都有什么名字呢女生（宠物粮食品牌起名大全）">宠物粮食品牌都有什么名字呢女生（宠物粮食品牌起名大全）</a></li>
+                        <li class="py-2"><a href="/news/article-72261.htm" title="国内宠物粮生产厂家有哪些 国内宠物粮生产厂家有哪些品牌">国内宠物粮生产厂家有哪些 国内宠物粮生产厂家有哪些品牌</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-15-node-share.htm" title="3月15日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">3月15日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-54727.htm" title="做动物疫苗前景怎么样啊（动物疫苗专业）">做动物疫苗前景怎么样啊（动物疫苗专业）</a></li>
+                        <li class="py-2"><a href="/news/article-70950.htm" title="动物疫苗厂家排名榜前十名有哪些呢（动物疫苗厂家排名榜前十名有哪些呢视频）">动物疫苗厂家排名榜前十名有哪些呢（动物疫苗厂家排名榜前十名有哪些呢视频）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
