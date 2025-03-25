@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-80371.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>golang panic和recover 实现原理</title>
+        <meta name="description" content="golang panic和recover 实现原理  思考   1.为什么go 进程会终止 2. 为什么不会中止运行 3.不设置 defer 行不 4. 为什么起个 goroutine 就不行   数" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-80371.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="golang panic和recover 实现原理" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/42ac86770f8e624448a8c69a076c574b.webp" />
+        <meta property="og:release_date" content="2025-03-24T08:20:55" />
+    <meta property="og:updated_time" content="2025-03-24T08:20:55" />
+        <meta property="og:description" content="golang panic和recover 实现原理  思考   1.为什么go 进程会终止 2. 为什么不会中止运行 3.不设置 defer 行不 4. 为什么起个 goroutine 就不行   数" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="golang panic和recover 实现原理">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">golang panic和recover 实现原理</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>golang panic和recover 实现原理</h3> <ul> <li><a href="#_10" rel="nofollow">思考</a></li> <li> <ul> <li><a href="#1go__11" rel="nofollow">1.为什么go 进程会终止</a></li> <li><a href="#2__29" rel="nofollow">2. 为什么不会中止运行</a></li> <li><a href="#3_defer__49" rel="nofollow">3.不设置 defer 行不</a></li> <li><a href="#4__goroutine__75" rel="nofollow">4. 为什么起个 goroutine 就不行</a></li> </ul> </li> <li><a href="#_120" rel="nofollow">数据结构</a></li> <li><a href="#panic_151" rel="nofollow">panic</a></li> <li><a href="#_recover_panic_265" rel="nofollow">恢复 recover panic</a></li> <li><a href="#panic__394" rel="nofollow">panic 抛出</a></li> <li><a href="#_407" rel="nofollow">总结：</a></li> </ul> </div> <p> 这篇文章是系列文章中的第二篇，系列文章主要包括：</p> <ol> <li>golang defer的原理</li> <li>golang panic和recover()函数的原理(包括golang对于错误处理方式)</li> <li>defer性能损耗的讨论以及最重要的应用场景</li> <li>defer在golang 1.13 上的性能</li> </ol> <p>panic 能中断一个程序的执行，同时也能在一定情况下进行恢复(recover)。我们就来看一看 panic 和 recover 这对关键字的实现机制。根据我们对 Go 的实践，可以预见的是，他们的实现跟runtime调度器和 defer 关键字也紧密相关。</p> </h1> <h2> <a id="1go__11" rel="nofollow"></a>1.为什么go 进程会终止</h2> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sim lou."</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>输出结果是：</p> <pre><code>panic: sim lou.  goroutine 1 [running]: main.main() 	/Users/ytlou/Desktop/golang/golang_study/study/basic/panic/panic_test1.go:4 +0x39 Process finished with exit code 2 </code></pre> <p>这里思考一下，为什么执行 panic 后会导致应用程序运行中止？或者说执行panic为什么导致进程终止了？</p> <h2> <a id="2__29" rel="nofollow"></a>2. 为什么不会中止运行</h2> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 		<span class="token keyword">if</span> err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 			log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"recover: %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span> 		<span class="token punctuation">}</span> 	<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	 	<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sim lou."</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>输出结果是：</p> <pre><code>2019/10/26 22:19:33 recover: sim lou.  Process finished with exit code 0 </code></pre> <p>思考一下为什么加上 defer + recover 组合就可以保护应用程序不会退出。</p> <h2> <a id="3_defer__49" rel="nofollow"></a>3.不设置 defer 行不</h2> <p>上面问题二是 defer + recover 组合，那我去掉 defer 是不是也可以呢？如下：</p> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">if</span> err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 		log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"recover: %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span> 	<span class="token punctuation">}</span> 	<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sim lou."</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>运行结果：</p> <pre><code>panic: sim lou.  goroutine 1 [running]: main.main() 	/Users/ytlou/Desktop/golang/golang_study/study/basic/panic/panic_test3.go:9 +0xa1  Process finished with exit code 2 </code></pre> <p>不行！！！我们常说 defer + recover 组合 “万能” 捕获。但是为什么呢。去掉 defer 后为什么就无法捕获了？</p> <p>思考一下，为什么需要设置 defer 后 recover 才能起作用？</p> <p>同时你还需要仔细想想，我们设置 defer + recover 组合后就能无忧无虑了吗，各种 “乱” 写了吗？</p> <h2> <a id="4__goroutine__75" rel="nofollow"></a>4. 为什么起个 goroutine 就不行</h2> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 		<span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 			<span class="token keyword">if</span> err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 				log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"recover: %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span> 			<span class="token punctuation">}</span> 		<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"qwertyuiop."</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>输出结果：</p> <pre><code>panic: qwertyuiop.  goroutine 1 [running]: main.main() 	/Users/ytlou/Desktop/golang/golang_study/study/basic/panic/panic_test4.go:13 +0x51 </code></pre> <p>请思考一下，为什么新起了一个 Goroutine 就无法捕获到异常了？到底发生了什么事…</p> <p>但是我们改一下：</p> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">go</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 		<span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 			<span class="token keyword">if</span> err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 				log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"recover: %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span> 			<span class="token punctuation">}</span> 		<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 		<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"aim lou 2."</span><span class="token punctuation">)</span> 	<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	time<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">*</span> time<span class="token punctuation">.</span>Second<span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>输出是：</p> <pre><code>2019/10/26 22:27:50 recover: aim lou 2. </code></pre> <p>为什么我们把panic放到自定义的协程里面recover又可以work了呢？</p> <p>基于前面的四个问题，我们阅读源码，从源码找到root cause.</p> </h1> <pre><code class="prism language-go"><span class="token keyword">type</span> _panic <span class="token keyword">struct</span> <span class="token punctuation">{<!-- --></span> 	argp      unsafe<span class="token punctuation">.</span>Pointer <span class="token comment">// pointer to arguments of deferred call run during panic; cannot move - known to liblink</span> 	arg       <span class="token keyword">interface</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>    <span class="token comment">// argument to panic</span> 	link      <span class="token operator">*</span>_panic        <span class="token comment">// link to earlier panic</span> 	recovered <span class="token builtin">bool</span>           <span class="token comment">// whether this panic is over</span> 	aborted   <span class="token builtin">bool</span>           <span class="token comment">// the panic was aborted</span> <span class="token punctuation">}</span> </code></pre> <p>在 panic 中是使用 <strong>_panic</strong> 作为其基础单元的，每执行一次 panic 语句，都会创建一个 _panic 对象。它包含了一些基础的字段用于存储当前的 panic 调用情况，涉及的字段如下</p> <ul> <li>argp：指向 defer 延迟调用的参数的指针</li> <li>arg：panic 的原因，也就是调用 panic 时传入的参数</li> <li>link：指向上一个调用的 _panic，这里说明panic也是一个链表</li> <li>recovered：panic 是否已经被处理过，也就是是否被 recover</li> <li>aborted：panic 是否被中止</li> </ul> <p>通过查看 link 字段，可得知其是一个链表的数据结构，如下图：</p> <pre><code>+-----------+          +-----------+          +-----------+ |  _panic   |     +----&gt;  _panic   |    +-----&gt;  _panic   | +-----------+     |    +-----------+    |     +-----------+ |  ......   |     |    |  ......   |    |     |  ......   | +-----------+     |    +-----------+    |     +-----------+ |   link    |-----+    |   link    +----+     |   link    | +-----------+          +-----------+          +-----------+ |  ......   |          |  ......   |          |  ......   | +-----------+          +-----------+          +-----------+ </code></pre> </h1> <p>我们先看看panic生成的汇编代码：</p> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sim lou."</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>汇编代码：</p> <pre><code>"".main STEXT size=65 args=0x0 locals=0x18 	0x0000 00000 (panic_test1.go:3)	TEXT	"".main(SB), ABIInternal, $24-0 ...... 	0x002f 00047 (panic_test1.go:4)	PCDATA	$0, $0 	0x002f 00047 (panic_test1.go:4)	MOVQ	AX, 8(SP) 	0x0034 00052 (panic_test1.go:4)	CALL	runtime.gopanic(SB) ....... </code></pre> <p>可以看到 panic 翻译成汇编代码主要是调用了 runtime.gopanic，我们一起来看看这个方法做了什么事，如下（省略部分）</p> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">gopanic</span><span class="token punctuation">(</span>e <span class="token keyword">interface</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	gp <span class="token operator">:=</span> <span class="token function">getg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	<span class="token operator">...</span><span class="token operator">...</span> 	<span class="token keyword">var</span> p _panic 	p<span class="token punctuation">.</span>arg <span class="token operator">=</span> e 	<span class="token comment">// 头插法</span> 	p<span class="token punctuation">.</span>link <span class="token operator">=</span> gp<span class="token punctuation">.</span>_panic 	gp<span class="token punctuation">.</span>_panic <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>_panic<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">noescape</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  	<span class="token keyword">for</span> <span class="token punctuation">{<!-- --></span> 		d <span class="token operator">:=</span> gp<span class="token punctuation">.</span>_defer 		<span class="token keyword">if</span> d <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 			<span class="token keyword">break</span> 		<span class="token punctuation">}</span>  		<span class="token comment">// If defer was started by earlier panic or Goexit (and, since we're back here, that triggered a new panic),</span> 		<span class="token comment">// take defer off list. The earlier panic or Goexit will not continue running.</span> 		<span class="token keyword">if</span> d<span class="token punctuation">.</span>started <span class="token punctuation">{<!-- --></span> 			<span class="token keyword">if</span> d<span class="token punctuation">.</span>_panic <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 				d<span class="token punctuation">.</span>_panic<span class="token punctuation">.</span>aborted <span class="token operator">=</span> <span class="token boolean">true</span> 			<span class="token punctuation">}</span> 			d<span class="token punctuation">.</span>_panic <span class="token operator">=</span> <span class="token boolean">nil</span> 			d<span class="token punctuation">.</span>fn <span class="token operator">=</span> <span class="token boolean">nil</span> 			gp<span class="token punctuation">.</span>_defer <span class="token operator">=</span> d<span class="token punctuation">.</span>link 			<span class="token function">freedefer</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> 			<span class="token keyword">continue</span> 		<span class="token punctuation">}</span>  		<span class="token comment">// Mark defer as started, but keep on list, so that traceback</span> 		<span class="token comment">// can find and update the defer's argument frame if stack growth</span> 		<span class="token comment">// or a garbage collection happens before reflectcall starts executing d.fn.</span> 		d<span class="token punctuation">.</span>started <span class="token operator">=</span> <span class="token boolean">true</span>  		<span class="token comment">// Record the panic that is running the defer.</span> 		<span class="token comment">// If there is a new panic during the deferred call, that panic</span> 		<span class="token comment">// will find d in the list and will mark d._panic (this panic) aborted.</span> 		d<span class="token punctuation">.</span>_panic <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>_panic<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token function">noescape</span><span class="token punctuation">(</span>unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  		p<span class="token punctuation">.</span>argp <span class="token operator">=</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span><span class="token function">getargp</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 		<span class="token function">reflectcall</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">,</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>fn<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">deferArgs</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">uint32</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>siz<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">uint32</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>siz<span class="token punctuation">)</span><span class="token punctuation">)</span> 		p<span class="token punctuation">.</span>argp <span class="token operator">=</span> <span class="token boolean">nil</span>  		<span class="token comment">// reflectcall did not panic. Remove d.</span> 		<span class="token keyword">if</span> gp<span class="token punctuation">.</span>_defer <span class="token operator">!=</span> d <span class="token punctuation">{<!-- --></span> 			<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"bad defer entry in panic"</span><span class="token punctuation">)</span> 		<span class="token punctuation">}</span> 		d<span class="token punctuation">.</span>_panic <span class="token operator">=</span> <span class="token boolean">nil</span> 		d<span class="token punctuation">.</span>fn <span class="token operator">=</span> <span class="token boolean">nil</span> 		gp<span class="token punctuation">.</span>_defer <span class="token operator">=</span> d<span class="token punctuation">.</span>link  		<span class="token comment">// trigger shrinkage to test stack copy. See stack_test.go:TestStackPanic</span> 		<span class="token comment">//GC()</span>  		pc <span class="token operator">:=</span> d<span class="token punctuation">.</span>pc 		sp <span class="token operator">:=</span> unsafe<span class="token punctuation">.</span><span class="token function">Pointer</span><span class="token punctuation">(</span>d<span class="token punctuation">.</span>sp<span class="token punctuation">)</span> <span class="token comment">// must be pointer so it gets adjusted during stack copy</span> 		<span class="token function">freedefer</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> 		<span class="token keyword">if</span> p<span class="token punctuation">.</span>recovered <span class="token punctuation">{<!-- --></span> 			atomic<span class="token punctuation">.</span><span class="token function">Xadd</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>runningPanicDefers<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>  			gp<span class="token punctuation">.</span>_panic <span class="token operator">=</span> p<span class="token punctuation">.</span>link 			<span class="token comment">// Aborted panics are marked but remain on the g.panic list.</span> 			<span class="token comment">// Remove them from the list.</span> 			<span class="token keyword">for</span> gp<span class="token punctuation">.</span>_panic <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> gp<span class="token punctuation">.</span>_panic<span class="token punctuation">.</span>aborted <span class="token punctuation">{<!-- --></span> 				gp<span class="token punctuation">.</span>_panic <span class="token operator">=</span> gp<span class="token punctuation">.</span>_panic<span class="token punctuation">.</span>link 			<span class="token punctuation">}</span> 			<span class="token keyword">if</span> gp<span class="token punctuation">.</span>_panic <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> <span class="token comment">// must be done with signal</span> 				gp<span class="token punctuation">.</span>sig <span class="token operator">=</span> <span class="token number">0</span> 			<span class="token punctuation">}</span> 			<span class="token comment">// Pass information about recovering frame to recovery.</span> 			gp<span class="token punctuation">.</span>sigcode0 <span class="token operator">=</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>sp<span class="token punctuation">)</span> 			gp<span class="token punctuation">.</span>sigcode1 <span class="token operator">=</span> pc 			<span class="token function">mcall</span><span class="token punctuation">(</span>recovery<span class="token punctuation">)</span> 			<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"recovery failed"</span><span class="token punctuation">)</span> <span class="token comment">// mcall should not return</span> 		<span class="token punctuation">}</span> 	<span class="token punctuation">}</span>  	<span class="token function">preprintpanics</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>_panic<span class="token punctuation">)</span>  	<span class="token function">fatalpanic</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>_panic<span class="token punctuation">)</span> <span class="token comment">// should not return</span> 	<span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span>      <span class="token comment">// not reached</span> <span class="token punctuation">}</span> </code></pre> <ul> <li>获取指向当前 Goroutine 的指针</li> <li>初始化一个 panic 的基本单位 _panic，并将这个panic头插入当前goroutine的panic链表中。</li> <li>获取当前 Goroutine 上挂载的 _defer（数据结构也是链表）</li> <li>若当前存在 defer 调用，则调用 reflectcall 方法去执行先前 defer 中延迟执行的代码。<strong>reflectcall方法若在执行过程中需要运行 recover 将会调用 gorecover 方法。</strong> </li> <li>结束前，使用 preprintpanics 方法打印出所涉及的 panic 消息</li> <li>最后调用 fatalpanic 中止应用程序，实际是执行 exit(2) 进行最终退出行为的。</li> </ul> <p>通过对上述代码的执行分析，可得知 <strong>panic 方法实际上就是处理当前 Goroutine(g) 上所挂载的 ._panic 链表</strong>（所以无法对其他 Goroutine 的异常事件响应），然后对其所属的 defer 链表和 recover 进行检测并处理，最后调用退出命令中止应用程序。</p> </h1> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">defer</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 		<span class="token keyword">if</span> err <span class="token operator">:=</span> <span class="token function">recover</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{<!-- --></span> 			log<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"recover: %v"</span><span class="token punctuation">,</span> err<span class="token punctuation">)</span> 		<span class="token punctuation">}</span> 	<span class="token punctuation">}</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	 	<span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"sim lou."</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>输出结果：</p> <pre><code>2019/10/27 12:39:30 recover: sim lou.  Process finished with exit code 0 </code></pre> <p>我们看汇编代码，panic是怎么被recover的：</p> <pre><code>"".main STEXT size=118 args=0x0 locals=0x50 	...... 	0x003a 00058 (panic_test2.go:6)	CALL	runtime.deferprocStack(SB) 	...... 	0x005a 00090 (panic_test2.go:12)	CALL	runtime.gopanic(SB) 	...... 	0x0060 00096 (panic_test2.go:6)	CALL	runtime.deferreturn(SB) 	...... "".main.func1 STEXT size=151 args=0x0 locals=0x40 	0x0000 00000 (panic_test2.go:6)	TEXT	"".main.func1(SB), ABIInternal, $64-0 	...... 	0x0026 00038 (panic_test2.go:7)	CALL	runtime.gorecover(SB) 	...... 	0x0092 00146 (panic_test2.go:6)	JMP	0 </code></pre> <p>通过分析底层调用，可得知主要是如下几个方法：</p> <ul> <li>runtime.deferprocStack</li> <li>runtime.gopanic</li> <li>runtime.deferreturn</li> <li>runtime.gorecover</li> </ul> <p>前面我们说了简单的流程，gopanic 方法会遍历调用当前 Goroutine 下的 defer 链表，若 reflectcall 执行中遇到 recover 就会调用 gorecover 进行处理，该方法代码如下：</p> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">gorecover</span><span class="token punctuation">(</span>argp <span class="token builtin">uintptr</span><span class="token punctuation">)</span> <span class="token keyword">interface</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span> <span class="token punctuation">{<!-- --></span> 	<span class="token comment">// Must be in a function running as part of a deferred call during the panic.</span> 	<span class="token comment">// Must be called from the topmost function of the call</span> 	<span class="token comment">// (the function used in the defer statement).</span> 	<span class="token comment">// p.argp is the argument pointer of that topmost deferred function call.</span> 	<span class="token comment">// Compare against argp reported by caller.</span> 	<span class="token comment">// If they match, the caller is the one who can recover.</span> 	gp <span class="token operator">:=</span> <span class="token function">getg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 	p <span class="token operator">:=</span> gp<span class="token punctuation">.</span>_panic 	<span class="token keyword">if</span> p <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>p<span class="token punctuation">.</span>recovered <span class="token operator">&amp;&amp;</span> argp <span class="token operator">==</span> <span class="token function">uintptr</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>argp<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 		p<span class="token punctuation">.</span>recovered <span class="token operator">=</span> <span class="token boolean">true</span> 		<span class="token keyword">return</span> p<span class="token punctuation">.</span>arg 	<span class="token punctuation">}</span> 	<span class="token keyword">return</span> <span class="token boolean">nil</span> <span class="token punctuation">}</span> </code></pre> <p>这代码，看上去挺简单的，核心就是修改 recovered 字段。该字段是用于标识当前 panic 是否已经被 recover 处理。但是这和我们想象的并不一样啊，程序是怎么从 panic 流转回去的呢？是不是在核心方法里处理了呢？我们再看看 gopanic 的代码，如下：</p> <pre><code>func gopanic(e interface{}) {     ...     for {         // defer...         ...         pc := d.pc         sp := unsafe.Pointer(d.sp) // must be pointer so it gets adjusted during stack copy         freedefer(d)          // recover...         if p.recovered {             atomic.Xadd(&amp;runningPanicDefers, -1)              gp._panic = p.link             for gp._panic != nil &amp;&amp; gp._panic.aborted {                 gp._panic = gp._panic.link             }             if gp._panic == nil {                  gp.sig = 0             }              gp.sigcode0 = uintptr(sp)             gp.sigcode1 = pc             mcall(recovery)             throw("recovery failed")          }     }     ... } </code></pre> <p>我们回到 gopanic 方法中再仔细看看，发现实际上是包含对 recover 流转的处理代码的。恢复流程如下：</p> <ul> <li>判断当前 _panic 中的 recover 是否已标注为处理</li> <li>从 _panic 链表中删除已标注中止的 panic 事件，也就是删除已经被恢复的 panic 事件</li> <li>将相关需要恢复的栈帧信息传递给 recovery 方法的 gp 参数（每个栈帧对应着一个未运行完的函数。栈帧中保存了该函数的返回地址和局部变量）</li> <li>执行 recovery 进行恢复动作</li> <li>从流程来看，最核心的是 recovery 方法。它承担了异常流转控制的职责。代码如下：</li> </ul> <pre><code class="prism language-go"><span class="token keyword">func</span> <span class="token function">recovery</span><span class="token punctuation">(</span>gp <span class="token operator">*</span>g<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token comment">// Info about defer passed in G struct.</span> 	sp <span class="token operator">:=</span> gp<span class="token punctuation">.</span>sigcode0 	pc <span class="token operator">:=</span> gp<span class="token punctuation">.</span>sigcode1  	<span class="token comment">// d's arguments need to be in the stack.</span> 	<span class="token keyword">if</span> sp <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>sp <span class="token operator">&lt;</span> gp<span class="token punctuation">.</span>stack<span class="token punctuation">.</span>lo <span class="token operator">||</span> gp<span class="token punctuation">.</span>stack<span class="token punctuation">.</span>hi <span class="token operator">&lt;</span> sp<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 		<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"recover: "</span><span class="token punctuation">,</span> <span class="token function">hex</span><span class="token punctuation">(</span>sp<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">" not in ["</span><span class="token punctuation">,</span> <span class="token function">hex</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>stack<span class="token punctuation">.</span>lo<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">", "</span><span class="token punctuation">,</span> <span class="token function">hex</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>stack<span class="token punctuation">.</span>hi<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"]\n"</span><span class="token punctuation">)</span> 		<span class="token function">throw</span><span class="token punctuation">(</span><span class="token string">"bad recovery"</span><span class="token punctuation">)</span> 	<span class="token punctuation">}</span>  	<span class="token comment">// Make the deferproc for this d return again,</span> 	<span class="token comment">// this time returning 1.  The calling function will</span> 	<span class="token comment">// jump to the standard return epilogue.</span> 	gp<span class="token punctuation">.</span>sched<span class="token punctuation">.</span>sp <span class="token operator">=</span> sp 	gp<span class="token punctuation">.</span>sched<span class="token punctuation">.</span>pc <span class="token operator">=</span> pc 	gp<span class="token punctuation">.</span>sched<span class="token punctuation">.</span>lr <span class="token operator">=</span> <span class="token number">0</span> 	gp<span class="token punctuation">.</span>sched<span class="token punctuation">.</span>ret <span class="token operator">=</span> <span class="token number">1</span> 	<span class="token function">gogo</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>gp<span class="token punctuation">.</span>sched<span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <p>粗略一看，似乎就是很简单的设置了一些值？但实际上设置的是编译器中伪寄存器的值，常常被用于维护上下文等。在这里我们需要结合 gopanic 方法一同观察 recovery 方法。它所使用的栈指针 sp 和程序计数器 pc 是由当前 defer 在调用流程中的 deferproc 传递下来的，<em>因此实际上最后是通过 gogo 方法跳回了 deferproc 方法</em>。另外我们注意到：</p> <p><code>gp.sched.ret = 1</code></p> <p>在底层中程序将 gp.sched.ret 设置为了 1，也就是没有实际调用 deferproc 方法，直接修改了其返回值。意味着默认它已经处理完成。直接转移到 deferproc 方法的下一条指令去。至此为止，异常状态的流转控制就已经结束了。接下来就是继续走 defer 的流程了.</p> </h1> <p>当然如果所有的 defer 都没有指明显式的 recover，那么这时候则直接在运行时抛出 panic 信息：</p> <pre><code class="prism language-go"><span class="token comment">// 消耗完所有的 defer 调用，保守地进行 panic</span> <span class="token comment">// 因为在冻结之后调用任意用户代码是不安全的，所以我们调用 preprintpanics 来调用</span> <span class="token comment">// 所有必要的 Error 和 String 方法来在 startpanic 之前准备 panic 字符串。</span> <span class="token function">preprintpanics</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>_panic<span class="token punctuation">)</span>  <span class="token function">fatalpanic</span><span class="token punctuation">(</span>gp<span class="token punctuation">.</span>_panic<span class="token punctuation">)</span> <span class="token comment">// 不应该返回</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token boolean">nil</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span>      <span class="token comment">// 无法触及</span> </code></pre> </h1> <p>从 panic 和 recover 这对关键字的实现上可以看出，可恢复的 panic 必须要 recover 的配合。 而且，这个 recover 必须位于同一 goroutine 的直接调用链上（例如，如果 A 依次调用了 B 和 C，而 B 包含了 recover，而 C 发生了 panic，则这时 B 的 panic 无法恢复 C 的 panic； 又例如 A 调用了 B 而 B 又调用了 C，那么 C 发生 panic 时，如果 A 要求了 recover 则仍然可以恢复）， 否则无法对 panic 进行恢复。</p> <p>当一个 panic 被恢复后，调度并因此中断，会重新进入调度循环，进而继续执行 recover 后面的代码， 包括比 recover 更早的 defer（因为已经执行过得 defer 已经被释放，而尚未执行的 defer 仍在 goroutine 的 defer 链表中）， 或者 recover 所在函数的调用方。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-79707.htm">上海流浪宠物领养网站（上海流浪宠物救助中心）</a></p>
+                                        <p>下一个：<a href="/news/article-80372.htm">兽用活疫苗稀释后多久内使用有效（猪用活疫苗稀释液保存温度）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-75594.htm" title="如何修改项目加载包默认的node_modules路径">如何修改项目加载包默认的node_modules路径</a></li>
+                        <li class="py-2"><a href="/news/article-66413.htm" title="java自带的四种线程池">java自带的四种线程池</a></li>
+                        <li class="py-2"><a href="/news/article-67696.htm" title="动物疫苗去哪里买便宜点 动物疫苗去哪里买便宜点呢">动物疫苗去哪里买便宜点 动物疫苗去哪里买便宜点呢</a></li>
+                        <li class="py-2"><a href="/news/article-64568.htm" title="质量好的宠物服装（质量好的宠物服装品牌）">质量好的宠物服装（质量好的宠物服装品牌）</a></li>
+                        <li class="py-2"><a href="/news/article-40020.htm" title="开宠物用品店利润大吗多少钱一个月（想开个宠物用品店）">开宠物用品店利润大吗多少钱一个月（想开个宠物用品店）</a></li>
+                        <li class="py-2"><a href="/news/article-50986.htm" title="宠物领养中心是什么单位 宠物领养中心是什么单位性质">宠物领养中心是什么单位 宠物领养中心是什么单位性质</a></li>
+                        <li class="py-2"><a href="/news/article-52034.htm" title="JavaScript从数组中删除相同的条目，并保持其长度相同方法详解">JavaScript从数组中删除相同的条目，并保持其长度相同方法详解</a></li>
+                        <li class="py-2"><a href="/news/article-40504.htm" title="宠物批发商业运营计划书（宠物店市场规划）">宠物批发商业运营计划书（宠物店市场规划）</a></li>
+                        <li class="py-2"><a href="/news/article-78328.htm" title="宠物医院看仓鼠（仓鼠宠物医生在线咨询免费）">宠物医院看仓鼠（仓鼠宠物医生在线咨询免费）</a></li>
+                        <li class="py-2"><a href="/news/article-67053.htm" title="「BUAA OO Unit 2 HW8」第二单元总结_在线工具">「BUAA OO Unit 2 HW8」第二单元总结_在线工具</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
