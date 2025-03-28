@@ -1,0 +1,418 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-81741.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>go语言编译过程概述</title>
+        <meta name="description" content="总结自《go语言设计与实现》 名词解释:   中间代码 中间代码是编译器或者虚拟机使用的语言，它可以来帮助我们分析计算机程序。在编译过程中，编译器会在将源代码转换到机器码的过程中，先把源代码转换成一种" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-81741.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="go语言编译过程概述" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/714299a70bb5e3aad3d9b969bd63d575.webp" />
+        <meta property="og:release_date" content="2025-03-26T08:56:09" />
+    <meta property="og:updated_time" content="2025-03-26T08:56:09" />
+        <meta property="og:description" content="总结自《go语言设计与实现》 名词解释:   中间代码 中间代码是编译器或者虚拟机使用的语言，它可以来帮助我们分析计算机程序。在编译过程中，编译器会在将源代码转换到机器码的过程中，先把源代码转换成一种" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="go语言编译过程概述">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">go语言编译过程概述</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				</h1> <p>总结自《go语言设计与实现》</p> <h2 id="名词解释">名词解释:</h2> <ul> <li> <p>中间代码</p> <p>中间代码是编译器或者虚拟机使用的语言，它可以来帮助我们分析计算机程序。在编译过程中，编译器会在将源代码转换到机器码的过程中，先把源代码转换成一种中间的表示形式，即中间代码。将编程语言到机器码的过程拆成中间代码生成和机器码生成两个简单步骤可以简化该问题，中间代码是一种更接近机器语言的表示形式，对中间代码的优化和分析相比直接分析高级编程语言更容易。</p> </li> <li> <p>SSA</p> <p>静态单赋值是中间代码的特性，如果中间代码具有静态单赋值的特性，那么每个变量就只会被赋值一次。在实践中，我们通常会用下标实现静态单赋值，这里以下面的代码举个例子：</p> <pre><code class="language-go">x := 1 x := 2 y := x</code></pre> <p>经过简单的分析，我们就能够发现上述的代码第一行的赋值语句<code>x := 1</code> 不会起到任何作用。下面是具有 SSA 特性的中间代码，我们可以清晰地发现变量<code>y_1</code> 和<code>x_1</code> 是没有任何关系的，所以在机器码生成时就可以省去<code>x := 1</code> 的赋值，通过减少需要执行的指令优化这段代码。</p> <pre><code class="language-go">x_1 := 1 x_2 := 2 y_1 := x_2</code></pre> </li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/cfa334ba9c6a542de5c8467bb418cdbc.jpg" alt="go语言编译过程概述"></p> <h2 id="过程概述">过程概述</h2> <ol> <li> <p>词法与语法分析</p> <ul> <li> <p>编译过程其实都是从解析代码的源文件开始的，词法分析的作用就是解析源代码文件，它将文件中的字符串序列转换成 Token 序列，方便后面的处理和解析，我们一般会把执行词法分析的程序称为词法解析器。</p> </li> <li> <p>而语法分析的输入是词法分析器输出的 Token 序列，语法分析器会按照顺序解析 Token 序列，该过程会将词法分析生成的 Token 按照编程语言定义好的文法（Grammar）自下而上或者自上而下的规约，每一个 Go 的源代码文件最终会被归纳成一个 SourceFile 结构 。</p> </li> </ul> <p>词法分析会返回一个不包含空格、换行等字符的 Token 序列，例如：package, json, import, (, io, ), …，而语法分析会把 Token 序列转换成有意义的结构体，即语法树。</p> </li> <li> <p>类型检查</p> <p>当拿到一组文件的抽象语法树之后，Go 语言的编译器会对语法树中定义和使用的类型进行检查，类型检查会按照以下的顺序分别验证和处理不同类型的节点：</p> <ol> <li>常量、类型和函数名及类型；</li> <li>变量的赋值和初始化；</li> <li>函数和闭包的主体；</li> <li>哈希键值对的类型；</li> <li>导入函数体；</li> <li>外部的声明；</li> </ol> <p>通过对整棵抽象语法树的遍历(也会修改语法树)，我们在每个节点上都会对当前子树的类型进行验证，以保证节点不存在类型错误，所有的类型错误和不匹配都会在这一个阶段被暴露出来，其中包括：结构体对接口的实现。</p> <p>类型检查阶段不止会对节点的类型进行验证，还会展开和改写一些内建的函数，例如 make 关键字在这个阶段会根据子树的结构被替换成 runtime.makeslice或者 runtime.makechan等函数。</p> </li> <li> <p>中间代码生成</p> <p>当我们将源文件转换成了抽象语法树、对整棵树的语法进行解析并进行类型检查之后，就可以认为当前文件中的代码不存在语法错误和类型错误的问题了，Go 语言的编译器就会将输入的抽象语法树转换成中间代码。</p> <p>在类型检查之后，编译器会通过 cmd/compile/internal/gc.compileFunctions编译整个 Go 语言项目中的全部函数，这些函数会在一个编译队列中等待几个 Goroutine 的消费，并发执行的 Goroutine 会将所有函数对应的抽象语法树转换成中间代码。由于 Go 语言编译器的中间代码使用了 SSA 的特性，所以在这一阶段我们能够分析出代码中的无用变量和片段并对代码进行优化</p> </li> <li> <p>机器码生成</p> <p>Go 语言源代码的 src/cmd/compile/internal 目录中包含了很多机器码生成相关的包，不同类型的 CPU 分别使用了不同的包生成机器码，其中包括 amd64、arm、arm64、mips、mips64、ppc64、s390x、x86 和 wasm</p> </li> </ol> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-81740.htm">记录detector2使用中的PyYAML报错</a></p>
+                                        <p>下一个：<a href="/news/article-82473.htm">PowerDesigner默认双向关联修改为单向关联</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-42993.htm" title="重庆在哪里领养狗狗比较好（重庆在哪里领养狗狗比较好点）">重庆在哪里领养狗狗比较好（重庆在哪里领养狗狗比较好点）</a></li>
+                        <li class="py-2"><a href="/news/article-56374.htm" title="动物接种疫苗后多久产生抗体?（动物疫苗间隔时间）">动物接种疫苗后多久产生抗体?（动物疫苗间隔时间）</a></li>
+                        <li class="py-2"><a href="/news/article-50457.htm" title="2020年开宠物店怎么样（2020年开宠物店怎么样了）">2020年开宠物店怎么样（2020年开宠物店怎么样了）</a></li>
+                        <li class="py-2"><a href="/news/article-39508.htm" title="国产兽药厂家排名前十强企业（国内兽药厂家）">国产兽药厂家排名前十强企业（国内兽药厂家）</a></li>
+                        <li class="py-2"><a href="/news/article-44000.htm" title="人用狂犬疫苗跟兽用一样吗（兽用狂犬疫苗和人用狂犬疫苗有啥区别）">人用狂犬疫苗跟兽用一样吗（兽用狂犬疫苗和人用狂犬疫苗有啥区别）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-22-latest-hiddify-next-node.htm" title="2月22日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接">2月22日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-free-high-speed-nodes.htm" title="1月22日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">1月22日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-11-free-node-subscribe.htm" title="2月11日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">2月11日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-26-node-share-links.htm" title="3月26日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接">3月26日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-14-hiddify-next-node-share.htm" title="2月14日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接">2月14日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
