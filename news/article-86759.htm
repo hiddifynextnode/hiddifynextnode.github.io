@@ -1,0 +1,417 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-86759.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Golang | 测试与性能调优</title>
+        <meta name="description" content="我们在日常的工作过程中，自测是不可缺少的，公司还会要求所有的公共方法必须要写单测，在别的语言中，我们如果想要写单测还需要使用到测试框架，但是Go语言中，直接支持测试，并且使用起来非常简单。 比如说我现" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-86759.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="Golang | 测试与性能调优" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/43ca98b00c15366e71c0506c68596041.webp" />
+        <meta property="og:release_date" content="2025-04-02T07:44:24" />
+    <meta property="og:updated_time" content="2025-04-02T07:44:24" />
+        <meta property="og:description" content="我们在日常的工作过程中，自测是不可缺少的，公司还会要求所有的公共方法必须要写单测，在别的语言中，我们如果想要写单测还需要使用到测试框架，但是Go语言中，直接支持测试，并且使用起来非常简单。 比如说我现" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Golang | 测试与性能调优">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">Golang | 测试与性能调优</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				</h1> <p>我们在日常的工作过程中，自测是不可缺少的，公司还会要求所有的公共方法必须要写单测，在别的语言中，我们如果想要写单测还需要使用到测试框架，但是Go语言中，直接支持测试，并且使用起来非常简单。</p> <p>比如说我现在写了一个：</p> <pre><code class="language-go">// twoSum 给定数组，求两个之和的数组内地址 func twoSum(nums []int, target int) []int { 	hashTable := map[int]int{} 	for i, x := range nums { 		if p, ok := hashTable[target-x]; ok { 			return []int{p, i} 		} 		hashTable[x] = i 	} 	return nil }</code></pre> <p>这个方法是求两数之和的，这个方法是公共方法，现在我需要对这个方法进行单测，我们只需要在同一目录下新建一个以<code>_test</code>结尾的文件就可以了。</p> <pre><code class="language-go">package twoSum  import ( 	"testing" )  func TestTwoSum(t *testing.T) { 	 }</code></pre> <p>新建一个函数，以<code>Test</code>开头，以刚刚的方法名结尾，参数默认是<code>testing</code>包中的。</p> <p>现在我们就可以写测试内容了：</p> <pre><code class="language-go">func TestTwoSum(t *testing.T) { 	args := []struct { 		nums   []int 		target int 		source []int 	}{ 		{[]int{2, 7, 11, 15}, 9, []int{0, 1}}, 		{[]int{2, 7, 11, 15}, 13, []int{0, 2}}, 		{[]int{0, 1, 0}, 0, []int{0, 2}}, 	} 	for _, arg := range args { 		sum := twoSum(arg.nums, arg.target) 		for i, v := range sum { 			if arg.source[i] != v { 				fmt.Printf("nums:%v,target:%v,right:%v,source:%v", arg.nums, arg.target, sum, arg.source) 			} 		} 	} }</code></pre> <p>以上就是测试方法的内容了，这和我们平时写的测试不太一样，是因为这是表格驱动测试。</p> <p>把输入和输出放到同一个结构体内，然后循环去执行测试，把测试不通过的测试案例输出出来，并且符上正确答案，这种方法更加的直观一点，也更加的方便，在Go语言中我们使用这种方法测试更加的简单一点，别的语言如果使用这测试方法可能全非常的麻烦。</p> <h2 id="测试代码覆盖率">测试代码覆盖率</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/135b51c492e9050fb4760e0223a6b3f9.jpg" alt="Golang | 测试与性能调优"></p> <p>使用命令<code>go test -coverprofile=c.out</code> 成生代码覆盖率文件。</p> <p>然后通过<code>go tool cover -html=c.out</code>查看文件内容：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/d5f2d2445a285d33db46336f892707cf.jpg" alt="Golang | 测试与性能调优"></p> </h1> <p>一般我们写完测试代码之后，这个函数的测试工作就算完成了，但是有时当一个函数特别重要时，我还还需要对这个函数进行性能测试，Go语言也对性能测试提供了支持：</p> <pre><code class="language-go">func BenchmarkTwoSum(b *testing.B) { 	nums := []int{2, 7, 11, 15, 24, 22, 44} 	target := 9 	source := []int{0, 1} 	b.ResetTimer() 	for i := 0; i &lt; b.N; i++ { 		sum := twoSum(nums, target) 		for i, v := range sum { 			if source[i] != v { 				fmt.Printf("nums:%v,target:%v,right:%v,source:%v", nums, target, sum, source) 			} 		} 	} }</code></pre> <p>函数名以<code>Benchmark</code>开头，以要测试的函数名结尾。函数体为测试内容。</p> <pre><code class="language-go">b.ResetTimer() // 数据准备完成，从这一行对性能进行统计</code></pre> <pre><code class="language-go">b.N		// 循环的次数由系统决定</code></pre> <p>使用命令对函数进行测试：</p> <pre><code>go test -bench .</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/1efd88310d446a8fbc75885e624cc0ba.jpg" alt="Golang | 测试与性能调优"></p> <p>以上就是测试内容，一共运行了：31572230 次，每次用时 34.93 ns</p> <p>当然，有时我们想知道这个函数的性能瓶颈在那我们也可以通过命令来实现：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/b3facbec0334a33881400a90abbe00af.jpg" alt="Golang | 测试与性能调优"></p> <pre><code class="language-sh"># 通过命令生成性能测试文件 go test -bench . -cpuprofile cpu.out # 能过web方式查看性能文件 go tool pprof cpu.out # 最后输入 web 后会自动弹出网页 web</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/37b4b8134df5fd414de8ed60197a8199.jpg" alt="Golang | 测试与性能调优"></p> <p>通过网页我们可以更直观的看到性能瓶颈在那。</p> <blockquote> <p>如果想要查看性能文件必须提前安装：<a href="www.graphviz.org" target="_blank" rel="nofollow">graphviz</a></p> </blockquote> <p></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-86055.htm">宠物美容店投资多少钱啊（宠物美容开店多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-86760.htm">卖狗的平台除了咸鱼还有什么（可以卖狗的平台）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-19-free-subscribe-node.htm" title="3月19日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">3月19日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-22-hiddify-next-node-github.htm" title="3月22日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接">3月22日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-26-node-share-links.htm" title="3月26日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接">3月26日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-1-hiddify-next-node-share.htm" title="4月1日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接">4月1日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-76968.htm" title="关于Springcloud Sleuth分布式请求链路跟踪的使用 小结">关于Springcloud Sleuth分布式请求链路跟踪的使用 小结</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-27-hiddify-next-windows.htm" title="3月27日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">3月27日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-free-hiddify-next-node.htm" title="3月3日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接">3月3日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-4-hiddify-next-node.htm" title="4月4日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接">4月4日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-74924.htm" title="宠物寄养条款规定是什么（家庭式宠物寄养是什么）">宠物寄养条款规定是什么（家庭式宠物寄养是什么）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-hiddify-next-node-github.htm" title="3月17日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">3月17日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
