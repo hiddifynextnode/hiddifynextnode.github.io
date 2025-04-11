@@ -1,0 +1,417 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-90848.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>一文搞懂Vue3中如何使用ref获取元素节点？</title>
+        <meta name="description" content="文章目录  1.回顾 Vue2 中的 ref 2.Vue3 中 ref 访问元素 3.v-for 中使用 ref 5.组件上使用 ref 总结    虽然在 Vue 中不提倡我们直接操作 DOM，毕竟" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-90848.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="一文搞懂Vue3中如何使用ref获取元素节点？" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/8964939959d553d6002b8722e59bd1f0.webp" />
+        <meta property="og:release_date" content="2025-04-08T09:51:41" />
+    <meta property="og:updated_time" content="2025-04-08T09:51:41" />
+        <meta property="og:description" content="文章目录  1.回顾 Vue2 中的 ref 2.Vue3 中 ref 访问元素 3.v-for 中使用 ref 5.组件上使用 ref 总结    虽然在 Vue 中不提倡我们直接操作 DOM，毕竟" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="一文搞懂Vue3中如何使用ref获取元素节点？">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">一文搞懂Vue3中如何使用ref获取元素节点？</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-github-gist"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#1_Vue2__ref_5" rel="nofollow">1.回顾 Vue2 中的 ref</a></li> <li><a href="#2Vue3__ref__29" rel="nofollow">2.Vue3 中 ref 访问元素</a></li> <li><a href="#3vfor__ref_66" rel="nofollow">3.v-for 中使用 ref</a></li> <li><a href="#5_ref_162" rel="nofollow">5.组件上使用 ref</a></li> <li><a href="#_243" rel="nofollow">总结</a></li> </ul> </div> <blockquote> <p>虽然在 Vue 中不提倡我们直接操作 DOM，毕竟 Vue 的理念是以数据驱动视图。但是在实际情况中，我们有很多需求都是需要直接操作 DOM 节点的，这个时候 Vue 提供了一种方式让我们可以获取 DOM 节点：ref 属性。ref 属性是 Vue2 和 Vue3 中都有的，但是使用方式却不大一样，这也导致了很多从 Vue2 转到 Vue3 的小伙伴感到有些困惑。</p> </blockquote> <p>今天我们就来揭开 Vue3 中 ref 的神秘面纱！</p> </h1> <p>在学习 Vue3 中的 ref 之前，我们先来了解下 Vue2 中 ref，这样一对比，大家更能够加深印象，以及它们之间的区别。</p> <ul> <li> <p>获取节点：</p> <p>这是 ref 的基本功能之一，目的就是获取元素节点，在 Vue 中使用方式也很简单，代码如下：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">&gt;</span>     <span class="token operator">&lt;</span>div ref<span class="token operator">=</span><span class="token string">"hello"</span><span class="token operator">&gt;</span>小猪<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script<span class="token operator">&gt;</span> export <span class="token keyword">default</span> <span class="token punctuation">{<!-- --></span>   <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>this<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>hello<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;div&gt;小猪&lt;/div&gt;</span>   <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> </ul> <p>上段代码中可以看到我们在 div 元素上绑定了 ref 属性，并命名为 hello，接下来我们直接使用 this.$refs.hello 的方式就可以获取到该 DOM 元素了。</p> </h1> <p>Vue3 中通过 ref 访问元素节点与 Vue2 不太一样，在 Vue3 中我们是没有 this 的，所以当然也没有 this.$refs。想要获取 ref，我们只能通过声明变量的方式。</p> <ul> <li> <p>创建一个 Vite 项目：</p> <p>为了方便演示，我们直接在 Vite 项目中演示 ref 代码，创建项目指令如下：</p> <pre><code class="prism language-c">npm create vite@latest my<span class="token operator">-</span>vue<span class="token operator">-</span>app <span class="token operator">--</span>template vue<span class="token operator">-</span>ts </code></pre> </li> <li> <p>代码如下：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>div ref<span class="token operator">=</span><span class="token string">"hello"</span><span class="token operator">&gt;</span>小猪课堂<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script setup lang<span class="token operator">=</span><span class="token string">"ts"</span><span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> onMounted<span class="token punctuation">,</span> ref <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span> <span class="token keyword">const</span> hello <span class="token operator">=</span> ref<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span><span class="token punctuation">(</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>hello<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;div&gt;小猪课堂&lt;/div&gt;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> <ul> <li>输出结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/817b4e687b43e098f77f5bceea60954f.jpg" alt="一文搞懂Vue3中如何使用ref获取元素节点？"> </li> </ul> </li> </ul> <p>上段代码中我们同样给 div 元素添加了 ref 属性，为了获取到这个元素，我们声明了一个与 ref 属性名称相同的变量 hello，然后我们通过 hello.value 的形式便获取到了该 div 元素。</p> <ul> <li> <p>注意点：</p> <ul> <li>变量名称必须要与 ref 命名的属性名称一致。</li> <li>通过 hello.value 的形式获取 DOM 元素。</li> <li>必须要在 DOM 渲染完成后才可以获取 hello.value，否则就是 null。</li> </ul> </li> </ul> </h1> <p>使用 ref 的场景有多种，一种是单独绑定在某一个元素节点上，另一种便是绑定在 v-for 循环出来的元素上了。这是一种非常常见的需求，在 Vue2 中我们通常使用:ref="…"的形式，只要能够标识出每个 ref 不一样即可。</p> <p>但是在 Vue3 中又不太一样，不过还是可以通过变量的形式接收。</p> <ul> <li> <p>代码如下：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>div ref<span class="token operator">=</span><span class="token string">"hello"</span><span class="token operator">&gt;</span>小猪课堂<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>ul<span class="token operator">&gt;</span>     <span class="token operator">&lt;</span>li v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"item in 10"</span> ref<span class="token operator">=</span><span class="token string">"itemRefs"</span><span class="token operator">&gt;</span>       <span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span>item<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">-</span> 小猪课堂     <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script setup lang<span class="token operator">=</span><span class="token string">"ts"</span><span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> onMounted<span class="token punctuation">,</span> ref <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span>   <span class="token keyword">const</span> itemRefs <span class="token operator">=</span> ref<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>itemRefs<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> <li> <p>输出结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/8f7d26d597958673d1270177e26da07a.jpg" alt="一文搞懂Vue3中如何使用ref获取元素节点？"><br /> 段代码中尽管是 v-for 循环，但是我们似乎使用 ref 的形式与第 2 节中的方式没有任何变化，我们同样使用变量的形式拿到了每一个 li 标签元素。</p> </li> </ul> <p>但是这里我们需要注意一下：我们似乎没办法区分哪个 li 标签哪个 ref，初次之外，我们的 itemRefs 数组不能够保证与原数组顺序相同，即与 list 原数组中的元素一一对应。</p> <p>4.ref 绑定函数</p> <p>前面我们在组件上定义 ref 时，都是以一个字符串的形式作为 ref 的名字，其实我们的 ref 属性还可以接收一个函数作为属性值，这个时候我们需要在 ref 前面加上:。</p> <ul> <li> <p>代码如下：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>    <span class="token operator">&lt;</span>div <span class="token operator">:</span>ref<span class="token operator">=</span><span class="token string">"setHelloRef"</span><span class="token operator">&gt;</span>小猪课堂<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script setup lang<span class="token operator">=</span><span class="token string">"ts"</span><span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> ComponentPublicInstance<span class="token punctuation">,</span> HTMLAttributes <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span>   <span class="token keyword">const</span> setHelloRef <span class="token operator">=</span> <span class="token punctuation">(</span>el<span class="token operator">:</span> HTMLElement <span class="token operator">|</span> ComponentPublicInstance <span class="token operator">|</span> HTMLAttributes<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &lt;div&gt;小猪课堂&lt;/div&gt;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> <li> <p>输出结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/ff076aae06fec4e5a21f34241d628a17.jpg" alt="一文搞懂Vue3中如何使用ref获取元素节点？"><br /> 上段代码中 ref 属性接收的是一个 setHelloRef 函数，该函数会默认接收一个 el 参数，这个参数就是我们需要获取的 div 元素。假如需求中我们采用这种方式的话，那么完全可以把 el 保存到一个变量中去，供后面使用。</p> </li> </ul> <p>那么，我们在 v-for 中是否也能采用这种方式呢？</p> <p>答案是可以的！</p> <p><strong>v-for 中使用</strong></p> <ul> <li> <p>代码如下：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>ul<span class="token operator">&gt;</span>     <span class="token operator">&lt;</span>li v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"item in 10"</span> <span class="token operator">:</span>ref<span class="token operator">=</span><span class="token string">"(el) =&gt; setItemRefs(el, item)"</span><span class="token operator">&gt;</span>       <span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> item <span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">-</span> 小猪课堂     <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script setup lang<span class="token operator">=</span><span class="token string">"ts"</span><span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> ComponentPublicInstance<span class="token punctuation">,</span> HTMLAttributes<span class="token punctuation">,</span> onMounted <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span> let itemRefs<span class="token operator">:</span> Array<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">const</span> setItemRefs <span class="token operator">=</span> <span class="token punctuation">(</span>el<span class="token operator">:</span> HTMLElement <span class="token operator">|</span> ComponentPublicInstance <span class="token operator">|</span> HTMLAttributes<span class="token punctuation">,</span> item<span class="token operator">:</span>number<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   <span class="token keyword">if</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     itemRefs<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>       id<span class="token operator">:</span> item<span class="token punctuation">,</span>       el<span class="token punctuation">,</span>     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token punctuation">}</span> <span class="token punctuation">}</span> <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>itemRefs<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> <li> <p>输出结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/5b05a688bfc05f308cddab0516769322.jpg" alt="一文搞懂Vue3中如何使用ref获取元素节点？"><br /> 在 v-for 中使用函数的形式传入 ref 与不使用 v-for 时的形式差不多，不过这里我们做了一点变通，为了区别出哪个 ref 是哪一个 li 标签，我们决定将 item 传入函数，也就是(el) =&gt; setItemRefs(el, item)的写法。</p> </li> </ul> <p>这种形式的好处既让我们的操作性变得更大，还解决了 v-for 循环是 ref 数组与原数组顺序不对应的问题。</p> </h1> <p>前面我们所使用 ref 时，都是在一个具体的 dom 元素上绑定，但是我们也可以将 ref 绑定在组件上，比如在 Vue2 中，我们将 ref 绑定在组件上时，便可以获取到该组件里面的所有数据和方法.</p> <p>虽然 Vue3 中也可以将 ref 绑定在组件上，但是具体能获取组件的哪些值还是有一些区别的，我们一起来看看。</p> <ul> <li> <p>代码如下：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>child ref<span class="token operator">=</span><span class="token string">"childRef"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>child<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script setup lang<span class="token operator">=</span><span class="token string">"ts"</span><span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> onMounted<span class="token punctuation">,</span> ref <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span> import child from <span class="token string">"./child.vue"</span><span class="token punctuation">;</span> <span class="token keyword">const</span> childRef <span class="token operator">=</span> ref<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span><span class="token punctuation">(</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>childRef<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// child 组件实例</span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>childRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> <li> <p>子组件 child 代码：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> message <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script lang<span class="token operator">=</span><span class="token string">"ts"</span> setup<span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> ref <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span> <span class="token keyword">const</span> message <span class="token operator">=</span> ref<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token string">"我是子组件"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">const</span> onChange <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> <li> <p>输出结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/e5fbb7988bef9a4719b7ec258714ac4b.jpg" alt="一文搞懂Vue3中如何使用ref获取元素节点？"><br /> 上段代码中我们新增了一个子组件，然后再子组件上面绑定了 ref，其用法基本上和 ref 直接绑定在 DOM 元素上一致。</p> <p>但是如果我们把 ref 绑定再组件上，通常就是为了调用子组件里面的方法或者数据，可是从上面的输出结果来看，我们没有获取到数据，即 childRef.value.message 为 undefined，这也是与 Vue2 的不同之处。</p> <p>在 Vue3 中，使用 ref 获取子组件时，如果想要获取子组件的数据或者方法，子组件可以通过</p> <p>defineExpose 方法暴露数据。</p> </li> <li> <p><strong>修改子组件代码</strong>：</p> <pre><code class="prism language-c"><span class="token operator">&lt;</span>template<span class="token operator">&gt;</span>   <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">{<!-- --></span> message <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>script lang<span class="token operator">=</span><span class="token string">"ts"</span> setup<span class="token operator">&gt;</span> import <span class="token punctuation">{<!-- --></span> ref <span class="token punctuation">}</span> from <span class="token string">"vue"</span><span class="token punctuation">;</span>   <span class="token keyword">const</span> message <span class="token operator">=</span> ref<span class="token operator">&lt;</span>string<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token string">"我是子组件"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">const</span> onChange <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"我是子组件方法"</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token function">defineExpose</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>   message<span class="token punctuation">,</span>   onChange <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span> </code></pre> </li> <li> <p><strong>父组件再次获取</strong>：</p> <pre><code class="prism language-c"><span class="token keyword">const</span> childRef <span class="token operator">=</span> ref<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span><span class="token punctuation">(</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">onMounted</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{<!-- --></span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>childRef<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// child 组件实例</span>   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>childRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 我是子组件</span>   childRef<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">onChange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 我是子组件方法</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre> </li> <li> <p>输出结果：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/d764bd5c7b2230f3ac28bb86213aaa4c.jpg" alt="一文搞懂Vue3中如何使用ref获取元素节点？"><br /> 可以看到我们在父组件中可以获取到子组件暴露的数据和方法了。</p> </li> </ul> </h1> <p>虽然 Vue2 和 Vue3 中的 ref 使用方式有着较大的区别，但是它们的目的都是一样的，所以我们只要朝着目的前进，都会与美好相遇的！</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-90847.htm">python提供了9个基本的数值运算操作符_Python学习笔记（三）Python基本数字类型及其简单操作（1）&#8230;</a></p>
+                                        <p>下一个：<a href="/news/article-91911.htm">猫咪抓伤轻微出血要***吗多久（猫轻微抓伤有一点渗血要***吗?）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-79004.htm" title="宠物领养协议法律效力多少年有效（宠物领养协议是否有法律效力）">宠物领养协议法律效力多少年有效（宠物领养协议是否有法律效力）</a></li>
+                        <li class="py-2"><a href="/news/article-66413.htm" title="java自带的四种线程池">java自带的四种线程池</a></li>
+                        <li class="py-2"><a href="/news/article-66414.htm" title="宠物猫疫苗多少钱一个针（宠物猫疫苗多少钱一次）">宠物猫疫苗多少钱一个针（宠物猫疫苗多少钱一次）</a></li>
+                        <li class="py-2"><a href="/news/article-70949.htm" title="布偶猫很少有人养（布偶不好养吗）">布偶猫很少有人养（布偶不好养吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-13-hiddify-next-node.htm" title="3月13日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接">3月13日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-69635.htm" title="分布式事务提交协议2PC/3PC详解">分布式事务提交协议2PC/3PC详解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-30-hiddify-next-node-share.htm" title="3月30日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">3月30日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-hiddify-next-node-github.htm" title="3月4日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接">3月4日 | HiddifyNextNode机场节点订阅每天更新20.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-31-hiddify-next-node.htm" title="3月31日 | HiddifyNextNode机场节点订阅每天更新20M/S免费节点订阅链接">3月31日 | HiddifyNextNode机场节点订阅每天更新20M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-18-free-node-subscribe-links.htm" title="3月18日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接">3月18日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
