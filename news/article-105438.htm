@@ -1,0 +1,420 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://hiddifynextnode.github.io/news/article-105438.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vue3 学习笔记&#8211;组合式 API</title>
+        <meta name="description" content="先来介绍一下 Mixin  Mixin 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能 一个 mixin 对象可以包含任意组件选项 当组件使用 mixin 对象时，所有 mixin 对象" />
+        <link rel="icon" href="/assets/website/img/hiddifynextnode/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="HiddifyNextNode免费节点官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://hiddifynextnode.github.io/news/article-105438.htm" />
+    <meta property="og:site_name" content="HiddifyNextNode免费节点官网" />
+    <meta property="og:title" content="Vue3 学习笔记&#8211;组合式 API" />
+    <meta property="og:image" content="https://hiddifynextnode.github.io/uploads/20240806/4bb24595ca22009cebfa3710752d945d.webp" />
+        <meta property="og:release_date" content="2025-04-27T08:28:03" />
+    <meta property="og:updated_time" content="2025-04-27T08:28:03" />
+        <meta property="og:description" content="先来介绍一下 Mixin  Mixin 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能 一个 mixin 对象可以包含任意组件选项 当组件使用 mixin 对象时，所有 mixin 对象" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Vue3 学习笔记&#8211;组合式 API">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!--/google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <!--//google-fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/assets/website/css/hiddifynextnode/style-liberty.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FW3J4WPCDW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FW3J4WPCDW');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--/Header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
+                <a class="navbar-brand pe-xl-5 pe-lg-4" href="/">
+                                    <span class="sublog">Hiddify Next</span> Node</span>
+                                </a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//Header-->
+    <!-- breadcrumb -->
+    <section class="w3l-about-breadcrumb">
+        <div class="breadcrumb-bg breadcrumb-bg-about">
+            <div class="container py-lg-5 py-sm-4">
+                <div class="w3breadcrumb-gids text-center">
+                    <div class="w3breadcrumb-info mt-5">
+                        <h1 class="w3ltop-title pt-4">Vue3 学习笔记&#8211;组合式 API</h1>
+                        <ul class="breadcrumbs-custom-path">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/news/"><span class="fas fa-angle-double-right mx-2"></span>  新闻资讯</a></li>
+                            <li class="active"><span class="fas fa-angle-double-right mx-2"></span> 正文 </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!--/tabs-faqs-->
+    <section class="w3l-products w3l-faq-block py-5" id="projects">
+        <div class="container py-md-5 py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="htmledit_views"> <p>先来介绍一下 Mixin</p> </h1> <p><span style="color:#ff9900;"><strong>Mixin</strong></span> 提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能</p> <p>一个 <span style="color:#ff9900;"><strong>mixin</strong></span> 对象可以包含任意组件选项</p> <p>当组件使用 <span style="color:#ff9900;"><strong>mixin</strong></span> 对象时，所有 <span style="color:#ff9900;"><strong>mixin</strong></span> 对象的选项将被&nbsp;<strong>混合&nbsp;</strong>进入该组件本身的选项</p> <pre><code class="language-javascript">// define a mixin object const myMixin = {   created() {     this.hello()   },   methods: {     hello() {       console.log('hello from mixin!')     }   } }  // define an app that uses this mixin const app = Vue.createApp({   mixins: [myMixin] })  app.mount('#mixins-basic') // =&gt; "hello from mixin!"</code></pre> <h2>1.1 合并规则</h2> <p><span style="color:#a2e043;"><strong>data 函数</strong></span></p> <p style="text-align:center;"><img fetchpriority="high" decoding="async" alt="" height="488" src="http://img.555519.xyz/uploads/20221230/78a16482cc8ce4e91da0c2a08561152b.jpg"></p> <p><span style="color:#a2e043;"><strong>&nbsp;钩子函数</strong></span></p> <p style="text-align:center;"><img decoding="async" alt="" height="364" src="http://img.555519.xyz/uploads/20221230/e9ea76b43b5267d960dd3f0d2f8c32c1.jpg"></p> <p><span style="color:#a2e043;"><strong>值为对象的选项，例如 methods、components</strong></span></p> <p style="text-align:center;"><img decoding="async" alt="" height="542" src="http://img.555519.xyz/uploads/20221230/c4bfa79f8231a36933a8c5aab8549fb1.jpg"></p> <h2>1.2 全局 mixin</h2> <p>一旦使用全局 mixin，它将影响每一个之后创建的组件</p> <pre><code class="language-javascript">const app = Vue.createApp({   myOption: 'hello!' })  // 为自定义的选项 'myOption' 注入一个处理器 app.mixin({   created() {     const myOption = this.$options.myOption     if (myOption) {       console.log(myOption)     }   } })  app.mount('#mixins-global') // =&gt; "hello!"</code></pre> <p><strong>和 mixin 有些类似的是 extends</strong></p> <hr/> </h1> <p>先来说说 <span style="color:#a2e043;"><strong>Options API</strong></span></p> <p><span style="color:#a2e043;"><strong>Options API </strong></span><span style="color:#494949;">的特点是在对应的属性中编写对应的功能模块</span></p> <p><span style="color:#494949;">比如：在 methods 中定义方法，在 computed 中定义计算属性</span></p> <p>缺点是：</p> <p>实现某一个功能时，该功能对应的代码逻辑会被&nbsp;<strong>拆分&nbsp;</strong>到各个属性中</p> <p>然而，当我们的组件变得更大、更复杂的时候，我们需要实现的功能也就越多</p> <p>每一个功能对应的代码逻辑都被拆的很分散，<strong>代码碎片化</strong></p> <p>这是&nbsp;<strong>不方便&nbsp;</strong>我们的去&nbsp;<strong>理解和维护&nbsp;</strong>这个组件的</p> <p><span style="color:#494949;">因此，在 Vue 组件中，我们可以在 </span><span style="color:#ff9900;"><strong>setup</strong></span><span style="color:#494949;"> 中使用组合式 API，来解决上述问题</span></p> <p><span style="color:#fe2c24;">注意：在 setup 中，我们应该避免使用 this</span></p> <h2>2.1 setup 组件选项</h2> <p>使用 setup 函数时，它将接受两个参数：</p> <ol> <li><span style="color:#a2e043;"><strong>props</strong></span></li> <li><span style="color:#a2e043;"><strong>context</strong></span></li> </ol> <h3>2.1.1 Props</h3> <p>对于 props 的相关内容，跟之前讲述的是一样的</p> <pre><code class="language-javascript">// MyBook.vue  export default {   props: {     title: String   },   setup(props) {     console.log(props.title)   } }</code></pre> <h3>2.1.2 Context</h3> <p>里面包含三个属性：</p> <ul> <li><span style="color:#a2e043;"><strong>attrs</strong></span></li> <li><span style="color:#a2e043;"><strong>slots</strong></span></li> <li><span style="color:#a2e043;"><strong>emit</strong></span></li> </ul> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="348" src="http://img.555519.xyz/uploads/20221230/3aba83e9055ee7372df4f5f34f62c329.jpg"></p> <h3>&nbsp;2.1.3 结合模板使用</h3> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="556" src="http://img.555519.xyz/uploads/20221230/a9b15bca37f7ec4ae5fe9786332b79ba.jpg"></p> <hr/> </h1> <p>包含以下部分：</p> <ul> <li>响应性基础 API</li> <li>refs</li> <li>computed 与 watch</li> </ul> <h2>3.1 响应性基础 API</h2> <h3>3.1.1 reactive</h3> <p>用法如下：</p> <pre><code class="language-javascript">const obj = reactive({ count: 0 })</code></pre> <p>返回对象的响应式副本</p> <p>响应式转换是深层的</p> <p><span style="color:#fe2c24;">注意：</span><span style="color:#956fe7;"><strong>reactive</strong></span> 对传入的类型是有限制的，它要求我们必须传入的是 <span style="color:#956fe7;"><strong>一个对象或者数组类型</strong></span></p> <p>那如果我们想传入基本数据类型的时候怎么办？</p> <p>Vue3 给我们提供了另外一个 <span style="color:#9c8ec1;"><strong>API：ref</strong></span>，稍后我们会对其进行讲解</p> <h3>3.1.2 readonly</h3> <p>接受一个对象或 ref 并返回原始对象的只读代理（也就是说它依然是一个 <span style="color:#fe2c24;"><strong>proxy </strong></span><span style="color:#be191c;"><strong>？</strong></span>）</p> <p>只读代理是深层的：任何被访问的嵌套 property 也是只读的</p> <p>在实际开发中，传入 readonly 的参数有三种类型：</p> <ol> <li><span style="color:#ff9900;"><strong>普通对象</strong></span></li> <li><span style="color:#ff9900;"><strong>reactive 返回的对象</strong></span></li> <li><span style="color:#ff9900;"><strong>ref 对象</strong></span></li> </ol> <p>用法如下：</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="350" src="http://img.555519.xyz/uploads/20221230/7d4d2584a3997efea0ec6a79a1f85de2.jpg"></p> <p><span style="color:#fe2c24;">一般我们什么时候会用到 <strong>readonly</strong> 呢？</span></p> <p>我们给其它组件传递数据，希望它们使用我们传递过去的数据</p> <p>但是不允许它们修改的时候</p> <h3>3.1.3 isProxy</h3> <p>检查对象是否由 <span style="color:#ff9900;"><strong>reactive</strong></span> 或 <span style="color:#ff9900;"><strong>readonly</strong></span> 创建的 proxy</p> <h3>3.1.4 isReactive</h3> <p>检查对象是否由 <span style="color:#ff9900;"><strong>reactive </strong></span>创建的响应式代理</p> <p>用法如下：</p> <pre><code class="language-javascript">import { reactive, isReactive } from 'vue' export default {   setup() {     const state = reactive({       name: 'John'     })     console.log(isReactive(state)) // -&gt; true   } }</code></pre> <p><span style="color:#fe2c24;">注意：</span>如果该代理是 <span style="color:#ff9900;"><strong>readonly</strong></span> 创建的，但包裹了由 <span style="color:#ff9900;"><strong>reactive</strong></span> 创建的另一个代理，它也会返回 <span style="color:#faa572;"><strong>true</strong></span></p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="390" src="http://img.555519.xyz/uploads/20221230/efdabac4541fc4e1c501c7ad286ef45e.jpg"></p> <h3>3.1.5 isReadonly</h3> <p>检查对象是否由 <span style="color:#ff9900;"><strong>readonly</strong></span> 创建的只读代理</p> <h3>3.1.6 toRaw</h3> <p>返回 <span style="color:#ff9900;"><strong>reactive</strong></span> 或 <span style="color:#ff9900;"><strong>readonly</strong></span> 代理的原始对象</p> <h3>3.1.7 shallowReactive</h3> <p>创建一个响应式代理，它跟踪其自身 <span style="color:#ff9900;"><strong>property</strong></span> 的响应性，但不执行嵌套对象的深层响应式转换</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="315" src="http://img.555519.xyz/uploads/20221230/577834582b9c7ab82cfdbc1171a54b0f.jpg"></p> <h3>3.1.8 shallowReadonly</h3> <p>创建一个 <span style="color:#ff9900;"><strong>proxy</strong></span>，使其自身的 <span style="color:#ff9900;"><strong>property</strong></span> 为只读，但不执行嵌套对象的深度只读转换 (暴露原始值)</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="299" src="http://img.555519.xyz/uploads/20221230/9a596792a64a60db8898e16ba7f50bdd.jpg"></p> <h2>3.2 Refs</h2> <h3>3.2.1 ref</h3> <p>接受一个内部值并返回一个响应式且可变的 <strong>ref</strong> 对象</p> <p><strong>ref</strong> 对象具有指向内部值的单个 <strong>property</strong>&nbsp;<span style="color:#ff9900;"><strong><span style="background-color:#f3f3f4;">.value</span></strong></span></p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="177" src="http://img.555519.xyz/uploads/20221230/3ba422c124f2da8c17c1123ffd078bb6.jpg"></p> <p>这里有两个注意事项：</p> <ol> <li>在&nbsp;<span style="color:#fe2c24;">模板中引入 ref 的值&nbsp;</span>时，Vue 会自动帮我们进行&nbsp;<span style="color:#fe2c24;">解包操作</span>，所以我们&nbsp;<span style="color:#fe2c24;">不需要&nbsp;</span>在模板中通过 ref.value 的方式来使用</li> <li>在 <span style="color:#fe2c24;">setup 函数内部</span>，它任然是一个 <span style="color:#fe2c24;">ref 引用</span>，所以对其进行操作时，我们依然需要&nbsp;<span style="color:#fe2c24;">使用 ref.value 的方式</span> </li> </ol> <p><span style="color:#fe2c24;">如果将 ref 放到一个 reactive 的属性中，那么在模板中使用时会自动解包？</span></p> <hr/> </h1> <h2>4.1 computed</h2> <p>接受一个 getter 函数，并为从 getter 返回的值返回一个&nbsp;<span style="color:#fe2c24;">不变的&nbsp;</span>响应式 ref 对象</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="172" src="http://img.555519.xyz/uploads/20221230/ee8d647b604bd1f974dce577e1aa7ae9.jpg"></p> <p>使用具有 get 和 set 函数的对象来创建&nbsp;<span style="color:#fe2c24;">可写&nbsp;</span>的 ref 对象</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="241" src="http://img.555519.xyz/uploads/20221230/9672d581c0b12d4f1e40ee6ed48b956f.jpg"></p> <h2>4.2 watchEffect</h2> <p>在响应式地跟踪其依赖项时&nbsp;<span style="color:#fe2c24;">立即运行&nbsp;</span>一个函数，并在&nbsp;<span style="color:#fe2c24;">更改&nbsp;</span>依赖项时&nbsp;<span style="color:#fe2c24;">重新运行&nbsp;</span>它</p> <pre><code class="language-javascript">const count = ref(0)  watchEffect(() =&gt; console.log(count.value)) // -&gt; logs 0  setTimeout(() =&gt; {   count.value++   // -&gt; logs 1 }, 100)</code></pre> <h3>&nbsp;4.2.1 停止监听</h3> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="171" src="http://img.555519.xyz/uploads/20221230/8575d41290cca5195fd7bca2c72db32d.jpg"></p> <h3>4.2.2&nbsp;清除副作用</h3> <p>有时副作用函数会执行一些异步的副作用，这些响应需要在其失效时清除</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" height="222" src="http://img.555519.xyz/uploads/20221230/bd077cf4c845d3d828b5666910731e8b.jpg"></p> <p><span style="color:#fe2c24;">待更...</span></p> </p></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-104716.htm">宠物医院会给仓鼠看病吗（宠物医院给仓鼠看病贵吗）</a></p>
+                                        <p>下一个：<a href="/news/article-105440.htm">开宠物店的坑（开宠物店会亏本吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-67051.htm" title="TensorFlow之张量的形状相关操作">TensorFlow之张量的形状相关操作</a></li>
+                        <li class="py-2"><a href="/news/article-73583.htm" title="一只猫要多少钱最便宜（一只猫多少钱最便宜的）">一只猫要多少钱最便宜（一只猫多少钱最便宜的）</a></li>
+                        <li class="py-2"><a href="/news/article-98532.htm" title="Redux基础必知必会 reducer拆分 中间件 单向数据流">Redux基础必知必会 reducer拆分 中间件 单向数据流</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-1-hiddify-next-node-share.htm" title="4月1日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接">4月1日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/news/article-71598.htm" title="同城领养狗狗 同城领养狗狗的一般在什么平台">同城领养狗狗 同城领养狗狗的一般在什么平台</a></li>
+                        <li class="py-2"><a href="/news/article-95668.htm" title="延时湿巾哪个牌子好用(延时湿巾哪个牌子好用百度知道)">延时湿巾哪个牌子好用(延时湿巾哪个牌子好用百度知道)</a></li>
+                        <li class="py-2"><a href="/news/article-91912.htm" title="动物疫苗证是什么样的 动物疫苗证是什么样的图片">动物疫苗证是什么样的 动物疫苗证是什么样的图片</a></li>
+                        <li class="py-2"><a href="/news/article-74923.htm" title="济南猫咪领养吧 济南猫咪领养吧百度贴吧">济南猫咪领养吧 济南猫咪领养吧百度贴吧</a></li>
+                        <li class="py-2"><a href="/news/article-82474.htm" title="如何考兽医证书（如何考兽医证书）">如何考兽医证书（如何考兽医证书）</a></li>
+                        <li class="py-2"><a href="/news/article-107220.htm" title="太原小狗免费赠送拜托领养 太原小狗免费赠送拜托领养是真的吗">太原小狗免费赠送拜托领养 太原小狗免费赠送拜托领养是真的吗</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">86</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--//tabs-faqs-->
+    
+        <!-- footer -->
+    <section class="w3l-footer-29-main">
+        <!-- copyright -->
+        <section class="w3l-copyright text-center">
+            <div class="container">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                <p class="copy-footer-29">HiddifyNextNode免费节点官网 版权所有 Powered by WordPress</p>
+            </div>
+            <!-- move top -->
+            <button onclick="topFunction()" id="movetop" title="Go to top">
+                <span class="fas fa-arrow-up"></span>
+            </button>
+            <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+            </script>
+            <!-- /move top -->
+        </section>
+        <!-- //copyright -->
+    </section>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- Template JavaScript -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-3.3.1.min.js"></script>
+    <script src="/assets/website/js/frontend/hiddifynextnode/theme-change.js"></script>
+    <!-- /typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Creative Agency", "Digital Marketing", "Brand Identity"];
+    const typingDelay = 200;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery-1.9.1.min.js"></script>
+    <!-- faq -->
+    <script>
+    const items = document.querySelectorAll(".accordion button");
+
+    function toggleAccordion() {
+        const itemToggle = this.getAttribute('aria-expanded');
+
+        for (i = 0; i < items.length; i++) {
+            items[i].setAttribute('aria-expanded', 'false');
+        }
+
+        if (itemToggle == 'false') {
+            this.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    items.forEach(item => item.addEventListener('click', toggleAccordion));
+    </script>
+    <!-- //faq -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/circles.js"></script>
+    <!-- owlcarousel -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+    $(document).ready(function() {
+        $('.owl-one').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: false,
+            autoplay: false,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                667: {
+                    items: 1
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        })
+
+        $('.owl-carousel .owl-dots, .owl-carousel .owl-nav').hide();
+    })
+    </script>
+    <!-- //script -->
+    
+    <!-- //script for tesimonials carousel slider -->
+    <!-- video popup -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //video popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!-- //bootstrap -->
+    <script src="/assets/website/js/frontend/hiddifynextnode/bootstrap.min.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
