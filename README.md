@@ -1,4 +1,4 @@
-# 9月26日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接  更新时间 2025-09-26 09:58:00
+# 10月2日 | HiddifyNextNode机场节点订阅每天更新21.7M/S免费节点订阅链接  更新时间 2025-10-02 10:12:42
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://hiddifynextnode.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -7,27 +7,27 @@
 
 ## 订阅链接：
 
-### Clash订阅链接
+### 免费Clash节点订阅链接
 
-- https://hiddifynextnode.github.io/uploads/2025/09/0-20250926.yaml
-- https://hiddifynextnode.github.io/uploads/2025/09/1-20250926.yaml
-- https://hiddifynextnode.github.io/uploads/2025/09/2-20250926.yaml
-- https://hiddifynextnode.github.io/uploads/2025/09/3-20250926.yaml
-- https://hiddifynextnode.github.io/uploads/2025/09/4-20250926.yaml
+- https://hiddifynextnode.github.io/uploads/2025/10/0-20251002.yaml
+- https://hiddifynextnode.github.io/uploads/2025/10/1-20251002.yaml
+- https://hiddifynextnode.github.io/uploads/2025/10/2-20251002.yaml
+- https://hiddifynextnode.github.io/uploads/2025/10/3-20251002.yaml
+- https://hiddifynextnode.github.io/uploads/2025/10/4-20251002.yaml
 
-### V2ray订阅链接
+### 免费V2ray节点订阅链接
 
-- https://hiddifynextnode.github.io/uploads/2025/09/0-20250926.txt
-- https://hiddifynextnode.github.io/uploads/2025/09/1-20250926.txt
-- https://hiddifynextnode.github.io/uploads/2025/09/2-20250926.txt
-- https://hiddifynextnode.github.io/uploads/2025/09/3-20250926.txt
-- https://hiddifynextnode.github.io/uploads/2025/09/4-20250926.txt
+- https://hiddifynextnode.github.io/uploads/2025/10/0-20251002.txt
+- https://hiddifynextnode.github.io/uploads/2025/10/1-20251002.txt
+- https://hiddifynextnode.github.io/uploads/2025/10/2-20251002.txt
+- https://hiddifynextnode.github.io/uploads/2025/10/3-20251002.txt
+- https://hiddifynextnode.github.io/uploads/2025/10/4-20251002.txt
 
-### Sing-box订阅链接
+### 免费Sing-box节点订阅链接
 
-- https://hiddifynextnode.github.io/uploads/2025/09/20250926.json
+- https://hiddifynextnode.github.io/uploads/2025/10/20251002.json
 
-## 更多clash节点订阅 ：
+## 更多Clash节点订阅 ：
 
 
 ### 高速机场推荐1【<a href="https://www.nfsq.us/#/register?code=UTg5SIHV" target="_blank">农夫山泉</a>】
