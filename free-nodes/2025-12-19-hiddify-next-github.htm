@@ -163,22 +163,13 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
 <div class="clearfix"></div>
 <div class="col-md-12 mt-5">
         <p>上一个：<a href="/free-nodes/2025-12-18-free-node-subscribe-links.htm">12月18日 | HiddifyNextNode机场节点订阅每天更新23M/S免费节点订阅链接</a></p>
+        <p>下一个：<a href="/free-nodes/2025-12-20-hiddify-next-node.htm">12月20日 | HiddifyNextNode机场节点订阅每天更新22.9M/S免费节点订阅链接</a></p>
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekobox 是否可以与 Shadowsocks 客户端共存？</h5></div>
+    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何优化视频播放？</h5></div>
     <div class="panel-body">
-        可以。Nekobox 配置独立，不影响其他客户端运行。用户可以同时使用 Shadowsocks、Clash 等客户端，通过策略组或分流规则选择合适节点，互不干扰。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekobox 可以与 Shadowsocks 等客户端同时使用吗？</h5></div>
-    <div class="panel-body">
-        可以。Nekobox 配置独立，与 Shadowsocks、Clash 等客户端互不干扰。用户可根据需要通过策略组选择节点，实现灵活的网络管理和分流策略。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的自动切换功能如何配置？</h5></div>
-    <div class="panel-body">
-        Shadowrocket 支持根据策略组和节点延迟自动切换最优节点。用户可设置测速频率和延迟阈值，程序会定期测试节点并自动切换，以保证网络稳定性和速度。<hr />    </div>
+        通过分流规则，将流媒体域名匹配到高速节点，而其他流量走备用节点。保证视频播放流畅，同时节约带宽资源，提升整体网络速度和体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Clash 支持多配置文件加载吗？</h5></div>
@@ -186,14 +177,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         Clash 支持多配置切换，用户可在图形界面中导入多个 YAML 文件，并通过选择不同配置快速切换使用场景。例如家用模式、移动模式或公司网络模式。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Trojan-go 如何启用 WebSocket 支持？</h5></div>
+    <div class="panel-heading"><h5>SSR 协议的多路复用功能如何提升性能？</h5></div>
     <div class="panel-body">
-        在配置文件中将 transport 参数设置为 websocket，并指定 path 路径。客户端需同步使用相同路径及主机名。这样可将 Trojan 流量伪装为普通 WebSocket 通信以提升隐蔽性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的混淆参数该如何填写？</h5></div>
-    <div class="panel-body">
-        SSR 混淆参数位于节点配置中，通常选择如 tls1.2_ticket_auth 或 http_simple。参数字段可以自定义伪装主机或路径，以模拟正常流量行为，从而提高隐蔽性和抗封锁能力。<hr />    </div>
+        SSR 多路复用允许多个短连接共享同一通道，减少握手次数和加密开销。适合游戏、即时通讯等高频短连接场景，提升网络吞吐量和连接稳定性，提高整体上网体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Matsuri 如何通过节点测速选择最优线路？</h5></div>
@@ -201,9 +187,14 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         Matsuri 会定期测速节点延迟和丢包率，结合策略组自动选择延迟低、稳定性高的节点。这样可以提升网页、视频和游戏访问速度，减少掉线和卡顿，优化整体体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何优化视频播放？</h5></div>
+    <div class="panel-heading"><h5>Trojan-go 如何启用 WebSocket 支持？</h5></div>
     <div class="panel-body">
-        通过分流规则，将流媒体域名匹配到高速节点，而其他流量走备用节点。保证视频播放流畅，同时节约带宽资源，提升整体网络速度和体验。<hr />    </div>
+        在配置文件中将 transport 参数设置为 websocket，并指定 path 路径。客户端需同步使用相同路径及主机名。这样可将 Trojan 流量伪装为普通 WebSocket 通信以提升隐蔽性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekobox 可以与 Shadowsocks 等客户端同时使用吗？</h5></div>
+    <div class="panel-body">
+        可以。Nekobox 配置独立，与 Shadowsocks、Clash 等客户端互不干扰。用户可根据需要通过策略组选择节点，实现灵活的网络管理和分流策略。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>如何更新 Clash 的订阅节点？</h5></div>
@@ -211,9 +202,19 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         在 Clash 中更新订阅节点，只需在配置页面中点击“Update”或“Refresh”按钮即可。系统会重新下载订阅链接中的内容，自动替换旧节点。这样能确保用户随时获取最新可用节点，避免连接失败或延迟过高。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 协议的多路复用功能如何提升性能？</h5></div>
+    <div class="panel-heading"><h5>Shadowrocket 的自动切换功能如何配置？</h5></div>
     <div class="panel-body">
-        SSR 多路复用允许多个短连接共享同一通道，减少握手次数和加密开销。适合游戏、即时通讯等高频短连接场景，提升网络吞吐量和连接稳定性，提高整体上网体验。    </div>
+        Shadowrocket 支持根据策略组和节点延迟自动切换最优节点。用户可设置测速频率和延迟阈值，程序会定期测试节点并自动切换，以保证网络稳定性和速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的混淆参数该如何填写？</h5></div>
+    <div class="panel-body">
+        SSR 混淆参数位于节点配置中，通常选择如 tls1.2_ticket_auth 或 http_simple。参数字段可以自定义伪装主机或路径，以模拟正常流量行为，从而提高隐蔽性和抗封锁能力。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekobox 是否可以与 Shadowsocks 客户端共存？</h5></div>
+    <div class="panel-body">
+        可以。Nekobox 配置独立，不影响其他客户端运行。用户可以同时使用 Shadowsocks、Clash 等客户端，通过策略组或分流规则选择合适节点，互不干扰。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -243,15 +244,15 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2"><a href="/free-nodes/2025-11-6-free-hiddify-next-node.htm" title="11月6日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接">11月6日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-4-free-hiddify-next-node.htm" title="12月4日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接">12月4日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-7-free-node-subscribe.htm" title="11月7日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接">11月7日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-15-latest-hiddify-next-node.htm" title="12月15日 | HiddifyNextNode机场节点订阅每天更新21.8M/S免费节点订阅链接">12月15日 | HiddifyNextNode机场节点订阅每天更新21.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-15-free-hiddify-next-node.htm" title="11月15日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">11月15日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-26-node-share-links.htm" title="11月26日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">11月26日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-13-free-high-speed-nodes.htm" title="12月13日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接">12月13日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-10-free-subscribe-node.htm" title="11月10日 | HiddifyNextNode机场节点订阅每天更新18.8M/S免费节点订阅链接">11月10日 | HiddifyNextNode机场节点订阅每天更新18.8M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-18-free-node-subscribe.htm" title="11月18日 | HiddifyNextNode机场节点订阅每天更新18M/S免费节点订阅链接">11月18日 | HiddifyNextNode机场节点订阅每天更新18M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-29-node-share.htm" title="11月29日 | HiddifyNextNode机场节点订阅每天更新18.3M/S免费节点订阅链接">11月29日 | HiddifyNextNode机场节点订阅每天更新18.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-8-today-hiddify-next-node.htm" title="12月8日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接">12月8日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-7-free-subscribe-node.htm" title="12月7日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接">12月7日 | HiddifyNextNode机场节点订阅每天更新19.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-11-hiddify-next-github.htm" title="11月11日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">11月11日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-6-today-hiddify-next-node.htm" title="12月6日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">12月6日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-11-node-share.htm" title="12月11日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接">12月11日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-3-node-share.htm" title="12月3日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接">12月3日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-23-hiddify-next-node-github.htm" title="11月23日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">11月23日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-24-hiddify-next-windows.htm" title="12月24日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接">12月24日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-30-free-node-subscribe.htm" title="11月30日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接">11月30日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -263,7 +264,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
