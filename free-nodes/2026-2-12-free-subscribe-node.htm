@@ -362,19 +362,9 @@ sudo netfilter-persistent save
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Sing-box 是否支持多出口自动选择？</h5></div>
+    <div class="panel-heading"><h5>Mellow 的 TUN 模式与 SOCKS5 代理区别是什么？</h5></div>
     <div class="panel-body">
-        支持。通过配置路由规则和策略组，Sing-box 可以自动判断流量类型并选择最佳出口，实现智能分流和多节点负载均衡，提高访问效率。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Surfboard 的配置文件可以与 Clash 通用吗？</h5></div>
-    <div class="panel-body">
-        Surfboard 基于 Clash 核心，因此支持大部分 YAML 配置文件，但部分字段如 rule-provider、external-controller 等可能不兼容。建议使用订阅转换工具将 Clash 文件转换为 Surfboard 兼容格式导入。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
-    <div class="panel-body">
-        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+        TUN 模式拦截系统 IP 层流量，实现全局代理；SOCKS5 代理通常只影响特定应用。TUN 更适合全局加速、游戏和视频应用，保证所有流量走节点，提高网络稳定性和速度。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>SSR 混淆方式如何提高抗封锁能力？</h5></div>
@@ -382,19 +372,9 @@ sudo netfilter-persistent save
         SSR 混淆可将流量伪装成正常 HTTPS 或 HTTP 数据，降低被 DPI 检测风险。合理选择协议和混淆参数组合，可以提高节点稳定性和长期可用性，保证科学上网体验顺畅。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 如何设置流量配额限制？</h5></div>
+    <div class="panel-heading"><h5>Sing-box 是否支持多出口自动选择？</h5></div>
     <div class="panel-body">
-        管理员可在 Hiddify Next 面板为每个用户设置流量上限或带宽限制。超过配额后可自动阻止或降速，保证服务器资源合理分配，防止单用户占用过多带宽。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Mellow 的 TUN 模式与 SOCKS5 代理区别是什么？</h5></div>
-    <div class="panel-body">
-        TUN 模式拦截系统 IP 层流量，实现全局代理；SOCKS5 代理通常只影响特定应用。TUN 更适合全局加速、游戏和视频应用，保证所有流量走节点，提高网络稳定性和速度。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 的用户管理可以分组吗？</h5></div>
-    <div class="panel-body">
-        支持用户分组管理，可为不同组设置独立带宽、流量配额和节点访问权限。分组管理便于大规模用户维护，确保每个组的网络资源合理分配，提升整体管理效率。<hr />    </div>
+        支持。通过配置路由规则和策略组，Sing-box 可以自动判断流量类型并选择最佳出口，实现智能分流和多节点负载均衡，提高访问效率。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Hysteria2 在丢包环境下如何配置更稳？</h5></div>
@@ -402,14 +382,34 @@ sudo netfilter-persistent save
         可调整 Hysteria2 的拥塞控制与重传参数，启用 FEC（前向纠错）并合理设置 MTU 与窗口大小以适应链路特性。还可尝试切换 QUIC 参数或更换中转以减少丢包影响。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Trojan 的伪装域名如何选择更安全？</h5></div>
+    <div class="panel-body">
+        伪装域名应选择真实可访问的网站，且证书有效。这样 Trojan 流量能伪装成正常 HTTPS 请求，减少被封锁或检测的风险，提高节点安全性和稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 的用户管理可以分组吗？</h5></div>
+    <div class="panel-body">
+        支持用户分组管理，可为不同组设置独立带宽、流量配额和节点访问权限。分组管理便于大规模用户维护，确保每个组的网络资源合理分配，提升整体管理效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-body">
+        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 如何设置流量配额限制？</h5></div>
+    <div class="panel-body">
+        管理员可在 Hiddify Next 面板为每个用户设置流量上限或带宽限制。超过配额后可自动阻止或降速，保证服务器资源合理分配，防止单用户占用过多带宽。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>何为 fake-ip 模式，它的优缺点是什么？</h5></div>
     <div class="panel-body">
         fake-ip 是通过伪造 DNS 返回的 IP 地址让客户端透明代理流量，优点是兼容性好、无需修改应用代理设置；缺点是可能导致某些证书校验或 SNI 伪装失效，需要配合 DNS 与证书策略谨慎使用。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Trojan 的伪装域名如何选择更安全？</h5></div>
+    <div class="panel-heading"><h5>Surfboard 的配置文件可以与 Clash 通用吗？</h5></div>
     <div class="panel-body">
-        伪装域名应选择真实可访问的网站，且证书有效。这样 Trojan 流量能伪装成正常 HTTPS 请求，减少被封锁或检测的风险，提高节点安全性和稳定性。    </div>
+        Surfboard 基于 Clash 核心，因此支持大部分 YAML 配置文件，但部分字段如 rule-provider、external-controller 等可能不兼容。建议使用订阅转换工具将 Clash 文件转换为 Surfboard 兼容格式导入。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -438,16 +438,16 @@ sudo netfilter-persistent save
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-1-25-latest-hiddify-next-node.htm" title="1月25日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接">1月25日 | HiddifyNextNode机场节点订阅每天更新19.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-21-node-share.htm" title="1月21日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接">1月21日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-24-free-hiddify-next-node.htm" title="1月24日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">1月24日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-27-free-node-subscribe.htm" title="1月27日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接">1月27日 | HiddifyNextNode机场节点订阅每天更新19.7M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-2-3-today-hiddify-next-node.htm" title="2月3日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">2月3日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-18-today-hiddify-next-node.htm" title="1月18日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">1月18日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-31-latest-hiddify-next-node.htm" title="1月31日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接">1月31日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-29-free-subscribe-node.htm" title="1月29日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接">1月29日 | HiddifyNextNode机场节点订阅每天更新22.4M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-2-6-latest-hiddify-next-node.htm" title="2月6日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接">2月6日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-2-4-hiddify-next-node-github.htm" title="2月4日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接">2月4日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-2-1-free-subscribe-node.htm" title="2月1日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接">2月1日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-2-9-latest-hiddify-next-node.htm" title="2月9日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接">2月9日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-24-free-hiddify-next-node.htm" title="1月24日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">1月24日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-2-14-hiddify-next-node-github.htm" title="2月14日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接">2月14日 | HiddifyNextNode机场节点订阅每天更新21M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-2-3-today-hiddify-next-node.htm" title="2月3日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">2月3日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-23-free-subscribe-node.htm" title="1月23日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">1月23日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-20-hiddify-next-node-github.htm" title="1月20日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接">1月20日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-26-hiddify-next-github.htm" title="1月26日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接">1月26日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-19-hiddify-next-windows.htm" title="1月19日 | HiddifyNextNode机场节点订阅每天更新20M/S免费节点订阅链接">1月19日 | HiddifyNextNode机场节点订阅每天更新20M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -459,7 +459,7 @@ sudo netfilter-persistent save
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">13</span> <a href="/date/2026-02/" title="2026-02 归档">2026-02</a></h4>
+                <h4><span class="badge" style="float: right;">20</span> <a href="/date/2026-02/" title="2026-02 归档">2026-02</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">18</span> <a href="/date/2026-01/" title="2026-01 归档">2026-01</a></h4>
