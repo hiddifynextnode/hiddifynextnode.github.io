@@ -162,19 +162,43 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
 <p style="margin-bottom:3rem;color:#999;font-style:italic;">注：跳转链接可能会 <b style="color:red;">被墙</b> ，如多次打开失败，请先使用下面不稳定免费订阅后，再尝试点击链接</p><p>&nbsp;</p><p></p><h2>订阅链接</h2><p>&nbsp;</p><p><strong>clash订阅链接</strong></p><p>https://hiddifynextnode.github.io/uploads/2026/03/0-20260304.yaml</p><p>https://hiddifynextnode.github.io/uploads/2026/03/1-20260304.yaml</p><p>https://hiddifynextnode.github.io/uploads/2026/03/3-20260304.yaml</p><p>https://hiddifynextnode.github.io/uploads/2026/03/4-20260304.yaml</p><p>&nbsp;</p><p><strong>v2ray订阅链接:</strong></p><p>https://hiddifynextnode.github.io/uploads/2026/03/1-20260304.txt</p><p>https://hiddifynextnode.github.io/uploads/2026/03/4-20260304.txt</p><p><strong>sing-box订阅链接</strong></p><p>https://hiddifynextnode.github.io/uploads/2026/03/20260304.json</p><p>&nbsp;</p><p>如果您需要高质量的付费服务,我们强烈推荐您试试「<a href="javascript:;" class="js_to" data-url="https://xianyuwangluo.top/#/register?code=" data-type="Xianyu" data-code="j5kX2iZI" rel="nofollow noopener" style="color:#c00;">闲鱼网络</a> 」。提供全球范围内快速稳定的高速节点,轻松处理8K高清视频流量,并可解锁流媒体网站和chatGPT。其服务器性能出色,确保您享受到高品质的体验。</p><h2>解密Clash：从全名解析到精通配置的科学上网指南</h2>  <h2>引言：数字时代的网络自由钥匙</h2>  <p>当互联网成为现代社会的"第五元素"，科学上网工具便如同数字世界的通行证。在众多代理工具中，Clash以其跨平台兼容性和高度可定制性脱颖而出——它不仅是技术极客的利器，更是普通用户突破网络边界的瑞士军刀。本文将带您深入探索Clash的命名哲学、核心功能，并通过手把手教学揭开其配置奥秘，最终让您获得如丝般顺滑的网络体验。  </p>  <h2>第一章 Clash的命名密码：不止是一个工具</h2>  <h3>1.1 多面体的命名体系</h3>  <p>Clash并非单一软件，而是一个覆盖全平台的代理生态。其名称如同变色龙般随环境变化："Clash for Windows"展现图形化界面的亲和力，"Clash for Linux"彰显命令行的极客精神，移动端的"Clash for Android/iOS"则化身口袋里的自由之门。这种模块化命名策略，暗示着开发者"一处设计，多端适用"的哲学智慧。  </p>  <h3>1.2 版本差异中的统一内核</h3>  <p>尽管各平台界面迥异，但所有Clash变体都共享着相同的DNA：<br /> - <strong>协议支持</strong>：V2Ray、Shadowsocks、Trojan等协议如同多语言翻译官<br /> - <strong>规则引擎</strong>：YAML配置架构提供堪比编程的灵活性<br /> - <strong>流量管控</strong>：微观到每个字节的精细化调度能力  </p>  <p>这种"形散神聚"的特性，使Clash在碎片化的设备生态中保持统一体验。  </p>  <h2>第二章 功能解剖：藏在代码里的网络魔术</h2>  <h3>2.1 协议交响乐团</h3>  <p>Clash如同一位精通多国语言的 diplomat，能同时处理：<br /> - <strong>Shadowsocks</strong>：轻量级加密的"快车专线"<br /> - <strong>VMess</strong>：V2Ray的动态端口变装术<br /> - <strong>Trojan</strong>：伪装成HTTPS流量的"特洛伊木马"  </p>  <p>用户可根据网络环境随时切换，就像选择不同的交通工具。  </p>  <h3>2.2 规则系统的智能路由</h3>  <p>其规则引擎堪比交通指挥中心：<br /> <code>yaml rules:   - DOMAIN-SUFFIX,google.com,ProxyA  # 谷歌流量走A线路   - IP-CIDR,192.168.1.0/24,DIRECT   # 内网直连   - GEOIP,CN,DIRECT                 # 国内IP不代理</code><br /> 这种颗粒度的控制，让关键业务永远畅通无阻。  </p>  <h3>2.3 动态配置的黑科技</h3>  <p>修改配置文件后无需重启的"热加载"特性，如同给飞行中的飞机更换引擎。配合TUN模式的全流量接管，甚至能让智能家居设备也享受代理服务。  </p>  <h2>第三章 实战手册：从安装到精通的阶梯</h2>  <h3>3.1 跨平台安装全景指南</h3>  <p><strong>Windows用户</strong>：<br /> 1. 从GitHub releases下载<code>Clash.for.Windows.Setup.exe</code><br /> 2. 安装时勾选"添加到PATH"以便命令行调用<br /> 3. 首次运行会在<code>%USERPROFILE%\.config\clash</code>生成配置模板  </p>  <p><strong>macOS用户</strong>：<br /> <code>bash brew install clash mkdir -p ~/.config/clash wget -O ~/.config/clash/config.yaml [订阅链接]</code>  </p>  <p><strong>Android用户</strong>：<br /> 推荐使用开源分支Clash.Meta，支持TUN模式全局代理  </p>  <h3>3.2 配置文件的艺术创作</h3>  <p>典型配置结构解析：<br /> ```yaml proxies:   - name: "日本节点"     type: vmess     server: jp.example.com     port: 443     uuid: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx     alterId: 0     cipher: auto     tls: true</p>  <p>proxy-groups:   - name: "智能切换"     type: fallback     proxies: ["日本节点","美国备用"]     url: "http://www.gstatic.com/generate_204"     interval: 300</p>  <p>rules:   - MATCH,智能切换  # 默认规则 ```  </p>  <h3>3.3 高阶技巧三连击</h3>  <ol> <li><strong>负载均衡</strong>：在proxy-groups中使用<code>type: load-balance</code>  </li> <li><strong>策略组嵌套</strong>：将多个代理组作为子组调用  </li> <li><strong>脚本规则</strong>：利用JavaScript实现动态路由决策  </li> </ol>  <h2>第四章 排错宝典：常见问题深度解析</h2>  <h3>4.1 连接故障树分析</h3>  <ul> <li><p><strong>症状</strong>：能ping通但无法上网<br /> <strong>诊断</strong>：检查规则是否误判为DIRECT<br /> <strong>处方</strong>：添加<code>- DOMAIN,clash.razord.top,REJECT</code>测试  </p></li> <li><p><strong>症状</strong>：移动端频繁断连<br /> <strong>诊断</strong>：可能是TLS指纹被识别<br /> <strong>处方</strong>：启用<code>client-fingerprint: chrome</code>伪装  </p></li> </ul>  <h3>4.2 性能优化四象限</h3>  <p>| 场景                | 优化方案                      | |---------------------|-----------------------------| | 低配设备            | 禁用IPv6解析                 | | 高延迟网络          | 启用UDP over TCP             | | 多用户环境          | 开启relay模式                | | 跨境视频会议        | 单独设置QoS优先级            |</p>  <h2>第五章 未来展望：Clash生态演进</h2>  <p>随着eBPF等新技术引入，下一代Clash可能实现：<br /> - <strong>零配置智能路由</strong>：基于AI预测自动选择节点<br /> - <strong>硬件级加速</strong>：利用网卡Offload提升吞吐量<br /> - <strong>区块链审计</strong>：去中心化的节点质量验证体系  </p>  <h2>结语：掌握数字世界的主动权</h2>  <p>Clash就像网络空间的哈德良长城——它既是防御工事，也是联通内外的关口。当我们深入理解其运作机制时，获得的不仅是技术能力，更是一种数字时代的生存智慧。正如网络自由活动家Aaron Swartz所言："信息即权力，但像所有权力一样，有些人只想独占它。"而Clash，正是一把打破这种垄断的钥匙。  </p>  <p><strong>终极建议</strong>：在<code>/rules</code>最后永远保留一条<code>- MATCH,DIRECT</code>，这不仅是技术上的安全阀，更隐喻着——真正的自由，在于随时可以选择不代理的权利。</p> </div>
 <div class="clearfix"></div>
 <div class="col-md-12 mt-5">
-        <p>上一个：<a href="/free-nodes/2026-3-3-free-node-subscribe-links.htm">3月3日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></p>
         <p>下一个：<a href="/free-nodes/2026-3-5-free-subscribe-node.htm">3月5日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></p>
     </div>
 <h4>FAQ</h4>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekobox 如何管理多协议节点和分流？</h5></div>
+    <div class="panel-body">
+        Nekobox 可同时管理 Shadowsocks、VMess、Trojan 等多协议节点。结合策略组和分流规则，可实现不同流量走不同节点，提升网络效率和管理便利性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Potatso Lite 是否可以手动管理多个节点？</h5></div>
+    <div class="panel-body">
+        支持。用户可以手动输入节点参数或扫描二维码导入节点，并可进行修改或删除。虽然不支持订阅自动更新，但足够满足轻量用户对节点管理和分流的基本需求。<hr />    </div>
+</div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 的核心组件有哪些？</h5></div>
     <div class="panel-body">
         V2Ray 的核心由 inbound、outbound、routing、policy 等模块组成。Inbound 处理入站请求，Outbound 负责出站连接，Routing 管理流量分流策略。模块化的设计让用户可以自由组合代理方式。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Matsuri 如何通过节点测速选择最优线路？</h5></div>
+    <div class="panel-heading"><h5>Matsuri 支持订阅更新吗？</h5></div>
     <div class="panel-body">
-        Matsuri 会定期测速节点延迟和丢包率，结合策略组自动选择延迟低、稳定性高的节点。这样可以提升网页、视频和游戏访问速度，减少掉线和卡顿，优化整体体验。<hr />    </div>
+        支持。Matsuri 内置订阅更新模块，可自动检测链接变化并定期刷新节点。用户还可手动点击更新按钮同步最新配置，保持网络连接的可用性与速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2RayN 的作用是什么？</h5></div>
+    <div class="panel-body">
+        V2RayN 是 V2Ray 的 Windows 图形客户端，提供节点管理、订阅导入、日志查看等功能。它支持多协议配置，并可与系统代理集成，是 Windows 用户最常用的代理管理工具之一。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VMess AEAD 加密如何确保数据安全？</h5></div>
+    <div class="panel-body">
+        AEAD 加密防止数据篡改、重放攻击和流量特征泄露。在高封锁环境下，保证节点可用，提升数据安全和连接稳定性，降低被检测风险，确保长期安全访问。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何给 Clash 添加自定义域名白名单以提升访问体验？</h5></div>
+    <div class="panel-body">
+        在 rules 中添加 `DOMAIN-SUFFIX,example.com,DIRECT` 或 `DOMAIN-KEYWORD,example,DIRECT` 条目，将常用且可靠的站点设为直连，可减少代理绕行延迟并避免因代理造成的登录/验证问题。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Netch 的 TUN 模式与 SOCKS 模式有何差异？</h5></div>
@@ -187,34 +211,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         先用 netstat 或 ss 工具查看占用该端口的进程（例如 `ss -ltnp`），确认是旧进程或其他服务占用。停止占用进程或修改 V2Ray 配置端口，然后重启服务并检查防火墙规则是否开放了新端口。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekobox 如何管理多协议节点和分流？</h5></div>
+    <div class="panel-heading"><h5>Matsuri 如何通过节点测速选择最优线路？</h5></div>
     <div class="panel-body">
-        Nekobox 可同时管理 Shadowsocks、VMess、Trojan 等多协议节点。结合策略组和分流规则，可实现不同流量走不同节点，提升网络效率和管理便利性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2RayN 的作用是什么？</h5></div>
-    <div class="panel-body">
-        V2RayN 是 V2Ray 的 Windows 图形客户端，提供节点管理、订阅导入、日志查看等功能。它支持多协议配置，并可与系统代理集成，是 Windows 用户最常用的代理管理工具之一。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何给 Clash 添加自定义域名白名单以提升访问体验？</h5></div>
-    <div class="panel-body">
-        在 rules 中添加 `DOMAIN-SUFFIX,example.com,DIRECT` 或 `DOMAIN-KEYWORD,example,DIRECT` 条目，将常用且可靠的站点设为直连，可减少代理绕行延迟并避免因代理造成的登录/验证问题。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 是否可以手动管理多个节点？</h5></div>
-    <div class="panel-body">
-        支持。用户可以手动输入节点参数或扫描二维码导入节点，并可进行修改或删除。虽然不支持订阅自动更新，但足够满足轻量用户对节点管理和分流的基本需求。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VMess AEAD 加密如何确保数据安全？</h5></div>
-    <div class="panel-body">
-        AEAD 加密防止数据篡改、重放攻击和流量特征泄露。在高封锁环境下，保证节点可用，提升数据安全和连接稳定性，降低被检测风险，确保长期安全访问。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Matsuri 支持订阅更新吗？</h5></div>
-    <div class="panel-body">
-        支持。Matsuri 内置订阅更新模块，可自动检测链接变化并定期刷新节点。用户还可手动点击更新按钮同步最新配置，保持网络连接的可用性与速度。    </div>
+        Matsuri 会定期测速节点延迟和丢包率，结合策略组自动选择延迟低、稳定性高的节点。这样可以提升网页、视频和游戏访问速度，减少掉线和卡顿，优化整体体验。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -243,16 +242,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-2-17-free-hiddify-next-node.htm" title="2月17日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">2月17日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-23-free-node-subscribe-links.htm" title="3月23日 | HiddifyNextNode机场节点订阅每天更新19M/S免费节点订阅链接">3月23日 | HiddifyNextNode机场节点订阅每天更新19M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-27-node-share.htm" title="3月27日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接">3月27日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-14-free-node-subscribe-links.htm" title="3月14日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接">3月14日 | HiddifyNextNode机场节点订阅每天更新22.7M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-2-free-subscribe-node.htm" title="4月2日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接">4月2日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-21-free-subscribe-node.htm" title="3月21日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接">3月21日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-5-free-subscribe-node.htm" title="3月5日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">3月5日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-22-hiddify-next-node-github.htm" title="3月22日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接">3月22日 | HiddifyNextNode机场节点订阅每天更新22.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-12-today-hiddify-next-node.htm" title="3月12日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接">3月12日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-4-free-node-subscribe-links.htm" title="3月4日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接">3月4日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-21-node-share.htm" title="1月21日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接">1月21日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-8-free-node-subscribe-links.htm" title="3月8日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接">3月8日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-2-24-hiddify-next-windows.htm" title="2月24日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接">2月24日 | HiddifyNextNode机场节点订阅每天更新22.5M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-3-free-node-subscribe-links.htm" title="3月3日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接">3月3日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-30-node-share.htm" title="1月30日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接">1月30日 | HiddifyNextNode机场节点订阅每天更新19.2M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-2-11-free-node-subscribe.htm" title="2月11日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接">2月11日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-28-hiddify-next-node-github.htm" title="1月28日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接">1月28日 | HiddifyNextNode机场节点订阅每天更新22.6M/S免费节点订阅链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-2-12-free-subscribe-node.htm" title="2月12日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接">2月12日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-18-hiddify-next-node-share.htm" title="3月18日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接">3月18日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接</a></li>
                     </ul>
     </div>
 </div>
@@ -264,13 +263,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2026-03/" title="2026-03 归档">2026-03</a></h4>
+                <h4><span class="badge" style="float: right;">1</span> <a href="/date/2026-04/" title="2026-04 归档">2026-04</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2026-02/" title="2026-02 归档">2026-02</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2026-01/" title="2026-01 归档">2026-01</a></h4>
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-03/" title="2026-03 归档">2026-03</a></h4>
             </li>
                     </ul>
     </div>
