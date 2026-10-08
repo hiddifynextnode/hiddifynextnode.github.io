@@ -329,29 +329,24 @@ A4：核对账号信息，尝试切换网络环境，检查应用权限，或者
         不同协议和混淆方式对抗 DPI 和封锁能力不同。合理选择可隐藏真实流量特征，减少被封锁风险，提高连接稳定性和访问速度，确保节点长期可用。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的协议插件如何增强安全性？</h5></div>
-    <div class="panel-body">
-        协议插件可隐藏真实流量特征并模拟正常协议，防止被封锁或 DPI 检测。结合加密方式和混淆方法，可以提升节点的稳定性和长期可用性，保证数据传输安全。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 的流量分流规则支持哪些条件？</h5></div>
-    <div class="panel-body">
-        V2Ray 支持按域名、IP、端口、协议或用户标签进行分流。用户可灵活设置国内直连、国外代理或特定节点，实现精准控制和网络优化。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 是否支持多节点手动管理？</h5></div>
-    <div class="panel-body">
-        支持。用户可以手动输入节点参数或扫描二维码导入节点，并可进行修改或删除。虽然不支持订阅自动更新，但足够满足轻量用户对节点管理和分流的基本需求。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>SSR 的混淆方式如何选择最合适？</h5></div>
     <div class="panel-body">
         根据网络环境选择适合的混淆方式，如 tls1.2_ticket_auth 模拟 HTTPS 流量，可隐藏真实特征。结合协议插件使用，可以提高抗封锁能力和节点可用性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash.Meta 与原版 Clash 有何不同？</h5></div>
+    <div class="panel-heading"><h5>Trojan-go 如何启用 WebSocket 支持？</h5></div>
     <div class="panel-body">
-        Clash.Meta 是社区优化版本，支持更多传输协议，如 Hysteria、TUIC、Reality 等。它还增强了 DNS 处理逻辑和脚本分流能力，适合追求极致速度和灵活规则配置的高级用户。<hr />    </div>
+        在配置文件中将 transport 参数设置为 websocket，并指定 path 路径。客户端需同步使用相同路径及主机名。这样可将 Trojan 流量伪装为普通 WebSocket 通信以提升隐蔽性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的协议插件如何增强安全性？</h5></div>
+    <div class="panel-body">
+        协议插件可隐藏真实流量特征并模拟正常协议，防止被封锁或 DPI 检测。结合加密方式和混淆方法，可以提升节点的稳定性和长期可用性，保证数据传输安全。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray 支持哪些传输层协议？</h5></div>
+    <div class="panel-body">
+        V2Ray 支持多种传输层，包括 TCP、mKCP、WebSocket、gRPC、QUIC 等。每种传输方式都有不同的性能特点，例如 TCP 稳定、WS 兼容 CDN、QUIC 延迟低。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>VLESS + XTLS 在移动网络的优势是什么？</h5></div>
@@ -364,14 +359,19 @@ A4：核对账号信息，尝试切换网络环境，检查应用权限，或者
         PAC 模式通过规则动态决定流量是否走代理。适合访问国内外混合网站环境，无需手动切换节点，自动分流提高网络访问效率和连接稳定性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Trojan-go 如何启用 WebSocket 支持？</h5></div>
+    <div class="panel-heading"><h5>V2Ray 的流量分流规则支持哪些条件？</h5></div>
     <div class="panel-body">
-        在配置文件中将 transport 参数设置为 websocket，并指定 path 路径。客户端需同步使用相同路径及主机名。这样可将 Trojan 流量伪装为普通 WebSocket 通信以提升隐蔽性。<hr />    </div>
+        V2Ray 支持按域名、IP、端口、协议或用户标签进行分流。用户可灵活设置国内直连、国外代理或特定节点，实现精准控制和网络优化。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 支持哪些传输层协议？</h5></div>
+    <div class="panel-heading"><h5>Clash.Meta 与原版 Clash 有何不同？</h5></div>
     <div class="panel-body">
-        V2Ray 支持多种传输层，包括 TCP、mKCP、WebSocket、gRPC、QUIC 等。每种传输方式都有不同的性能特点，例如 TCP 稳定、WS 兼容 CDN、QUIC 延迟低。    </div>
+        Clash.Meta 是社区优化版本，支持更多传输协议，如 Hysteria、TUIC、Reality 等。它还增强了 DNS 处理逻辑和脚本分流能力，适合追求极致速度和灵活规则配置的高级用户。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Potatso Lite 是否支持多节点手动管理？</h5></div>
+    <div class="panel-body">
+        支持。用户可以手动输入节点参数或扫描二维码导入节点，并可进行修改或删除。虽然不支持订阅自动更新，但足够满足轻量用户对节点管理和分流的基本需求。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -419,16 +419,16 @@ A4：核对账号信息，尝试切换网络环境，检查应用权限，或者
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-9-14-free-hiddify-next-node.htm" title="9月14日 | HiddifyNextNode机场节点订阅每天更新20.1M/S免费节点订阅链接">9月14日 | HiddifyNextNode机场节点订阅每天更新20.1M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/hiddify-next-windows-2026-8-27.htm" title="8月27日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接">8月27日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-8-free-hiddify-next-node.htm" title="9月8日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接">9月8日 | HiddifyNextNode机场节点订阅每天更新18.9M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-2-today-hiddify-next-node.htm" title="9月2日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接">9月2日 | HiddifyNextNode机场节点订阅每天更新20.2M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-26-free-subscribe-node.htm" title="8月26日 | HiddifyNextNode机场节点订阅每天更新19M/S免费节点订阅链接">8月26日 | HiddifyNextNode机场节点订阅每天更新19M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-4-free-node-subscribe.htm" title="9月4日 | HiddifyNextNode机场节点订阅每天更新21.7M/S免费节点订阅链接">9月4日 | HiddifyNextNode机场节点订阅每天更新21.7M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-10-free-subscribe-node.htm" title="9月10日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接">9月10日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-18-hiddify-next-github.htm" title="8月18日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">8月18日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/latest-hiddify-next-node-2026-10-3.htm" title="10月3日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">10月3日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-24-today-hiddify-next-node.htm" title="9月24日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接">9月24日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-node-subscribe-links-2026-9-21.htm" title="9月21日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接">9月21日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-9-30-free-hiddify-next-node.htm" title="9月30日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接">9月30日 | HiddifyNextNode机场节点订阅每天更新22.8M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-25.htm" title="9月25日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接">9月25日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/hiddify-next-node-share-2026-10-1.htm" title="10月1日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接">10月1日 | HiddifyNextNode机场节点订阅每天更新18.7M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-10-8-hiddify-next-github.htm" title="10月8日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接">10月8日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/hiddify-next-node-share-2026-9-27.htm" title="9月27日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接">9月27日 | HiddifyNextNode机场节点订阅每天更新21.5M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-26-hiddify-next-node.htm" title="9月26日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接">9月26日 | HiddifyNextNode机场节点订阅每天更新18.6M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/hiddify-next-node-share-2026-9-19.htm" title="9月19日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接">9月19日 | HiddifyNextNode机场节点订阅每天更新19.3M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-9-17.htm" title="9月17日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接">9月17日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -440,13 +440,10 @@ A4：核对账号信息，尝试切换网络环境，检查应用权限，或者
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">1</span> <a href="/date/2026-10/" title="2026-10 归档">2026-10</a></h4>
+                <h4><span class="badge" style="float: right;">8</span> <a href="/date/2026-10/" title="2026-10 归档">2026-10</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
             </li>
                     </ul>
     </div>
