@@ -189,24 +189,14 @@ iptables -A OUTPUT -m state --state NEW -j LOG</pre></div><h2>第五章 典型�
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>如何在 Clash for Android 中导入订阅链接？</h5></div>
+    <div class="panel-heading"><h5>Shadowrocket 节点测速功能如何优化游戏体验？</h5></div>
     <div class="panel-body">
-        Clash for Android 支持通过订阅链接快速导入节点。用户只需在配置界面中点击“新建配置”，选择“URL 导入”并粘贴订阅地址即可，程序会自动下载并解析所有节点配置。<hr />    </div>
+        Shadowrocket 会定期测速节点延迟和丢包率，并结合策略组自动切换最佳节点。保证游戏流量走低延迟节点，减少延迟和掉线，提高游戏流畅度和稳定性。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Hiddify Next 如何设置用户带宽限制？</h5></div>
     <div class="panel-body">
         管理员可为每个用户设置上传和下载带宽上限。超出限制可自动降速或阻止访问，保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性和使用效率。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 策略组如何提升节点切换效率？</h5></div>
-    <div class="panel-body">
-        通过策略组可设置节点优先级和分流规则，结合延迟检测功能，Clash 自动选择延迟低、稳定性高的节点处理不同流量，提高网页、视频和游戏访问速度及整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 如何配置策略组优先节点？</h5></div>
-    <div class="panel-body">
-        在 Clash 中，用户可以通过策略组设置节点优先级，优先使用延迟低、稳定性高的节点。结合规则文件，可以根据域名或 IP 自动选择最优节点，实现更高效的网络访问体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Potatso Lite 在新版 iOS 上无法连接怎么办？</h5></div>
@@ -219,9 +209,9 @@ iptables -A OUTPUT -m state --state NEW -j LOG</pre></div><h2>第五章 典型�
         Netch 支持 UDP 转发，可为游戏流量建立高速通道。结合策略组和节点延迟检测，可减少丢包和延迟，保证游戏访问稳定流畅，提高网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 节点测速功能如何优化游戏体验？</h5></div>
+    <div class="panel-heading"><h5>SSR 如何选择合适混淆提高稳定性？</h5></div>
     <div class="panel-body">
-        Shadowrocket 会定期测速节点延迟和丢包率，并结合策略组自动切换最佳节点。保证游戏流量走低延迟节点，减少延迟和掉线，提高游戏流畅度和稳定性。<hr />    </div>
+        选择混淆方式时应根据网络环境和封锁程度，例如 tls1.2_ticket_auth 可模拟 HTTPS 流量。合理组合协议和混淆可提升节点稳定性和抗封锁能力，确保长期科学上网体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>如何配置 Clash 的 GEOIP 分流？</h5></div>
@@ -229,14 +219,24 @@ iptables -A OUTPUT -m state --state NEW -j LOG</pre></div><h2>第五章 典型�
         Clash 支持使用 GEOIP 数据库进行区域分流。用户在规则文件中添加 `GEOIP,CN,DIRECT` 可使国内流量直连，而国外流量走代理，从而提升整体网络性能。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 如何选择合适混淆提高稳定性？</h5></div>
+    <div class="panel-heading"><h5>Clash 如何配置策略组优先节点？</h5></div>
     <div class="panel-body">
-        选择混淆方式时应根据网络环境和封锁程度，例如 tls1.2_ticket_auth 可模拟 HTTPS 流量。合理组合协议和混淆可提升节点稳定性和抗封锁能力，确保长期科学上网体验。<hr />    </div>
+        在 Clash 中，用户可以通过策略组设置节点优先级，优先使用延迟低、稳定性高的节点。结合规则文件，可以根据域名或 IP 自动选择最优节点，实现更高效的网络访问体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 如何通过策略组优化海外网站访问？</h5></div>
     <div class="panel-body">
-        策略组可根据延迟和地理位置自动选择最佳节点访问海外网站。结合路由规则，可实现国内流量直连，国外流量通过代理，提高访问速度，降低延迟和连接不稳定风险。    </div>
+        策略组可根据延迟和地理位置自动选择最佳节点访问海外网站。结合路由规则，可实现国内流量直连，国外流量通过代理，提高访问速度，降低延迟和连接不稳定风险。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何在 Clash for Android 中导入订阅链接？</h5></div>
+    <div class="panel-body">
+        Clash for Android 支持通过订阅链接快速导入节点。用户只需在配置界面中点击“新建配置”，选择“URL 导入”并粘贴订阅地址即可，程序会自动下载并解析所有节点配置。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Clash 策略组如何提升节点切换效率？</h5></div>
+    <div class="panel-body">
+        通过策略组可设置节点优先级和分流规则，结合延迟检测功能，Clash 自动选择延迟低、稳定性高的节点处理不同流量，提高网页、视频和游戏访问速度及整体网络体验。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -284,16 +284,16 @@ iptables -A OUTPUT -m state --state NEW -j LOG</pre></div><h2>第五章 典型�
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/latest-hiddify-next-node-2026-9-9.htm" title="9月9日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接">9月9日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-16-free-hiddify-next-node.htm" title="9月16日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接">9月16日 | HiddifyNextNode机场节点订阅每天更新20.5M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-10-4-free-subscribe-node.htm" title="10月4日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接">10月4日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-9-23.htm" title="9月23日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接">9月23日 | HiddifyNextNode机场节点订阅每天更新20.9M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-6-hiddify-next-github.htm" title="9月6日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接">9月6日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-24-today-hiddify-next-node.htm" title="9月24日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接">9月24日 | HiddifyNextNode机场节点订阅每天更新20.8M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-9-17.htm" title="9月17日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接">9月17日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-3.htm" title="9月3日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接">9月3日 | HiddifyNextNode机场节点订阅每天更新19.1M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-node-subscribe-links-2026-10-15.htm" title="10月15日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接">10月15日 | HiddifyNextNode机场节点订阅每天更新20.7M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/hiddify-next-node-github-2026-10-21.htm" title="10月21日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接">10月21日 | HiddifyNextNode机场节点订阅每天更新20.3M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-10-6-hiddify-next-node.htm" title="10月6日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接">10月6日 | HiddifyNextNode机场节点订阅每天更新18.5M/S免费节点订阅链接</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/node-share-links-2026-9-7.htm" title="9月7日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接">9月7日 | HiddifyNextNode机场节点订阅每天更新21.9M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-20-hiddify-next-github.htm" title="9月20日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接">9月20日 | HiddifyNextNode机场节点订阅每天更新22M/S免费节点订阅链接</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-25.htm" title="9月25日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接">9月25日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-10-13.htm" title="10月13日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接">10月13日 | HiddifyNextNode机场节点订阅每天更新22.3M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-6-hiddify-next-github.htm" title="9月6日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接">9月6日 | HiddifyNextNode机场节点订阅每天更新19.5M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-4-free-node-subscribe.htm" title="9月4日 | HiddifyNextNode机场节点订阅每天更新21.7M/S免费节点订阅链接">9月4日 | HiddifyNextNode机场节点订阅每天更新21.7M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-10-4-free-subscribe-node.htm" title="10月4日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接">10月4日 | HiddifyNextNode机场节点订阅每天更新18.2M/S免费节点订阅链接</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/latest-hiddify-next-node-2026-9-15.htm" title="9月15日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接">9月15日 | HiddifyNextNode机场节点订阅每天更新21.2M/S免费节点订阅链接</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -305,7 +305,7 @@ iptables -A OUTPUT -m state --state NEW -j LOG</pre></div><h2>第五章 典型�
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2026-10/" title="2026-10 归档">2026-10</a></h4>
+                <h4><span class="badge" style="float: right;">22</span> <a href="/date/2026-10/" title="2026-10 归档">2026-10</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
